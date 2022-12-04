@@ -1,0 +1,50 @@
+<header id="header-inverse" style="background-color: #00aae6">
+  <div class="row" style="height: 100px">
+    <div class="col-2">
+      <a style="margin-top: 30px" class="navbar-brand"><img src="assets/images/logo.png" alt="logo"/></a>
+    </div>
+    <div class="col-3">
+    </div>
+    <div class="col-2"></div>
+    <div *ngIf="isLoggedIn()" class="col-4" align="right">
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <i class="bi bi-three-dots-vertical"></i>
+        <svg style="margin-bottom: 25px; margin-right: 2px; color: whitesmoke" matTooltip="Menu"
+             xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+             class="bi bi-three-dots-vertical a1" viewBox="0 0 16 16">
+          <path
+            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+        </svg>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button routerLink="user/edit" class="a2" mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Cài đặt</span>
+        </button>
+        <button class="a2" mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Tắt thông báo</span>
+        </button>
+      </mat-menu>
+
+      <mat-icon *ngIf="check" matTooltip="Thông báo" matBadge="15" matBadgeColor="warn" class="noti a1">notifications
+      </mat-icon>
+      <span matTooltip="Thông báo" class="noti material-icons a1">notifications</span>
+      <mat-icon *ngIf="check" [routerLink]="['/user/messenger']" matTooltip="Tin nhắn" matBadge="15"
+                matBadgeColor="warn" class="noti a1">offline_bolt
+      </mat-icon>
+      <span [routerLink]="['/user/messenger']" matTooltip="Tin nhắn" class="noti material-icons a1">offline_bolt</span>
+      <img routerLink="/user/user-detail" matTooltip="Trang cá nhân"
+           style="margin-right: 20px; margin-bottom: 25px; width: 35px; height: 35px; border-radius: 50%"
+           class=" a1" src="{{avatar}}" alt="Lỗi ảnh">
+    </div>
+    <span *ngIf="!checkHRF2()" (click)="logOut()" matTooltip="Đăng xuất"
+          style="font-size: 30px; margin-top: 34px; margin-left: 35px;"
+          class="colorWhitesmoke a1 material-icons">logout</span>
+    <span *ngIf="checkHRF2()" style="margin-top: 36px" class="colorWhitesmoke material-icons">star_rate</span>
+    <h2 *ngIf="checkHRF2()" style="margin-top: 35px" class="colorWhitesmoke">
+      &nbsp;Trò chuyện với bạn bè của bạn&nbsp;</h2>
+    <span *ngIf="checkHRF2()" style="margin-top: 36px" class="colorWhitesmoke material-icons">star_rate</span>
+  </div>
+</header>

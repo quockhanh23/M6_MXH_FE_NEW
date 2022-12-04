@@ -1,0 +1,211 @@
+<div class="timeline" style="font-size: 18px">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="timeline-cover a1">
+        <img class="a1 width-100-percent" style="height: 500px" src="{{cover}}">
+        <!--Timeline Menu for Large Screens-->
+        <div class="timeline-nav-bar hidden-sm hidden-xs">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="profile-info">
+                <img src="{{avatar}}" alt="" class="img-responsive profile-photo"/>
+                <h1 class="menu" style="margin-top: 10px">{{currentUser.fullName}}</h1>
+                <h1 style="margin-top: 10px">Tên đăng nhập: {{currentUser.username}}</h1>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <ul class="list-inline profile-menu">
+                <li><sub><span class="material-icons">query_builder</span></sub><a routerLink="/user/newsfeed">Dòng thời
+                  gian</a></li>
+                <li><sub> <span class="material-icons">add_circle_outline</span></sub> <a routerLink="/user/short">Tin
+                  {{my}}</a></li>
+                <li><sub> <span class="material-icons">people_alt</span></sub><a
+                  routerLink="/user/listFriend/{{currentUser?.id}}">Bạn bè</a></li>
+                <li><sub> <span class="material-icons">text_snippet</span></sub><a routerLink="/user/post">Bài
+                  đăng {{my}}</a></li>
+                <li><sub><span class="material-icons">delete</span></sub><a [routerLink]="['/user/trash']">Thùng
+                  rác</a></li>
+              </ul>
+              <ul class="follow-me list-inline">
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="navbar-mobile hidden-lg hidden-md">
+          <div class="profile-info menu">
+            <img src="{{avatar}}" alt="" class="img-responsive profile-photo"/>
+            <h1>{{currentUser.username}}</h1>
+          </div>
+        </div>
+      </div>
+      <div id="page-contents">
+        <div class="row">
+          <div class="col-4">
+            <ul class="edit-menu">
+              <li class="active"><i class="icon ion-ios-information-outline"></i>
+                <a routerLink="/user/edit">Chỉnh sửa thông tin cá nhân</a></li>
+              <li class="active"><i class="icon ion-ios-information-outline"></i>
+                <a routerLink="/user/password">Đổi mật khẩu</a></li>
+              <div class="divLi1">
+                <li *ngIf="!showLifeEvents" (click)="openLifeEvents()" class="a1 li1 active"><i
+                  class="icon ion-ios-information-outline"></i>
+                  <a matTooltip="Xem tất cả">Các sự kiện</a>
+                </li>
+                <li *ngIf="showLifeEvents" (click)="closeLifeEvents()" class="a1 li1 active"><i
+                  class="icon ion-ios-information-outline"></i>
+                  <a matTooltip="Ẩn">Các sự kiện</a>
+                </li>
+                <div *ngIf="showLifeEvents">
+                  <div class="row" style="margin-bottom: 10px; margin-top: 5px">
+                    <div class="col-1">
+                      <span style="margin-left: 32px;" class="material-icons">timeline</span>
+                    </div>
+                    <div class="col" style="margin-left: 32px;">
+                      <p style="font-size: 18px"><sub></sub>Dòng thời gian</p>
+                    </div>
+                    <div class="col-1">
+                       <span *ngIf="!checkFromCreateLifeEvent" (click)="openFromCreateLifeEvent()"
+                             matTooltip="Thêm sự kiện" style="margin-top: 5px"
+                             class="a1 a2 material-icons">add_circle</span>
+                      <span *ngIf="checkFromCreateLifeEvent" (click)="closeFromCreateLifeEvent()"
+                            matTooltip="Đóng" style="margin-top: 5px"
+                            class="a1 a2 material-icons">add_circle</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-1">
+                      <span style="margin-left: 32px;" class="material-icons">watch_later</span>
+                    </div>
+                    <div class="col" style="margin-left: 32px;">
+                      <p style="font-size: 18px; margin-left: 2px"><sub></sub>Tham gia vào</p>
+                      <p style="font-size: 13px">{{createAt |  date:"dd/MM/yyyy"}}</p>
+                    </div>
+                    <div class="col-1">
+                    </div>
+                  </div>
+                  <div style="margin-left: 32px" *ngFor="let life of lifeEvents">
+                    <div class="row">
+                      <div class="col-1">
+                        <span class="material-icons">work_history</span>
+                      </div>
+                      <div class="col">
+                        <p style="font-size: 18px; margin-top: 5px; margin-left: 5px">{{life?.work}}</p>
+                        <p style="font-size: 13px">{{life?.timeline | date:"dd/MM/yyyy"}}</p>
+                      </div>
+                      <div class="col-1">
+                        <sub><span *ngIf="!checkUpdateLifeEvent" (click)="openUpdateLifeEvent(); getOne(life?.id)"
+                                   matTooltip="Chỉnh sửa" style="font-size: 16px; margin-top: 10px"
+                                   class="a1 a2 material-icons">edit</span>
+                        </sub>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+              <li class="active"><i class="icon ion-ios-information-outline"></i>
+                <a>Giới thiệu</a></li>
+              <li class="active"><i class="icon ion-ios-information-outline"></i>
+                <a routerLink="/user/listImage/{{currentUser?.id}}">Ảnh {{my}}</a></li>
+              <li class="active"><i class="icon ion-ios-information-outline"></i>
+                <a routerLink="/user/group">Nhóm {{my}}</a></li>
+              <li class="active"><i class="icon ion-ios-information-outline"></i>
+                <a matTooltip="Xem tất cả" routerLink="/user/listFriend/{{currentUser?.id}}">Bạn bè {{my}}</a></li>
+              <div class="row" style="margin-top: 5px">
+                <div class="col-2" *ngFor="let friend of listFriend">
+                  <img style="border-radius: 50%; height: 50px; width: 50px" src="{{friend?.avatar}}">
+                </div>
+                <span *ngIf="count > 0" style="margin-top: 30px; margin-left: 5px">...</span>
+              </div>
+            </ul>
+          </div>
+          <div class="col-5">
+            <div>
+              <div class="about-profile">
+                <div class="about-content-block" style="font-size: 18px; color: #1c75bc">
+                  <h1 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Thông tin cá nhân</h1>
+                </div>
+                <div class="about-content-block">
+                  <h4 style="font-size: 18px; color: purple" class="grey"><i
+                    class="ion-ios-person-outline icon-in-title"></i>Tên đầy đủ</h4>
+                  <p style="margin-left: 29px">{{currentUser?.fullName}}</p>
+                </div>
+                <div class="about-content-block">
+                  <h4 style="font-size: 18px; color: purple" class="grey"><i
+                    class="ion-ios-location-outline icon-in-title"></i>Địa chỉ</h4>
+                  <p style="margin-left: 29px">{{currentUser?.address}}</p>
+                </div>
+                <div class="about-content-block">
+                  <h4 style="font-size: 18px; color: purple" class="grey"><i
+                    class="ion-ios-chatboxes-outline icon-in-title"></i>Số điện thoại</h4>
+                  <p style="margin-left: 29px">{{currentUser?.phone}}</p>
+                </div>
+                <div class="about-content-block">
+                  <h4 style="font-size: 18px; color: purple" class="grey"><i
+                    class="ion-ios-heart-outline icon-in-title"></i>Sở thích</h4>
+                  <p style="margin-left: 29px">{{currentUser?.favorite}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div *ngIf="checkFromCreateLifeEvent">
+              <h2>Thêm sự kiện</h2>
+              <form [formGroup]="lifeEventsCreateForm" (ngSubmit)="createLifeEvent()">
+                <input formControlName="work"
+                       class="form-control" type="text"
+                       name="work" placeholder="Sự kiện trong đời..." style="width: 86% !important; height: 60px"/>
+                <br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Lựa chọn thời gian</mat-label>
+                  <input formControlName="timeline" matInput [matDatepicker]="picker">
+                  <mat-hint>Tháng/Ngày/Năm</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-primary">Lưu sự kiện</button>
+                  </div>
+                  <div class="col">
+                    <button style="margin-left: 10px" type="button" (click)="closeFromCreateLifeEvent()"
+                            class="btn btn-primary">Đóng
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <hr *ngIf="checkUpdateLifeEvent && checkFromCreateLifeEvent">
+            <div *ngIf="checkUpdateLifeEvent">
+              <h2>Chỉnh sửa sự kiện</h2>
+              <form [formGroup]="updateForm" (ngSubmit)="update()">
+                <input formControlName="work"
+                       class="form-control" type="text"
+                       name="work" placeholder="Sự kiện trong đời" style="width: 86% !important; height: 60px"/>
+                <br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Lựa chọn thời gian</mat-label>
+                  <input formControlName="timeline" matInput [matDatepicker]="picker">
+                  <mat-hint>Tháng/Ngày/Năm</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-primary">Lưu sự kiện</button>
+                  </div>
+                  <div class="col">
+                    <button style="margin-left: 10px" type="button" (click)="closeUpdateLifeEvent()"
+                            class="btn btn-primary">Đóng
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

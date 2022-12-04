@@ -1,0 +1,54 @@
+<div class="backArrowDiv">
+  <span matTooltip="Quay lại"
+        [routerLink]="['/admin/manageUser']"
+        class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+<div class="divAction margin-top10 row">
+  <div class="col-4">
+    <img style="margin-bottom: 10px; width: 400px; height: 400px; border-radius: 5px" src="{{user?.avatar}}"/>
+    <div class="row">
+      <div class="col-5">
+        <h2>Tên đầy đủ: </h2>
+        <h2>Ngày đăng ký: </h2>
+        <h2>Trạng thái: </h2>
+      </div>
+      <div class="col">
+        <h2 class="profile-link">{{user?.fullName}}</h2>
+        <h2 class="profile-link">{{user?.createAt |date:"dd-MM-yyyy"}}</h2>
+        <h2 style="color: red;" *ngIf="user?.status == 'Banned'">{{user?.status}}</h2>
+        <h2 style="color: #1ee51e;" *ngIf="user?.status == 'Active'">{{user?.status}}</h2>
+      </div>
+    </div>
+    <button *ngIf="user?.status == 'Active'" mat-raised-button color="warn">Khóa tài khoản</button>
+    <button *ngIf="user?.status == 'Banned'" mat-raised-button color="primary">Kích hoạt tài khoản</button>
+  </div>
+  <div class="col">
+    <div style="font-size: 17px ; margin-left: 2%; margin-right: 2%">
+      <div class="row">
+        <div class="col-8">
+          <h2 style="color: #0a70b9">Danh sách bài viết của {{user?.fullName}}&nbsp;, Tổng số bài: ({{count}})</h2>
+        </div>
+      </div>
+      <table style="color: purple" border="1px" width="100%">
+        <tr>
+          <th>&nbsp;Số thứ tự&nbsp;</th>
+          <th>&nbsp;Nội dung&nbsp;</th>
+          <th>&nbsp;Ngày đăng&nbsp;</th>
+          <th>&nbsp;Trạng thái&nbsp;</th>
+        </tr>
+        <tr *ngFor="let pe of post index as i">
+          <td>&nbsp;{{i + 1}}</td>
+          <td>&nbsp;{{pe?.content}}</td>
+          <td>&nbsp;{{pe?.createAt |date:"dd-MM-yyyy"}}</td>
+
+          <td style="color: red" *ngIf="pe?.status == 'Private'">&nbsp;Riêng tư</td>
+          <td style="color: #0ac70a" *ngIf="pe?.status == 'Public'">&nbsp;Công khai</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+

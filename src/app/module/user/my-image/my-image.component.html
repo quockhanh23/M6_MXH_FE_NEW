@@ -1,0 +1,56 @@
+<div class="backArrowDiv">
+  <span *ngIf="idUser == idUserLogIn" matTooltip="Quay lại"
+        [routerLink]="['/user/user-detail']"
+        class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+  <span *ngIf="idUser != idUserLogIn" matTooltip="Quay lại"
+        routerLink="/user/people-detail/{{idUser}}"
+        class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+<div class="divFix">
+  <div class="row">
+    <div align="left" class="col">
+      <h2 *ngIf="idUser != idUserLogIn">
+        <sub><span class="material-icons">collections</span></sub> Ảnh của : {{fullNameUser}}</h2>
+      <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImage(idUser)" class="a1 a2">
+        <sub><span class="material-icons">collections</span></sub>&nbsp;Ảnh của bạn</h2>
+    </div>
+    <div align="center" class="col">
+      <h2 *ngIf="idUser == idUserLogIn" class="a1 a2">
+        <sub><span class="material-icons">add_a_photo</span></sub>&nbsp;Thêm ảnh</h2>
+    </div>
+    <div align="right" class="col">
+      <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImageDeleted()" class="a1 a2">
+        <sub><span class="material-icons">delete</span></sub>&nbsp;Ảnh đã xóa</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngFor="let image of images">
+      <div class="row">
+          <span *ngIf="image.user.id == idUserLogIn && check1" matTooltip="Xóa ảnh" (click)="delete(image.id)"
+                class="a1 material-icons">highlight_off
+          </span>
+        <span *ngIf="image.user.id == idUserLogIn && check2" matTooltip="Xóa hẳn không hồi phục"
+              (click)="delete2(image.id)"
+              class="a1 material-icons">highlight_off
+          </span>
+      </div>
+      <img class="zoomImage imageChange"
+           style="width: 250px; height: 250px; border-radius: 10px; margin-right: 10px; margin-bottom: 10px"
+           src="{{image?.linkImage}}" alt="Lỗi">
+    </div>
+  </div>
+  <div style="{{height}}" align="center">
+    <div *ngIf="count == 0 && check1">
+      <h2 style="margin-top: 100px">Không có ảnh</h2>
+      <sub>
+        <span style="color: blueviolet; font-size: 100px" class="material-icons">collections</span>
+      </sub>
+    </div>
+    <div *ngIf="count == 0 && check2">
+      <h2 style="margin-top: 100px">Không có ảnh đã xóa</h2>
+      <sub>
+        <span style="color: limegreen; font-size: 100px" class="material-icons">recycling</span>
+      </sub>
+    </div>
+  </div>
+</div>

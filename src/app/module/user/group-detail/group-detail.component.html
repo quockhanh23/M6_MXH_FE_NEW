@@ -1,0 +1,59 @@
+<div class="backArrowDiv">
+       <span matTooltip="Quay lại"
+             [routerLink]="['/user/groupShare']"
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+
+<div class="divFix">
+  <div class="row">
+    <div class="col-4" style="background-color: #fcf8f8;">
+      <div style="border: #e7e7e7 1px solid; border-radius: 5px">
+        <img class="width-100-percent" style="height: 200px;" src="{{theGroup?.coverGroup}}">
+        <h2 style="margin-left: 5px">{{theGroup?.groupName}}</h2>
+        <span style="margin-left: 5px" *ngIf="theGroup?.status == 'Public'">Nhóm công khai</span>&nbsp;
+        <span>{{countMember}} thành viên</span><br>
+        <button class="width-100-percent"
+                mat-raised-button color="primary">Quản lý
+        </button>
+        <button (click)="joinGroupParticipant()" class="width-100-percent"
+                *ngIf="checkUserOnGroup" mat-raised-button color="primary">
+          Tham gia nhóm
+        </button>
+      </div>
+    </div>
+    <div class="col-8" style="background-color: #e7e7e7;  border: #e7e7e7 1px solid">
+      <div class="row" style="border: #e7e7e7 1px solid">
+        <div class="col-9" style="background-color: white">
+          <h2>Thảo luận</h2>
+        </div>
+        <div class="col" align="right" style="background-color: white">
+          <button *ngIf="!checkUserOnGroup" mat-raised-button color="primary">Tạo bài viết</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7" style="background-color: white; margin-right: 10px; margin-top: 10px; margin-left: 10px">
+        </div>
+        <div class="col-4" style="border: #0a70b9 1px solid">
+          <h2>Giới thiệu</h2>
+          <h2>{{theGroup?.type}}</h2>
+          <h2 *ngIf="theGroup?.status == 'Public'">Nhóm công khai</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row border-green-b2dba1" *ngFor="let mem of groupParticipant"
+       style="border-radius: 5px; margin-top: 5px">
+    <img class="imageListAvatarMessage"
+         src="{{mem?.user?.avatar}}">
+    <h2 class="a1 a2"
+        style="margin-top: 15px">{{mem?.user?.fullName}}
+    </h2>
+    <button (click)="acceptUserJoinGroup(mem?.user?.id)" mat-raised-button color="primary">Đồng ý</button>
+    <button (click)="rejectUserJoinGroup(mem?.user?.id)" mat-raised-button color="warn">Từ chối</button>
+  </div>
+  <div class="row border-green-b2dba1" *ngFor="let mem of groupParticipant2"
+       style="border-radius: 5px; margin-top: 5px">
+    <img class="imageListAvatarMessage"
+         src="{{mem?.user?.avatar}}">
+  </div>
+</div>

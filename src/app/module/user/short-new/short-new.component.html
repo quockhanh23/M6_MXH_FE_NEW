@@ -1,0 +1,32 @@
+<div class="row" style="border-radius: 10px">
+  <div *ngFor="let short of shortNewLimit"
+       style="background: wheat; margin-right: 10px; height: 220px;
+        border-radius: 10px; border: 1px solid"
+       class="col-2 margin-left-15 test">
+    <div class="row" style="margin-bottom: 2px">
+      <div class="col-3">
+        <img class="imgShortNewAvatar"
+             src="{{short.user?.avatar}}" alt="Lỗi ảnh">
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row">
+      <img class="imgShortNewContent" src="{{short.image}}" alt="Lỗi ảnh">
+    </div>
+    <p>{{short.content}}</p>
+  </div>
+  <div
+    style="background: wheat; margin-right: 0px; height: 220px; border-radius: 10px; border: 1px solid"
+    class="col-2 margin-left-15">
+    <div style="height: 80px" class="row"></div>
+    <p align="center"><span matTooltip="Tạo tin" [routerLink]="['/user/listShortNew']"
+                            style="color: #1c75bc; font-size: 35px;"
+                            class="material-icons a1">add_circle</span></p>
+    <h2 align="center" class="a1" [routerLink]="['/user/listShortNew']">Tạo tin</h2>
+    <div style="height: 50px" class="row"></div>
+  </div>
+</div>
+<div class="row">
+  <p class="a1 a2" matTooltip="Xem tất cả tin" [routerLink]="['/user/listShortNew']"
+     style="margin-left: 2%; margin-top: 15px">Xem tất cả tin</p>
+</div>

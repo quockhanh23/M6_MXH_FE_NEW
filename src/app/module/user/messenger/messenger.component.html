@@ -1,0 +1,292 @@
+<div class="backArrowDiv">
+       <span matTooltip="Quay lại"
+             [routerLink]="['/user/newsfeed']"
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+
+<div class="row"
+     style="margin-left: 5%; margin-right: 5%; margin-bottom: 10px; background-color: #faf9f9; border-radius: 8px">
+  <div *ngIf="countFriend == 0 && countMessageNotFriend == 0" class="col-3">
+    <div class="row" style="margin-left: 1%">
+      <div class="col-8">
+        <h2>Bạn bè</h2>
+        <a style="font-size: 15px" [routerLink]="['/user/requests']">Tìm kiếm bạn bè</a>
+      </div>
+      <div class="col">
+        <h2 style="color: #8c8c8c" class="a1 a2">Người lạ</h2>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="countFriend > 0 || countMessageNotFriend > 0" class="col-3">
+    <div class="row" style="margin-left: 1%">
+      <div class="col">
+        <h2 matTooltip="Tin nhắn từ bạn bè" class="a1 a2" (click)="friendMessageTrue()"
+            style="{{colorCheckFriendMessage1}}">Bạn bè</h2>
+        <a *ngIf="countFriend == 0 && checkFriendMessage" style="font-size: 15px" [routerLink]="['/user/requests']">
+          Tìm kiếm bạn bè</a>
+      </div>
+      <div class="col">
+        <h2 matTooltip="Tin nhắn từ người lạ" class="a1 a2" (click)="friendMessageFalse()"
+            style="{{colorCheckFriendMessage2}}">Người lạ
+        </h2>
+      </div>
+      <p *ngIf="countMessageNotFriend == 0 && !checkFriendMessage"
+         style="font-size: 18px; margin-left: 30px">Không tin nhắn từ người lạ
+      </p>
+    </div>
+    <div *ngIf="checkFriendMessage" class="col" id="scroll2">
+      <div class="col">
+        <div class="row hc" (click)="createConversation(list?.id)" *ngFor="let list of listFriend"
+             style="{{border}}; border-radius: 5px; margin-top: 5px">
+          <img class="imageListAvatarMessage"
+               src="{{list?.avatar}}">
+          <h3 class="a1 a2" matTooltip="{{pressToChat}}" (click)="openMessage()"
+              style="margin-top: 15px; font-size: 17px">{{list?.fullName}}</h3>
+          <span style="color: #0a70b9" class="material-icons">textsms</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!checkFriendMessage" class="col" id="scroll5">
+      <div class="col">
+        <div style="{{border}}; border-radius: 5px; margin-top: 5px" class="row hc"
+             *ngFor="let user of conversationsNotFriend">
+          <img *ngIf="user?.idSender?.id != idUserLogIn" class="imageListAvatarMessage"
+               src="{{user?.idSender?.avatar}}">
+          <h3 (click)="createConversation(user?.idSender?.id); openMessage()" *ngIf="user?.idSender?.id != idUserLogIn"
+              class="a1 a2"
+              matTooltip="{{pressToChat}}"
+              style="margin-top: 15px; font-size: 17px">{{user?.idSender?.fullName}}</h3>
+          <span style="color: #0a70b9" class="material-icons" *ngIf="user?.idSender?.id != idUserLogIn">textsms</span>
+          <img *ngIf="user?.idReceiver?.id != idUserLogIn" class="imageListAvatarMessage"
+               src="{{user?.idReceiver?.avatar}}">
+          <h3 *ngIf="user?.idReceiver?.id != idUserLogIn"
+              (click)="createConversation(user?.idReceiver?.id); openMessage()" class="a1 a2"
+              matTooltip="{{pressToChat}}"
+              style="margin-top: 15px; font-size: 17px">{{user?.idReceiver?.fullName}}</h3>
+          <span *ngIf="user?.idReceiver?.id != idUserLogIn" style="color: #0a70b9" class="material-icons">textsms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <h2 *ngIf="idUserLogIn != userName?.id">{{withUser}} {{userName?.fullName}}</h2>
+        <h2 *ngIf="idUserLogIn == userName?.id">{{withUser}} {{userName1?.fullName}}</h2>
+      </div>
+      <div class="col" align="right" *ngIf="closeInFor">
+        <sub><span matTooltip="Màu nền mặc định" style="color: #eee1e1" (click)="changeBackgroundColor4()"
+                   class="a1 material-icons">radio_button_checked
+          </span></sub>
+        <sub><span matTooltip="Đổi màu nền" style="color: pink" (click)="changeBackgroundColor1()"
+                   class="a1 material-icons">radio_button_checked
+          </span></sub>
+        <sub><span matTooltip="Đổi màu nền" style="color: #afd9ee" (click)="changeBackgroundColor2()"
+                   class="a1 material-icons">radio_button_checked
+          </span></sub>
+        <sub><span matTooltip="Đổi màu nền" style="color: #1deecf" (click)="changeBackgroundColor3()"
+                   class="a1 material-icons">radio_button_checked
+          </span></sub>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-{{withMessage}}">
+        <div *ngIf="checkConversation" style="; border-radius: 5px">
+          <div class="border-green-b2dba1"
+               style="background-color: #5bc0de; height: 65px;
+             border-top-right-radius: 5px; border-top-left-radius: 5px">
+            <img *ngIf="idUserLogIn != conversation?.idReceiver?.id && conversation != null"
+                 routerLink="/user/people-detail/{{conversation?.idReceiver?.id}}" class="imgFix a1 imc"
+                 style="margin-left: 10px" matTooltip="Xem trang cá nhân"
+                 src="{{conversation?.idReceiver?.avatar}}">
+            <img *ngIf="idUserLogIn == conversation?.idReceiver?.id && conversation != null"
+                 class="imgFix imc" style="margin-left: 10px"
+                 src="{{conversation?.idSender?.avatar}}">
+            <span *ngIf="count > 0" style="color: red;" class="material-icons">announcement</span>
+            <span *ngIf="conversation != null" (click)="closeMessage()"
+                  style="float: right; margin-top: 1px"
+                  matTooltip="Đóng" class="color-whitesmoke a1 a2 material-icons">close</span>
+            <span *ngIf="conversation != null && !checkOpenInfo" class="color-whitesmoke a1 a2 material-icons"
+                  style="float: right; font-size: 27px" (click)="openInfo()"
+                  matTooltip="Thông tin hội thoại">last_page</span>
+          </div>
+          <div>
+            <div style="border-left: #b2dba1 1px solid; border-right: #b2dba1 1px solid;{{background}}" #scrollMe
+                 [scrollTop]="scrollMe.scrollHeight"
+                 id="scroll" class="col">
+              <p style="text-align: center"
+                 *ngIf="checkFirstDayMessage">{{firstDayMessage | date:"HH:MM | dd/MM/yyyy"}}</p>
+              <div style="margin-top: 215px" align="center" *ngIf="count == 0">
+                <img *ngIf="conversation != null" class="imgFix" src="{{conversation?.idReceiver?.avatar}}">
+                <p style="font-size: 15px; margin-top: 10px">Friend Finder</p>
+                <p *ngIf="conversation != null" style="font-size: 15px">
+                  Sống tại {{conversation?.idReceiver?.address}}
+                </p>
+              </div>
+              <div *ngFor="let mes of messengers">
+                <div class="row" *ngIf="idUserLogIn == mes?.idSender?.id">
+                  <div class="col-1">
+                    <img align="left" class="imgFix"
+                         src="{{mes?.idSender?.avatar}}">
+                  </div>
+                  <div class="col-11">
+                    <h2 align="left" style="margin-top: 15px;">
+                      <span class="messageContentLeft" *ngIf="mes?.content != ''">
+                    {{mes?.content}}</span>
+                    </h2>
+                    <img align="left" class="imageMessage"
+                         *ngIf="mes?.image != '' && mes?.image != null"
+                         src="{{mes?.image}}">
+                  </div>
+                </div>
+                <div class="row" *ngIf="idUserLogIn != mes?.idSender?.id">
+                  <div class="col-11">
+                    <h2 align="right" style="margin-top: 15px;">
+                      <span class="messageContentRight"
+                            *ngIf="mes?.content != ''">
+                           {{mes?.content}}</span>
+                    </h2>
+                    <img align="right" class="imageMessage"
+                         *ngIf="mes?.image != '' && mes?.image != null"
+                         src="{{mes?.image}}">
+                  </div>
+                  <div class="col-1">
+                    <img align="right" class="imgFix"
+                         src="{{mes?.idSender?.avatar}}">
+                  </div>
+                </div>
+              </div>
+              <p style="text-align: left; font-size: 10px"
+                 *ngIf="lastIdSend == idUserLogIn && checkCreateMessage">
+                Đã gửi&nbsp;|&nbsp;{{send | date:"HH:mm:ss | dd/MM/yyyy"}}
+                <sub><span style="font-size: 10px" class="material-icons">done</span></sub>
+              </p>
+            </div>
+            <div style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;{{border}}">
+              <form [formGroup]="messengerForm"
+                    (ngSubmit)="createMessenger(conversation?.id)">
+                <div class="row" style="margin-top: 20px">
+                  <div class="col-8">
+                    <input
+                      style="width: 100% !important; height: 60px; font-size: 18px; margin-left: 5px; border: #c0a16b 1px solid"
+                      onfocus="this.value=''" type="text"
+                      class="form-control c1 i1" formControlName="content"
+                      placeholder="Aa">
+                  </div>
+                  <div class="col-1">
+                    <sup *ngIf="conversation != null">
+                  <span matTooltip="Tải ảnh lên" style="font-size: 73px; color: #196d86" #userPhoto
+                        (change)="onFileSelected($event)"
+                        class="a1 material-icons btn-file">image
+                   <input type="file" name="image" autocomplete="off" class="a1 form-control"></span>
+                    </sup>
+                    <sup *ngIf="conversation == null">
+                  <span matTooltip="Tải ảnh lên" style="font-size: 73px; color: #d9e3e7" #userPhoto
+                        class="a1 material-icons btn-file">image
+                   </span>
+                    </sup>
+                  </div>
+                  <div class="col">
+                    <button *ngIf="conversation != null && checkButton" class="width-96-percent"
+                            style="height: 60px; font-size: 18px" mat-raised-button color="accent"
+                            type="summit">Gửi
+                    </button>
+                    <div style="margin-left: 60px; margin-top: 10px" *ngIf="checkDone">
+                      <mat-spinner [diameter]="30"></mat-spinner>
+                      <span>Đang tải ảnh</span>
+                    </div>
+                    <button *ngIf="conversation == null" disabled class="width-96-percent"
+                            style="height: 60px; font-size: 18px" mat-raised-button color="accent"
+                            type="summit">Gửi
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div class="row">
+                    <div class="col-8">
+                      <span style="margin-left: 10px">Tối đa 120 kí tự.</span>
+                    </div>
+                    <div class="col-3">
+                      <div *ngIf="fb != null">
+                        <img class="imageUploadSmall"
+                             style="margin-left: 11px"
+                             src="{{fb}}" alt="">
+                        <span class="font-size-15" style="margin-left: 40px">Ảnh đã tải lên</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!checkConversation" class="col-{{withMessage}}">
+        <div style="height: 640px; border-radius: 5px; border-left: #b2dba1 1px solid;
+         border-right: #b2dba1 1px solid; border-bottom: #b2dba1 1px solid">
+          <div
+            style="background-color: #5bc0de; height: 65px; border-top-right-radius: 5px; border-top-left-radius: 5px">
+          </div>
+          <div>
+            <div style="{{background}}" class="col">
+              <div style="margin-top: 210px; height: 358px" align="center">
+                <p style="font-size: 15px; margin-top: 10px">Friend Finder</p>
+                <p class="a1 a2" (click)="openMessage()" style="font-size: 15px; margin-top: 10px; color: #0a70b9">
+                  Ấn để mở cuộc trò chuyện</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-{{withInfo}}"
+           style="border-radius: 5px; border-right: #b2dba1 1px solid;
+            border-left: #b2dba1 1px solid; border-bottom: #b2dba1 1px solid">
+        <div *ngIf="checkOpenInfo">
+          <div class="row" style="height: 65px; background-color: #5bc0de;
+           border-top-left-radius: 5px; border-top-right-radius: 5px">
+            <span matTooltip="Thu gọn" (click)="closeInfo()"
+                  style="font-size: 26px; color: whitesmoke; margin-top: 2px"
+                  class="a1 a2 material-icons">first_page</span>
+            <h2 style="margin-left: 20px; color: whitesmoke">Thông tin hội thoại</h2>
+          </div>
+          <div style="margin-top: 5px">
+            <div class="row" style="height: 5px; background-color: white"></div>
+            <div class="row" style="margin-top: 10px">
+              <p style="margin-left: 10px">Ảnh&nbsp;
+                <sub>
+                  <span style="font-size: 15px" class="material-icons">perm_media</span>
+                </sub>
+              </p>
+              <div class="col">
+                <div class="row" id="scroll3">
+                  <div style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px" class="col-3"
+                       *ngFor="let mesP of messengersHavePhoto">
+                    <img
+                      style="width: 50px; height: 50px; border-radius: 5px"
+                      src="{{mesP?.image}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="height: 5px; background-color: white"></div>
+            <div style="margin-top: 10px">
+              <p>Link&nbsp;
+                <sub>
+                  <span style="font-size: 15px" class="material-icons">language</span>
+                </sub>
+              </p>
+              <div style="margin-left: 5px">
+                <div *ngFor="let mesL of messengersHaveLink">
+                  <li>
+                    <a style="width: 100%" href="{{mesL}}" target="_bank" class="break-word a1 a2">{{mesL}}</a>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

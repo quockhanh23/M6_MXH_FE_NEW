@@ -1,0 +1,40 @@
+
+.hc:hover {
+  background-color: #f1eded;
+}
+
+.imc:hover {
+  border: #8006bd 1px solid;
+}
+
+#scroll {
+  height: 450px;
+  width: 100%;
+
+  overflow-y: scroll; /* Show vertical scrollbar */
+  overflow-x: hidden; /* Show horizontal scrollbar */
+}
+
+#scroll2 {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 638px;
+}
+
+#scroll5 {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 638px;
+}
+
+#scroll3 {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 150px;
+}
+
+#scroll4 {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 350px;
+}

@@ -1,0 +1,22 @@
+
+.menu {
+  animation: color 0.5s infinite;
+  -webkit-animation: color 3s infinite;
+  -moz-animation: color 3s infinite;
+  -o-animation: color 0.5s infinite;
+  background: white;
+}
+
+@keyframes color {
+  0% {
+
+    color: #d5b90b;
+  }
+  50% {
+    color: #d2175f;
+  }
+}
+
+.a2:hover {
+  color: #ffc107;
+}

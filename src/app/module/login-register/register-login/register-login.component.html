@@ -1,0 +1,237 @@
+<div class="container wrapper">
+  <div *ngIf="checkHRF()">
+    <h2 style="margin-top: 10px" *ngIf="count > 0">
+      <sub><span class="material-icons">today</span></sub>&nbsp;Đăng nhập gần đây
+    </h2>
+    <hr>
+    <div class="row" style="margin-left: 5px">
+      <div style="margin-right: 10px; float: left; width: 30%" *ngFor="let user of lastUserLogin">
+        <div class="row">
+          <div class="col-3">
+            <img style="border-radius: 15px; width: 80px; height: 80px" src="{{user.avatar}}" alt="">
+          </div>
+          <div class="col">
+            <h2>{{user.fullName}}</h2>
+            <p>{{user.loginTime | date:"HH:mm | dd/MM/yyyy"}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <div style="color: #2b669a !important;" class="intro-texts">
+        <h1 style="color: #2b669a !important;" class="text-white">Kết bạn tuyệt vời !!!</h1>
+        <h3 style="margin-top: 0px; margin-left: 5px">Hãy đến với chúng tôi để có những trải niệm tuyệt vời nhất.</h3>
+      </div>
+      <img style="width: 100%; height: 420px; border-radius: 5px"
+           src="https://genk.mediacdn.vn/139269124445442048/2020/9/11/pixabay-268533-15998400717292059239383.jpg">
+    </div>
+    <div class="col-sm-6 col-sm-offset-1">
+      <div class="reg-form-container">
+
+        <!-- Register/Login Tabs-->
+        <div class="reg-options">
+          <ul class="nav nav-tabs">
+            <li class="active"><a style="font-size: 20px; color: #1c75bc" href="#register" data-toggle="tab">Đăng ký</a>
+            </li>
+            <li><a style="font-size: 20px; color: #1c75bc" id="showLogin" href="#login" data-toggle="tab">Đăng nhập</a>
+            </li>
+          </ul><!--Tabs End-->
+        </div>
+        <!--Registration Form Contents-->
+        <div class="tab-content">
+          <div class="tab-pane active" id="register">
+            <h3 style="font-size: 30px">Đăng ký ngay !!!</h3>
+            <!--Register Form-->
+            <form [formGroup]="registerForm" (ngSubmit)="register()" name="registration_form" id='registration_form'
+                  class="form-inline">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="username" class="sr-only">Tên đăng nhập</label>
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
+                         formControlName="newUserName"
+                         id="username" class="form-control input-group-lg" type="text"
+                         name="username" title="Enter Username" placeholder="Tên đăng nhập"/>
+                  <div style="color: red;padding-left: 20px; margin-top: 5px" role="alert"
+                       *ngIf="registerForm.controls['newUserName'].errors?.['required']
+                         && registerForm.controls['newUserName'].touched">{{messageNotBlank}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="password" class="sr-only">Mật khẩu</label>
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
+                         formControlName="newPassWord" id="password"
+                         class="form-control input-group-lg"
+                         type="password" name="password" title="Enter password"
+                         placeholder="Mật khẩu từ 6-32 kí tự"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newPassWord'].errors?.['required']
+                        && registerForm.controls['newPassWord'].touched">{{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newPassWord'].errors?.['minlength']
+                        && registerForm.controls['newPassWord'].touched">{{messageLengthPassword}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newPassWord'].errors?.['maxlength']
+                        && registerForm.controls['newPassWord'].touched">{{messageLengthPassword}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="rePassword" class="sr-only">Re-Password</label>
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
+                         formControlName="newConfirmPassWord"
+                         id="rePassword" class="form-control input-group-lg"
+                         type="password" name="rePassword" title="Enter password again"
+                         placeholder="Xác nhận lại mật khẩu"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newConfirmPassWord'].errors?.['required']
+                        && registerForm.controls['newConfirmPassWord'].touched">{{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newConfirmPassWord'].errors?.['minlength']
+                        && registerForm.controls['newConfirmPassWord'].touched">{{messageLengthPassword}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newConfirmPassWord'].errors?.['maxlength']
+                        && registerForm.controls['newConfirmPassWord'].touched">{{messageLengthPassword}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="email" class="sr-only">Email</label>
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;" formControlName="newEmail"
+                         id="email"
+                         class="form-control input-group-lg" type="text"
+                         name="Email" title="Enter Email" placeholder="Email của bạn : abc@gmail.com"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newEmail'].errors?.['required'] && registerForm.controls['newEmail'].touched">
+                  {{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newEmail'].errors?.['email'] && registerForm.controls['newEmail'].touched">
+                  {{messageNotBlank}}
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="fullName" class="sr-only">Tên đầy đủ</label>
+                    <input style="margin-left: 15px; border-radius: 5px;font-size: 20px; width: 380px !important;"
+                           formControlName="fullName"
+                           id="fullName"
+                           class="form-control input-group-lg" type="text"
+                           name="fullName" title="Enter Email" placeholder="Tên đầy đủ"/>
+                  </div>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['fullName'].errors?.['required'] && registerForm.controls['fullName'].touched">
+                  {{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['fullName'].errors?.['pattern'] && registerForm.controls['fullName'].touched">
+                  {{messageNotBlank}}
+                </div>
+                <div class="form-group col-xs-12">
+                  <label for="phone" class="sr-only">Số điện thoại</label>
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
+                         formControlName="newPhoneNumber" id="phone"
+                         class="form-control input-group-lg" type="text"
+                         name="phone" title="Enter Phone number" placeholder="Số điện thoại"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newPhoneNumber'].errors?.['required'] && registerForm.controls['newPhoneNumber'].touched">
+                  {{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="registerForm.controls['newPhoneNumber'].errors?.['pattern'] && registerForm.controls['newPhoneNumber'].touched">
+                  {{messageNotBlank}}
+                </div>
+              </div>
+              <p style="margin-left: 10px; margin-top: 10px; font-size: 17px; margin-right: 5px">Giới tính:</p>
+              <label for="age1">Nam</label> &nbsp;
+              <input style="margin-bottom: 5px; font-size: 20px" formControlName="gender" type="radio" id="age1"
+                     value="Nam">&nbsp;
+              <label for="age2">Nữ</label> &nbsp;
+              <input style="margin-bottom: 5px; font-size: 20px" formControlName="gender" type="radio" id="age2"
+                     value="Nữ">&nbsp;
+              <label for="age3">Không xác định</label> &nbsp;
+              <input style="margin-bottom: 5px;font-size: 20px" formControlName="gender" type="radio" id="age3"
+                     value="Không xác định">&nbsp;
+              <button mat-flat-button color="primary" [disabled]="!registerForm.valid" class="btn btn-primary">Đăng ký
+                ngay
+              </button>
+            </form><!--Register Now Form Ends-->
+            <p class="a1 a2" style="margin-top: 10px; margin-left: 5px"><a (click)="showLogin()">Bạn đã có tài
+              khoản?</a>
+            </p>
+          </div><!--Registration Form Contents Ends-->
+
+          <!--Login-->
+          <div class="tab-pane" id="login">
+            <h2 style="font-size: 30px">Đăng nhập</h2>
+            <!--Login Form-->
+            <form [formGroup]="loginForm" (ngSubmit)="login()" name="Login_form" id='Login_form'>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="my-username" class="sr-only">Tên đăng nhập</label>
+                  <input style="border-radius: 5px;margin-bottom: 5px;font-size: 20px" formControlName="username"
+                         id="my-username"
+                         class="form-control input-group-lg" type="text"
+                         name="Username" title="Enter username" placeholder="Tên đăng nhập"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="loginForm.controls['username'].errors?.['required'] && loginForm.controls['username'].touched">
+                  {{messageNotBlank}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="my-password" class="sr-only">Mật khẩu</label>
+                  <input style="border-radius: 5px; margin-bottom: 5px;font-size: 20px" formControlName="password"
+                         id="my-password"
+                         class=" form-control input-group-lg"
+                         type="password" name="password" title="Enter password" placeholder="Mật khẩu"/>
+                </div>
+                <div style="color: red;padding-left: 20px" role="alert"
+                     *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched">
+                  {{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 20px" role="alert"
+                     *ngIf="loginForm.controls['password'].errors?.['minlength'] && loginForm.controls['password'].touched">
+                  {{messageLengthPassword}}
+                </div>
+                <div style="color: red;padding-left: 20px" role="alert"
+                     *ngIf="loginForm.controls['password'].errors?.['maxlength'] && loginForm.controls['password'].touched">
+                  {{messageLengthPassword}}
+                </div>
+              </div>
+              <button mat-flat-button color="primary" class="btn btn-primary">Đăng nhập</button>
+            </form><!--Login Form Ends-->
+            <p class="a1" style="margin-top: 10px"><a>Quên mật khẩu?</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-6">
+      <!--Social Icons-->
+      <ul class="list-inline social-icons">
+        <li><a><i class="icon ion-social-facebook"></i></a></li>
+        <li><a><i class="icon ion-social-twitter"></i></a></li>
+        <li><a><i class="icon ion-social-googleplus"></i></a></li>
+        <li><a><i class="icon ion-social-pinterest"></i></a></li>
+        <li><a><i class="icon ion-social-linkedin"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

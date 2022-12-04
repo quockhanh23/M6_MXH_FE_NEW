@@ -1,0 +1,288 @@
+<!--<div class="row">-->
+<!--  <div class="col-12">-->
+<!--    <button class="btn btn-success" onclick="toasty()">Thông báo</button>-->
+<!--    <div class="toast" id="EpicToast" role="alert" aria-live="assertive" aria-atomic="true"-->
+<!--         style="position: absolute; top: 20px; right: 20px; width: 300px; height: 60px; font-size: 17px; background-color: #49c016">-->
+<!--      <div class="toast-header" style="color: #8c8c8c">-->
+<!--        <strong class="mr-auto">Thông báo</strong>-->
+<!--        <small></small>-->
+<!--        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="toast-body" style="color: #ffffff">-->
+<!--        Đã gủi lời mời kết bạn-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div id="page-contents" class="font-size-18">
+  <div class="row">
+    <div class="col-3 static">
+      <div class="profile-card">
+        <img matTooltip="Thông tin của bạn" routerLink="/user/user-detail" src="{{userDetail?.avatar}}" alt="user"
+             class="a1 profile-photo"/>
+        <h2 class="a1" routerLink="/user/user-detail"><a
+          class="text-white">{{userDetail?.fullName}}</a></h2>
+        <a class="text-white"> {{countFriend}} Bạn bè </a>
+      </div>
+      <ul class="nav-news-feed">
+        <li><i style="color: slateblue" class='fas fa-bell'></i>
+          <div><a class="a1 a2" routerLink="/user/user-detail">Trang cá nhân</a></div>
+        </li>
+        <li><i class="icon ion-ios-people"></i>
+          <div><a class="a1 a2" [routerLink]="['/user/requests']">Bạn bè</a>
+          </div>
+        </li>
+        <li><i class="icon ion-ios-people"></i>
+          <div><a class="a1 a2" [routerLink]="['/user/groupShare']">Nhóm</a></div>
+        </li>
+        <li><i class="icon ion-chatboxes"></i>
+          <div><a class="a1 a2" [routerLink]="['/user/messenger']">Tin nhắn</a></div>
+        </li>
+        <li>
+          <sub><span style="font-size: 18px; color: purple" class="material-icons">turned_in</span></sub>
+          <a [routerLink]="['/user/saveList']" style="margin-left: 12px" class="a1 a2">Đã lưu</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <app-short-new></app-short-new>
+      <hr>
+      <div class="border-radius-10 create-post" style="border: #e5e5e5 1px solid">
+        <form [formGroup]="newPostForm"
+              (ngSubmit)="createPost(userDetail?.id)">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <img src="{{userDetail?.avatar}}" alt="" class="profile-photo-md a1"/>
+                <input style="width: 400px !important; height: 50px"
+                       onfocus="this.value=''" type="text"
+                       class="font-size-18 form-control c1 i1" formControlName="content"
+                       placeholder="Bạn đang nghĩ gì thế?">
+              </div>
+              <span class="font-size-15" style="margin-left: 60px">Tối đa 500 kí tự.</span>
+              <br>
+              <div style="margin-left: 60px" *ngIf="checkDone">
+                <mat-spinner [diameter]="30"></mat-spinner>
+                <span>Đang tải ảnh</span>
+              </div>
+              <div *ngIf="fb != null">
+                <span class="font-size-15" style="margin-left: 80px">Ảnh đã tải lên</span>
+                <img style="margin-left: 10px" class="imageUploadSmall"
+                     src="{{fb}}" alt="">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="a1 tools">
+                <ul style="margin-left: 125px" class="publishing-tools list-inline">
+                  <span style="font-size: 40px; color: deeppink" #userPhoto (change)="onFileSelected($event)"
+                        matTooltip="Tải ảnh lên"
+                        class="a1 material-icons btn-file">add_photo_alternate
+                    <input type="file" name="image" autocomplete="off" class="a1 form-control"></span>
+                </ul>
+                <button *ngIf="!checkButton" disabled mat-raised-button style="width: 130px;
+                 margin-top: 7px" class="border-radius-10 btn btn-primary pull-right">Đăng
+                </button>
+                <button *ngIf="checkButton" mat-raised-button style="width: 130px;
+                 margin-top: 7px" class="border-radius-10 btn btn-primary pull-right">Đăng
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--List post-->
+      <div
+        class="post-content font-size-18" style="border: 1px violet !important; margin-bottom: 20px"
+        *ngFor=" let p of posts">
+        <div class="post-container">
+          <img *ngIf="p?.userDTO?.id == idUserLogIn" src="{{p?.userDTO?.avatar}}"
+               matTooltip="{{detailUser}}" routerLink="/user/user-detail" class="a1 profile-photo-md pull-left"/>
+          <img *ngIf="p?.userDTO?.id != idUserLogIn" routerLink="/user/people-detail/{{p?.userDTO?.id}}"
+               src="{{p?.userDTO?.avatar}}"
+               matTooltip="{{detailUser}}" class="a1 profile-photo-md pull-left"/>
+          <div class="post-detail">
+            <div class="user-info">
+              <h2 *ngIf="p?.userDTO?.id == idUserLogIn"><a routerLink="/user/user-detail"
+                                                           class="profile-link a1">{{p?.userDTO?.fullName}}</a></h2>
+              <h2 *ngIf="p?.userDTO?.id != idUserLogIn"><a routerLink="/user/people-detail/{{p?.userDTO?.id}}"
+                                                           class="profile-link a1">{{p?.userDTO?.fullName}}</a></h2>
+              <p style="font-size: 14px" class="text-muted">{{p.createAt | date:"dd/MM/yyyy"}}</p>
+            </div>
+            <div class="reaction" *ngIf="p?.userDTO?.id == idUserLogIn">
+              <span class="material-icons a1" [matMenuTriggerFor]="menu" matTooltip="Tuỳ chọn">more_horiz</span>
+              <mat-menu #menu="matMenu">
+                <button routerLink="/user/detailNewsfeed/{{p?.id}}" class="a2 font-size-16" mat-menu-item>
+                  Chỉnh sửa bài viết
+                </button>
+                <button class="a2 font-size-16" mat-menu-item>Xóa bài viết</button>
+              </mat-menu>
+            </div>
+            <div class="line-divider"></div>
+            <div class="post-text">
+              <p style="font-size: 20px; margin-bottom: 0px !important; margin-top: 20px">{{p.content}}</p>
+            </div>
+            <div>
+              <img style="width: 100%; margin-top: 15px; border-radius: 5px" src="{{p.image}}">
+            </div>
+            <div class="line-divider"></div>
+            <div>
+              <span style="color:#1a71c5" (click)="createLike(p?.id)" matTooltip="Thích"
+                    class="material-icons a1">thumb_up</span>
+              <sub>{{p.numberLike}}</sub>
+              <span style="color: #f511b4; margin-bottom: 10px; font-size: 25px" matTooltip="Thả tim"
+                    (click)="createHeart(p?.id)" class="material-icons a1">favorite</span>
+              <sub>{{p.iconHeart}}</sub>
+              <span style="color: #d20845" (click)="createDisLike(p?.id)" matTooltip="Không thích"
+                    class="material-icons a1">thumb_down</span>
+              <sub>{{p.numberDisLike}}</sub>
+              <span [matMenuTriggerFor]="menu" matTooltip="..." style="font-size: 25px; color: rebeccapurple"
+                    class="material-icons a1">zoom_in</span>
+              <mat-menu #menu="matMenu">
+                <button class="a2 font-size-16" mat-menu-item>Xem chi tiết</button>
+              </mat-menu>
+            </div>
+            <h3>Tất cả bình luận: {{p?.countAllComment}}</h3>
+            <div *ngFor=" let c of comment">
+              <div *ngIf="c?.post?.id === p.id">
+                <div class="row">
+                  <div class="col-1">
+                    <img *ngIf="c?.user?.id != idUserLogIn" routerLink="/user/people-detail/{{c?.user?.id}}"
+                         matTooltip="{{detailUser}}"
+                         src="{{c?.user?.avatar}}"
+                         class="a1 profile-photo-sm"/>
+                    <img *ngIf="c?.user?.id == idUserLogIn" [routerLink]="['/user/user-detail']"
+                         matTooltip="{{detailUser}}"
+                         src="{{c?.user?.avatar}}"
+                         class="a1 profile-photo-sm"/>
+                  </div>
+                  <div class="col-8">
+                    <span *ngIf="c?.user?.id != idUserLogIn" style="margin-top: 9px">
+                      <a routerLink="/user/people-detail/{{c?.user?.id}}"
+                         class="font-size-16profile-link a1">{{c?.user?.fullName}}
+                        : </a> {{c.content}} </span>
+                    <span *ngIf="c?.user?.id == idUserLogIn" style="margin-top: 9px">
+                      <a [routerLink]="['/user/user-detail']"
+                         class="font-size-16 profile-link a1">{{c?.user?.fullName}}
+                        : </a> {{c.content}} </span>
+                    <div style=" padding: 0px">
+                      <span (click)="createLikeComment(c.id)" matTooltip="Thích"
+                            style="margin-top: 5px; margin-left: 5px; color:#1a71c5"
+                            class="material-icons a1 font-size-18">thumb_up</span>
+                      <sub>{{c.numberLike}}</sub>
+                      <span (click)="createDisLikeComment(c.id)" matTooltip="Không thích"
+                            style="margin-top: 5px; margin-left: 5px;color: #d20845"
+                            class="material-icons a1 font-size-18">thumb_down</span>
+                      <sub>{{c.numberDisLike}}</sub>
+                      <span *ngIf="c?.user?.id == idUserLogIn" (click)="deleteComment(c.id, p.id)"
+                            matTooltip="Xoá"
+                            style="margin-top: 5px; margin-left: 5px; color: darkolivegreen"
+                            class="material-icons a1 font-size-18">delete_forever</span>
+                      <br>
+                      <div id="answerCommentsForm">
+                        <form [formGroup]="answerCommentsForm"
+                              (ngSubmit)="createAnswerComment(c.id)">
+                          <div class="row">
+                            <div class="col-1">
+                              <img src="{{userDetail.avatar}}" alt="" class="profile-photo-sm"/>
+                            </div>
+                            <div class="col-10">
+                              <input style="width: 100% !important; height: 35px; border-radius: 11px;"
+                                     onfocus="this.value=''" type="text"
+                                     class="form-control c1 i1 font-size-16" formControlName="content"
+                                     placeholder="Trả lời : {{c?.user?.fullName}}">
+                            </div>
+                            <div class="col-1">
+                              <button
+                                style="text-align: center; width: 100px;
+                                 border-radius: 8px; height: 35px"
+                                type="submit" mat-raised-button
+                                class="btn btn-primary btn-block mb-4 c2">Gửi
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div *ngFor="let an of answerComments" style="margin-bottom: 10px">
+                        <div class="row">
+                          <div class="col-1">
+                            <span *ngIf="an?.comment?.id === c.id" class="font-size-15">
+                      <img style="margin-left: 9px; width: 20px; height: 20px " src="{{an?.user?.avatar}}"
+                           class="profile-photo-sm" alt=""/>
+                            </span>
+                          </div>
+                          <div class="col-10" *ngIf="an?.comment?.id === c.id">
+                           <span *ngIf="an?.user?.id != idUserLogIn"
+                                 class="font-size-16">
+                             <a routerLink="/user/people-detail/{{an?.user?.id}}"
+                                class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
+                            <span *ngIf="an?.user?.id == idUserLogIn"
+                                  class="font-size-16">
+                             <a [routerLink]="['/user/user-detail']"
+                                class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
+                          </div>
+                          <div *ngIf="an?.comment?.id === c.id" class="col-1">
+                            <span class="font-size-14">
+                        {{an?.createAt | date:"HH:mm|dd/MM"}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <span class="font-size-15">
+                        {{c.createAt | date:"HH:mm | dd/MM/yyyy" }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <form [formGroup]="commentCreateForm"
+                    (ngSubmit)="createComment(p?.id)">
+                <div class="row">
+                  <div class="col-1">
+                    <img src="{{userDetail.avatar}}" alt=""
+                         class="profile-photo-sm"/>
+                  </div>
+                  <div class="col-8">
+                    <input style="width: 100% !important; height: 37px; border-radius: 11px" onfocus="this.value=''"
+                           type="text"
+                           class="form-control c1 i1 font-size-18" formControlName="content"
+                           placeholder="Bình luận...">
+                    <span class="font-size-15">Tối đa 200 kí tự.</span>
+                  </div>
+                  <div class="col-3">
+                    <button style="text-align: center; width: 120px" type="submit"
+                            mat-raised-button class="border-radius-10 btn btn-primary btn-block mb-4 c2">Gửi
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--List post-->
+    </div>
+    <div class="col-2 static" style="margin-left: 3%">
+      <div class="suggestions" id="sticky-sidebar">
+        <h3 align="center" style="color: #ef0b93; margin-left: 11%" class="grey">Những người bạn có thể biết</h3>
+        <div style="margin-left: 3px" class="follow-user" *ngFor=" let user of users">
+          <div *ngIf="user?.id != idUserLogIn">
+            <img routerLink="/user/people-detail/{{user?.id}}" style="margin-right: 10px"
+                 src="{{user.avatar}}"
+                 alt="" class="profile-photo-sm pull-left a1"/>
+            <div>
+              <h3><a>{{user.fullName}}</a></h3>
+              <p style="margin-left: 12px" routerLink="/user/people-detail/{{user?.id}}"
+                 class="font-size-15 text-green a1 a2">{{detailUser}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

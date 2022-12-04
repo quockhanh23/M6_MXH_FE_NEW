@@ -1,0 +1,217 @@
+<div class="backArrowDiv">
+    <span *ngIf="idUser != idUserLogIn" matTooltip="Quay lại"
+          (click)="back2()"
+          class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+  <span *ngIf="idUser == idUserLogIn" matTooltip="Quay lại"
+        (click)="back()"
+        class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+<div class="divFix">
+  <div class="row">
+    <div class="col-{{col}}">
+      <h2 align="{{align}}" *ngIf="idUser == idUserLogIn">
+        <sub><span class="material-icons">assignment</span></sub>
+        {{list}} bạn bè
+      </h2>
+      <h2 align="{{align}}" *ngIf="idUser != idUserLogIn">
+        <sub><span class="material-icons">assignment</span></sub>
+        {{list}} bạn bè của: <span
+        style="color: #0fd90f">{{nameUser}} ({{count}})</span>
+      </h2>
+    </div>
+    <div class="col-8">
+      <form *ngIf="count > 0">
+        <div class="row">
+          <div class="col-7" align="right">
+            <sub><span style="font-size: 25px" class="material-icons">search</span></sub>
+          </div>
+          <div class="col" align="right">
+            <input placeholder="Tìm kiếm bạn bè"
+                   style="outline: none;border-radius: 8px; border: 1px solid; width: 350px; height: 30px; font-size: 25px;
+            background-repeat: no-repeat !important;" type="search" id="search">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 10px">
+    <div class="col">
+      <h2 class="a1" style="{{colorCheckFriend}}" (click)="changeListFriend()" align="{{alignCenter}}"
+          *ngIf="idUser == idUserLogIn">
+        <span class="a2">Tất cả bạn bè ({{count}}) </span>
+      </h2>
+    </div>
+    <div class="col">
+      <h2 class="a1" style="{{colorCheckFollow}}" (click)="changeListFollow()" align="{{alignCenter}}"
+          *ngIf="idUser == idUserLogIn">
+        <span *ngIf="countFollowList > 0" class="a2">Bạn đang theo dõi ({{countFollowList}})</span>
+        <span *ngIf="countFollowList == 0" class="a2">Bạn đang theo dõi</span>
+      </h2>
+    </div>
+    <div class="col">
+      <h2 class="a1" style="{{colorCheckWatching}}" (click)="changeListWatching()" align="{{alignCenter}}"
+          *ngIf="idUser == idUserLogIn">
+        <span *ngIf="countWatchingList > 0" class="a2">Đang theo dõi bạn ({{countWatchingList}})</span>
+        <span *ngIf="countWatchingList == 0" class="a2">Đang theo dõi bạn</span>
+      </h2>
+    </div>
+  </div>
+</div>
+<div style="margin-left: 50px"></div>
+<div class="divFix" style="border-radius: 5px;{{height}}" *ngIf="checkFriendList && count > 0">
+  <div style="margin-left: 200px">
+    <div class="row" style="height: 86px">
+      <div
+        style="border-radius: 5px;margin-top: 10px;
+         margin-right: 10px; margin-bottom: 10px; border: #afd9ee 1px solid"
+        class="col-5 hc"
+        *ngFor=" let friend of listFriend">
+        <div class="left1">
+          <img *ngIf="idUser == idUserLogIn"
+               style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px"
+               data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
+               src="{{friend?.avatar}}" routerLink="/user/people-detail/{{friend?.id}}"
+               alt="" class=" a1"/>
+          <img *ngIf="idUser != idUserLogIn"
+               style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px; margin-bottom: 5px"
+               data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
+               src="{{friend?.avatar}}" routerLink="/user/people-detail/{{friend?.id}}"
+               alt="" class=" a1"/>
+        </div>
+        <div class="left2">
+          <h2 matTooltip="Xem trang cá nhân"><a routerLink="/user/people-detail/{{friend?.id}}">{{friend?.fullName}}</a>
+          </h2>
+          <p *ngIf="idUser == idUserLogIn">Bạn chung: {{friend?.mutualFriends}}</p>
+        </div>
+        <div class="left3" *ngIf="idUser == idUserLogIn">
+             <span matTooltip="Tuỳ chọn" [matMenuTriggerFor]="menu" style="margin-top: 10px"
+                   class="material-icons a1 a2">more_horiz</span>
+          <mat-menu #menu="matMenu">
+            <button (click)="unfriend(friend?.id)" class="a2 font-size-17" mat-menu-item>Huỷ kết bạn</button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="border-radius: 5px;{{height}}" *ngIf="checkFollowList && idUser == idUserLogIn && countFollowList > 0">
+  <div style="margin-left: 200px">
+    <div class="row" style="height: 86px">
+      <div
+        style="border-radius: 5px;margin-top: 10px;
+         margin-right: 10px; margin-bottom: 10px; border: #afd9ee 1px solid"
+        class="col-5 hc"
+        *ngFor=" let friend of userFollow">
+        <div class="left1">
+          <img style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px"
+               data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
+               src="{{friend?.avatar}}" routerLink="/user/people-detail/{{friend?.id}}"
+               alt="" class=" a1"/>
+        </div>
+        <div class="left2">
+          <h2 matTooltip="Xem trang cá nhân"><a routerLink="/user/people-detail/{{friend?.id}}">{{friend?.fullName}}</a>
+          </h2>
+          <div class="row">
+            <div class="col">
+              <p *ngIf="idUser == idUserLogIn">Bạn chung: {{friend?.mutualFriends}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="left3" *ngIf="idUser == idUserLogIn">
+             <span matTooltip="Tuỳ chọn" [matMenuTriggerFor]="menu" style="margin-top: 10px"
+                   class="material-icons a1 a2">more_horiz</span>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="friend?.sendRequestFriend == false && friend?.peopleSendRequestFriend == false"
+                    (click)="sendRequestFriend(friend?.id)" class="a2 font-size-17" mat-menu-item>Thêm bạn bè
+            </button>
+            <button class="a2 font-size-17" mat-menu-item>Bỏ theo dõi</button>
+            <button class="a2 font-size-17" mat-menu-item>Chặn người này</button>
+          </mat-menu>
+        </div>
+        <button mat-raised-button color="accent" *ngIf="friend?.sendRequestFriend == true">Đã gửi kết bạn
+        </button>
+        <button (click)="acceptFriend(friend?.id)" mat-raised-button color="accent"
+                *ngIf="friend?.peopleSendRequestFriend == true">Đồng ý kết bạn
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="border-radius: 5px;{{height}}" *ngIf="checkWatchingList && idUser == idUserLogIn && countWatchingList > 0">
+  <div style="margin-left: 200px">
+    <div class="row" style="height: 86px">
+      <div
+        style="border-radius: 5px;margin-top: 10px;
+         margin-right: 10px; margin-bottom: 10px; border: #afd9ee 1px solid"
+        class="col-5 hc"
+        *ngFor=" let friend of userWatching">
+        <div class="left1">
+          <img style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px"
+               data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
+               src="{{friend?.avatar}}" routerLink="/user/people-detail/{{friend?.id}}"
+               class="a1"/>
+        </div>
+        <div class="left2">
+          <h2 matTooltip="Xem trang cá nhân"><a routerLink="/user/people-detail/{{friend?.id}}">{{friend?.fullName}}</a>
+          </h2>
+          <div class="row">
+            <div class="col">
+              <p *ngIf="idUser == idUserLogIn">Bạn chung: {{friend?.mutualFriends}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="left3" *ngIf="idUser == idUserLogIn">
+             <span matTooltip="Tuỳ chọn" [matMenuTriggerFor]="menu" style="margin-top: 10px"
+                   class="material-icons a1 a2">more_horiz</span>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="friend?.sendRequestFriend == false && friend?.peopleSendRequestFriend == false"
+                    (click)="sendRequestFriend(friend?.id)"
+                    class="a2 font-size-17" mat-menu-item>Thêm bạn bè
+            </button>
+            <button class="a2 font-size-17" mat-menu-item>Chặn người này</button>
+          </mat-menu>
+        </div>
+        <button mat-raised-button color="accent" *ngIf="friend?.sendRequestFriend == true">Đã gửi kết bạn
+        </button>
+        <button (click)="acceptFriend(friend?.id)" mat-raised-button color="accent"
+                *ngIf="friend?.peopleSendRequestFriend == true">Đồng ý kết bạn
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divFix" *ngIf="checkLength" style="background-color: whitesmoke">
+  <div style="background-color: whitesmoke; {{heightIfBlank1}}">
+  </div>
+  <div>
+    <p align="center"><span style="font-size: 30px" class="material-icons">sensors</span></p>
+    <p *ngIf="idUser == idUserLogIn" style="font-size: 25px" align="center">Bạn không có bạn bè</p>
+    <p *ngIf="idUser != idUserLogIn" style="font-size: 25px" align="center">Không có bạn bè</p>
+    <p *ngIf="idUser == idUserLogIn" class="a1 a2" [routerLink]="['/user/requests']"
+       style="font-size: 17px; color: #0a70b9" align="center">
+      <ins>Tìm kiếm bạn bè</ins>
+    </p>
+  </div>
+  <div style="background-color: whitesmoke; {{heightIfBlank2}}">
+  </div>
+</div>
+<div class="divFix" *ngIf="checkFollowList && countFollowList == 0">
+  <div style="height: 100px">
+  </div>
+  <div>
+    <p align="center"><span style="font-size: 30px" class="material-icons">sensors</span></p>
+    <p *ngIf="idUser == idUserLogIn" style="font-size: 25px" align="center">Không có</p>
+  </div>
+  <div style="height: 250px">
+  </div>
+</div>
+<div class="divFix" *ngIf="countWatchingList && countWatchingList == 0">
+  <div style="height: 100px">
+  </div>
+  <div>
+    <p align="center"><span style="font-size: 30px" class="material-icons">sensors</span></p>
+    <p *ngIf="idUser == idUserLogIn" style="font-size: 25px" align="center">Không có</p>
+  </div>
+  <div style="height: 250px">
+  </div>
+</div>

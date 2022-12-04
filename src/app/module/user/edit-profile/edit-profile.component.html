@@ -1,0 +1,174 @@
+<div class="backArrowDiv">
+       <span matTooltip="Quay lại"
+             [routerLink]="['/user/user-detail']"
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+<div class="divFix">
+  <div class="row">
+    <div class="col-3" style="background-color: whitesmoke; border-radius: 5px">
+      <div align="right">
+        <span style="margin-top: 5px; margin-bottom: 0px; color: limegreen;"
+              class="material-icons">verified_user</span>
+      </div>
+      <div align="center" style="{{backgroundUser}};  border-radius: 5px">
+        <img style="border-radius: 50%; width: 200px; height: 200px"
+             src="{{currentUser?.avatar}}">
+      </div>
+      <div align="center" style="margin-top: 5px; background-color: white">
+        <h2 align="center"
+            style="margin-bottom: 5px; margin-top: 0px; border-radius: 5px">{{currentUser?.fullName}}</h2>
+        <p>{{currentUser?.dateOfBirth | date:"dd/MM/yyyy" }}</p>
+        <p>{{currentUser?.phone}}</p>
+        <p>{{currentUser?.address}}</p>
+        <p>{{currentUser?.favorite}}</p>
+        <hr>
+      </div>
+      <div class="row" style="background-color: white; margin-left: 1px; margin-right: 1px; border-radius: 5px">
+        <div class="col-2" style="margin-left: 25px"></div>
+        <div class="col-1" style="margin-top: 15px">
+          <span class="material-icons">mode_edit</span>
+        </div>
+        <div class="col" style="margin-top: 15px">
+          <h3 class="a1 a2">Sửa thông tin</h3>
+        </div>
+      </div>
+      <div class="row"
+           style="background-color: white; margin-left: 1px; margin-right: 1px; margin-top: 5px; border-radius: 5px">
+        <div class="col-2" style="margin-left: 25px"></div>
+        <div class="col-1" style="margin-top: 15px">
+          <span class="material-icons">vpn_key</span>
+        </div>
+        <div class="col" style="margin-top: 15px">
+          <h3 class="a1 a2">Đổi mật khẩu</h3>
+        </div>
+      </div>
+    </div>
+    <div style="float: left; width: 1%"></div>
+    <div class="col" style="background-color: whitesmoke; border-radius: 5px">
+      <h2 *ngIf="!checkList" style="width: 100%" class="a1 a2" (click)="openListImage()">
+        Chọn ảnh đại diện mặc định
+      </h2>
+      <span style="color: #0a70b9; margin-top: 5px" matTooltip="Đóng"
+            *ngIf="checkList && imageDefault == null" (click)="closeListImage()"
+            class="a1 a2 material-icons">highlight_off</span>
+      <div *ngIf="imageDefault == null && checkList">
+        <div>
+          <div class="row" style=" margin-left: 1%">
+            <div style="float: left; width: 110px" *ngFor="let list of listImage">
+              <img class="zoomImage imageChange" style="width: 100px; height: 100px; border-radius: 5px"
+                   src="{{list?.name}}"><br>
+              <button mat-raised-button color="accent" style="width: 90%"
+                      *ngIf="imageDefault == null" (click)="getNameImage(list?.name)">Chọn
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="imageDefault != null && checkList">
+        <div class="row">
+          <div class="col">
+            <div><img style="width: 150px; height: 150px; border-radius: 5px; margin-top: 5px; margin-bottom: 5px"
+                      src="{{imageDefault}}"></div>
+            <button style="width: 150px" mat-stroked-button color="primary" (click)="cancelGetNameImage()">Bỏ chọn
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="page-contents">
+        <div class="row">
+          <div class="edit-block">
+            <div class="form-group col-12" *ngIf="imageDefault == null">
+              <label for="avatar">{{changeImage}} đại diện</label>
+              <input type="file"
+                     id="avatar"
+                     #userPhoto
+                     (change)="onFileSelected($event)"
+                     name="image"
+                     autocomplete="off"/>
+            </div>
+            <div class="form-group col-12">
+              <label for="cover">{{changeImage}} nền</label>
+              <input type="file"
+                     id="cover"
+                     #userPhoto
+                     (change)="onFileSelected1($event)"
+                     name="image"
+                     autocomplete="off"/>
+            </div>
+            <form [formGroup]="updateForm" (ngSubmit)="update()" name="basic-info" id="basic-info"
+                  class="form-inline">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="fullname">Tên đầy đủ</label>
+                  <input formControlName="fullName" id="fullname" class="form-control input-group-lg" type="text"
+                         name="fullname" title="Enter fullname"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="updateForm.controls['fullName'].errors?.['required']
+                       && updateForm.controls['fullName'].touched">{{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="updateForm.controls['fullName'].errors?.['pattern']
+                       && updateForm.controls['fullName'].touched">{{messageNotValid}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="phone">Số điện thoại</label>
+                  <input formControlName="phone" id="phone" class="form-control input-group-lg" type="text"
+                         name="phone" title="Enter Phone number"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="updateForm.controls['phone'].errors?.['required']
+                       && updateForm.controls['phone'].touched">{{messageNotBlank}}
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="updateForm.controls['phone'].errors?.['pattern']
+                       && updateForm.controls['phone'].touched">{{messageNotValid}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="address">Địa chỉ</label>
+                  <input formControlName="address" id="address" class="form-control input-group-lg" type="text"
+                         name="address" title="Enter address"/>
+                </div>
+                <div style="color: red;padding-left: 30px" role="alert"
+                     *ngIf="updateForm.controls['address'].errors?.['required']
+                       && updateForm.controls['address'].touched">{{messageNotBlank}}
+                </div>
+              </div>
+
+              <mat-form-field appearance="fill" class="example-form-field">
+                <mat-label>Ngày tháng năm sinh</mat-label>
+                <input matInput [matDatepicker]="datepicker" id="cf">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Đóng</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Xác nhận</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="my-favorite">Sở thích</label>
+                  <textarea formControlName="favorite" id="my-favorite" name="information" class="form-control"
+                            rows="4"
+                            cols="400"></textarea>
+                </div>
+              </div>
+              <button class="btn btn-primary">Lưu lại thay đổi</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

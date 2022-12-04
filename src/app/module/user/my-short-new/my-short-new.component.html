@@ -1,0 +1,47 @@
+<div class="backArrowDiv">
+       <span matTooltip="Quay lại"
+             (click)="back()"
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+
+<div class="divFix" style="background-color: #faf7f7; border-radius: 5px">
+  <h2 align="center">
+    <sub><span style="color: #1c75bc; font-size: 22px;"
+               class="material-icons">recent_actors
+        </span></sub>&nbsp;Tin của bạn
+  </h2>
+  <div class="row divFix" style="border-radius: 10px">
+    <div *ngFor="let short of shortNew"
+         style="background:wheat; margin-right: 15px; height: 220px; width: 160px;
+           border-radius: 10px; border: 1px solid; margin-bottom: 15px"
+         class="margin-left-15 test">
+      <div class="row" style="margin-bottom: 2px">
+        <div class="col-3">
+          <img class="imgShortNewAvatar"
+               src="{{short.user?.avatar}}">
+        </div>
+        <div class="col-3">
+        </div>
+      </div>
+      <img class="imgShortNewContent" src="{{short.image}}">
+      <P>{{short?.content}}</P>
+    </div>
+  </div>
+</div>
+<div *ngIf="checkShortNew">
+  <div style="{{heightIfBlank1}}">
+  </div>
+  <div>
+    <p style="font-size: 25px" align="center">Bạn chưa đăng tin nào</p>
+    <p class="a1 a2" [routerLink]="['/user/listShortNew']"
+       style="font-size: 17px; color: #0a70b9" align="center">
+      <ins>Tạo tin ngay</ins>
+    </p>
+  </div>
+  <div style="{{heightIfBlank2}}">
+  </div>
+</div>
+<div class="divFix" style="margin-bottom: 5px; background-color: #faf7f7;
+   border-bottom-right-radius: 10px; border-bottom-left-radius: 5px; {{heightIfBlank1}}" *ngIf="checkShortNew2">
+</div>
+

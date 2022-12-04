@@ -1,0 +1,132 @@
+<div class="backArrowDiv">
+       <span matTooltip="Quay lại"
+             [routerLink]="['/user/newsfeed']"
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+<div class="divFix" *ngIf="check" style="border: #1c75bc 1px solid; border-radius: 15px">
+  <div style="margin: 20px">
+    <h2>Nhập văn bản</h2>
+    <form [formGroup]="shortNewForm"
+          (ngSubmit)="createShortNew()">
+      <input style="width: 330px !important; height: 40px; font-size: 18px"
+             onfocus="this.value=''" type="text"
+             class="form-control c1 i1" formControlName="content"
+             placeholder="Aa...">
+      <sup>
+        <span matTooltip="Tải ảnh lên" style="margin-top: 5px; font-size: 30px; color: #1c75bc" #userPhoto
+              (change)="onFileSelected($event)" class="a1 material-icons btn-file">image
+        <input type="file" name="image" autocomplete="off" class="a1 form-control"></span>
+      </sup>
+      <br>
+      <span style="font-size: 12px;">Tối đa 120 kí tự.</span><br>
+      <div class="row">
+        <div class="col">
+          <p>Trạng thái:</p>
+        </div>
+        <div class="col">
+          <label class="a2" for="age1">Công khai</label> &nbsp;
+          <sub><input class="a1 font-size-20" style="margin-bottom: 5px"
+                      formControlName="status" type="radio" id="age1"
+                      value="Public">&nbsp;</sub>
+        </div>
+        <div class="col">
+          <label class="a2" for="age2">Riêng tư</label> &nbsp;
+          <sub><input class="a1 font-size-20" style="margin-bottom: 5px"
+                      formControlName="status" type="radio" id="age2"
+                      value="Private">&nbsp;</sub>
+        </div>
+      </div>
+      <div style="margin-left: 60px" *ngIf="checkDone">
+        <mat-spinner [diameter]="30"></mat-spinner>
+        <span>Đang tải ảnh</span>
+      </div>
+      <div *ngIf="fb != null">
+        <span class="font-size-15">Ảnh đã tải lên</span>
+        <img style="margin-left: 10px" class="imageUploadSmall"
+             src="{{fb}}" alt="">
+      </div>
+      <button *ngIf="checkButton" style="margin-top: 10px" mat-raised-button color="accent"
+              type="summit">Đăng tin
+      </button>
+      <button *ngIf="!checkButton" disabled style="margin-top: 10px" mat-raised-button color="accent"
+              type="summit">Đăng tin
+      </button>
+      <button style="margin-left: 10px" (click)="closeCreate()"
+              type="button" mat-raised-button color="primary">
+        Đóng
+      </button>
+    </form>
+  </div>
+</div>
+<div class="divFix" style="background-color: #faf7f7; border-radius: 5px">
+  <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+    <div class="col">
+      <div class="row" style="margin-top: 10px">
+        <div class="col" align="right" style="padding: 0px">
+          <span style="color: #1c75bc"
+                class="font-size-22 material-icons">photo_camera_front
+        </span>
+        </div>
+        <div class="col" align="left" style="padding: 0px">
+          <span class="a1 a2 font-size-20" (click)="closeCreate()">&nbsp;Tất cả tin
+      </span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row" style="margin-top: 10px">
+        <div class="col" align="right" style="padding: 0px">
+             <span matTooltip="Tạo tin"
+                   style="color: #1c75bc; font-size: 21px"
+                   class="material-icons">add_circle
+        </span>
+        </div>
+        <div class="col" align="left" style="padding: 0px">
+          <span class="a1 a2 font-size-20" (click)="showCreate()">&nbsp;Tạo tin
+      </span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row" style="margin-top: 10px">
+        <div class="col" align="right" style="padding: 0px">
+           <span style="color: #1c75bc"
+                 class="font-size-22 material-icons">recent_actors
+        </span>
+        </div>
+        <div class="col" align="left" style="padding: 0px">
+          <span class="a1 a2 font-size-20" [routerLink]="['/user/short']">&nbsp;Tin của bạn</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="border-radius: 10px;" #scrollMe [scrollTop]="scrollMe.scrollHeight"
+       id="scroll">
+    <div *ngFor="let short of shortNew"
+         style="background: wheat; margin-right: 15px; height: 220px; width: 160px;
+           border-radius: 10px; border: 1px solid; margin-bottom: 15px"
+         class=" margin-left-15 test">
+      <div class="row" style="margin-bottom: 2px">
+        <div class="col-3">
+          <img class="imgShortNewAvatar"
+               src="{{short.userDTO?.avatar}}" alt="Lỗi ảnh">
+        </div>
+        <div class="col-3">
+        </div>
+      </div>
+      <img class="imgShortNewContent" src="{{short.image}}" alt="Lỗi ảnh">
+      <p>{{short?.content}}</p>
+    </div>
+    <div *ngIf="count < 1"
+         style="background: wheat; margin-right: 0px; height: 220px; border-radius: 10px; border: 1px solid"
+         class="col-2 margin-left-15">
+      <div style="height: 80px" class="row"></div>
+      <div style="height: 50px" class="row"></div>
+    </div>
+  </div>
+</div>
+<div
+  style="margin-bottom: 5px; background-color: #faf7f7;
+   border-bottom-right-radius: 10px; border-bottom-left-radius: 5px;{{height}}"
+  class="row divFix">
+</div>

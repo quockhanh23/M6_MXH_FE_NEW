@@ -1,0 +1,38 @@
+<div style="font-size: 17px ; margin-left: 2%; margin-right: 2%; margin-top: 1%">
+  <div class="row">
+    <div class="col-8">
+      <h2 style="color: #0a70b9">Danh sách người dùng ({{count}})</h2>
+    </div>
+    <div class="col-4">
+      <input style="border: #b2dba1 1px solid" placeholder="Tìm kiếm" type="search" id="form1" class="form-control"/>
+    </div>
+  </div>
+  <table style="color: purple" border="1px" width="100%">
+    <tr>
+      <th>&nbsp;Số thứ tự&nbsp;</th>
+      <th>&nbsp;Tên đăng nhập&nbsp;</th>
+      <th>&nbsp;Tên đầy đủ&nbsp;</th>
+      <th>&nbsp;Email&nbsp;</th>
+      <th>&nbsp;Ngày sinh&nbsp;</th>
+      <th>&nbsp;Số điện thoại&nbsp;</th>
+      <th>&nbsp;Ngày tham gia&nbsp;</th>
+      <th>&nbsp;Giới tính&nbsp;</th>
+      <th>&nbsp;Trạng thái&nbsp;</th>
+    </tr>
+    <tr *ngFor="let pe of user index as i">
+      <td>&nbsp;{{i + 1}}</td>
+      <td class="a1 a2" [routerLink]="['/admin/action', pe.id]" matTooltip="Tác vụ chi tiết">&nbsp;{{pe?.username}}</td>
+      <td>&nbsp;{{pe.fullName}}</td>
+      <td>&nbsp;{{pe?.email}}</td>
+      <td>&nbsp;{{pe?.dateOfBirth |date:"dd-MM-yyyy"}}</td>
+      <td>&nbsp;{{pe?.phone}}</td>
+      <td>&nbsp;{{pe?.createAt |date:"dd-MM-yyyy"}}</td>
+      <td>&nbsp;{{pe?.gender}}</td>
+      <td style="color: red" *ngIf="pe?.status == 'Banned'">&nbsp;{{pe?.status}}</td>
+      <td style="color: #0ac70a" *ngIf="pe?.status == 'Active'">&nbsp;{{pe?.status}}</td>
+    </tr>
+  </table>
+</div>
+<h2 style="color: purple" id="alo"></h2>
+
+

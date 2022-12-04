@@ -1,0 +1,8 @@
+.zoomImage:hover {
+  transform: scale(1.3);
+}
+
+.imageChange {
+  transition: all .3s ease;
+  display: block;
+}

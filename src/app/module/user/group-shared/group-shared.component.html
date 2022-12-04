@@ -1,0 +1,214 @@
+<div class="backArrowDiv">
+       <span matTooltip="Quay lại"
+             [routerLink]="['/user/newsfeed']"
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+</div>
+<div class="c1" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-3">
+      <form class="margin-left-95" style="margin-bottom: 30px">
+        <input placeholder="Tìm kiếm nhóm" class="font-size-25"
+               style="outline: none;border-radius: 8px; border: 1px solid; width: 250px; height: 30px;
+               background-repeat: no-repeat !important;"
+               type="search" id="search">
+      </form>
+      <button [routerLink]="['/user/groupCreate']" class="margin-left-95"
+              mat-stroked-button color="primary">Tạo nhóm mới
+      </button>
+      <hr class="margin-left-95">
+      <h3 style="font-size: 20px; color: deeppink"
+          class="margin-bottom-0 margin-left-95 grey a2">Nhóm do bạn quản lý</h3>
+      <div class="margin-left-95" *ngFor="let s of myGroup">
+        <div class="row" style="height: 86px">
+          <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5px col-11">
+            <div class="row" style="margin-top: 5px">
+              <div class="col-4">
+                <img style="font-size: 40px; width: 70px; height: 70px"
+                     matTooltip="Xem nhóm" src="{{s?.coverGroup}}" alt="" class="border-radius-10 a1"/>
+              </div>
+              <div class="col-8">
+                <h2 style="margin-top: 15px">{{s?.groupName}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="margin-left-95">
+      <h3 style="font-size: 20px; margin-top: 10px; color: deeppink"
+          class="margin-bottom-0 margin-left-95 grey a2">Nhóm đã tham gia</h3>
+      <div class="margin-left-95" *ngFor="let s of allGroup">
+        <div class="row" style="height: 86px">
+          <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5px col-11">
+            <div class="row">
+              <div style="margin-top: 5px; margin-left: 1px">
+                <img style="font-size: 40px; width: 70px; height: 70px"
+                     data-toggle="tooltip" data-placement="top" matTooltip="Xem nhóm"
+                     src="{{s.coverGroup}}"
+                     alt="" class="border-radius-10 a1"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <h2 align="center">Hoạt động gần đây</h2>
+
+      <!--List post-->
+
+      <div style="border: 1px violet !important; margin-bottom: 30px; font-size: 18px"
+           class="post-content">
+        <div class="post-container">
+          <img src="" alt="user" class="profile-photo-md pull-left"/>
+          <div class="post-detail">
+            <div class="user-info">
+              <h2><a matTooltip="Xem trang cá nhân" class="profile-link a1"></a></h2>
+              <p style="font-size: 15px" class="text-muted"></p>
+            </div>
+            <div class="reaction">
+              <span class="material-icons a1">more_horiz</span>
+            </div>
+            <div class="line-divider"></div>
+            <div class="post-text">
+              <p style="font-size: 20px"></p>
+            </div>
+            <div>
+              <img style="width: 100%;" src="" alt="">
+            </div>
+            <div class="line-divider"></div>
+            <div>
+              <span style="color:#1a71c5" matTooltip="Thích" class="material-icons a1">thumb_up</span>
+              <sub></sub>
+              <span style="color: #f511b4; margin-bottom: 10px; font-size: 25px" matTooltip="Thả tim"
+                    class="material-icons a1">favorite</span>
+              <sub></sub>
+              <span style="color: #d20845" matTooltip="Không thích"
+                    class="material-icons a1">thumb_down</span>
+              <sub></sub>
+              <span matTooltip="..." style="font-size: 25px; color: rebeccapurple"
+                    class="material-icons a1">zoom_in</span>
+            </div>
+            <h3>Tất cả bình luận: </h3>
+            <div>
+              <div>
+                <div class="row">
+                  <div class="col-1">
+                    <img matTooltip="Xem trang cá nhân" src=""
+                         class="profile-photo-sm" alt=""/>
+                  </div>
+                  <div class="col-8">
+                    <span style="margin-top: 9px; font-size: 16px">
+                      <a class="profile-link a1">: </a>   </span>
+                    <div style=" padding: 0px">
+
+                      <span matTooltip="Thích"
+                            style="margin-top: 5px; margin-left: 5px; color:#1a71c5; font-size: 18px"
+                            class="material-icons a1">thumb_up</span>
+                      <sub></sub>
+
+                      <span matTooltip="Thả tim"
+                            style="margin-top: 5px; margin-left: 5px;color: #d20845; font-size: 18px"
+                            class="material-icons a1">thumb_down</span>
+                      <sub></sub>
+
+                      <span matTooltip="Xoá"
+                            style="margin-top: 5px; margin-left: 5px;font-size: 18px; color: yellowgreen"
+                            class="material-icons a1">question_answer
+                      </span><br>
+                      <div class="" id="answerCommentsForm">
+                        <form>
+                          <div class="row">
+                            <div class="col-1">
+                              <img src="" alt=""
+                                   class="profile-photo-sm"/>
+                            </div>
+                            <div class="col-8">
+                              <input style="width: 370px !important; height: 40px; font-size: 18px"
+                                     onfocus="this.value=''" type="text"
+                                     class="form-control c1 i1" formControlName="content"
+                                     placeholder="Trả lời : ">
+                            </div>
+                            <div class="col-3">
+                              <button style="text-align: center; width: 100px; margin-left: 35px; margin-top: 3px"
+                                      type="submit"
+                                      class="btn btn-primary btn-block mb-4 c2">Gửi
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div>
+                        <div class="row">
+                          <div class="col-1">
+                            <span
+                              style=" font-size: 15px !important;">
+                      <img style="margin-left: 9px; width: 20px; height: 20px " src=""
+                           class="profile-photo-sm" alt=""/>
+                            </span>
+                          </div>
+                          <div class="col-10">
+                           <span
+                             style=" font-size: 16px">
+                             <a class="profile-link a1">: </a></span>
+                          </div>
+                          <div class="col-1">
+                            <span style=" font-size: 15px !important;">
+                      </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <span style=" font-size: 15px !important;">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <form>
+                <div class="row">
+                  <div class="col-1">
+                    <img src="" alt="" class="profile-photo-sm"/>
+                  </div>
+                  <div class="col-8">
+                    <input style=" height: 40px; font-size: 18px" onfocus="this.value=''" type="text"
+                           class="form-control c1 i1" formControlName="content"
+                           placeholder="Bình luận...">
+                    <span style="font-size: 15px">Tối đa 500 kí tự.</span>
+                  </div>
+                  <div class="col-3">
+                    <button style="text-align: center; width: 130px; margin-top: 3px" type="submit"
+                            class="btn btn-primary btn-block mb-4 c2">Gửi
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--List post-->
+    </div>
+    <div class="col-3" style="margin-left: 20px;">
+      <h2 style=" margin-left: 105px">Gợi ý cho bạn</h2>
+      <div class="row" style="height: 300px; margin-bottom: 20px" *ngFor="let g of allGroup">
+        <div style=" background-color: #e5e5e5" class="border-radius-5px col-11">
+          <img src="{{g.coverGroup}}" style="width: 350px; height: 200px; margin-left: 5px" class="border-radius-5"
+               alt="">
+          <h2 class="margin-bottom-0">{{g.groupName}}</h2>
+          <div class="row">
+            <div class="col-6">
+              <h3 class="margin-bottom-0">Thể loại: {{g.type}}</h3>
+            </div>
+            <div class="col-6">
+              <h3 class="margin-bottom-0">Thành viên: {{g.numberUser}}</h3>
+            </div>
+          </div>
+          <button [routerLink]="['/user/groupDetail', g.id]" mat-raised-button color="primary">Tham gia nhóm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

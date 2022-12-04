@@ -1,0 +1,7 @@
+
+#scroll {
+  height: 500px;
+  width: 100%;
+  overflow-y: scroll; /* Show vertical scrollbar */
+  overflow-x: hidden; /* Show horizontal scrollbar */
+}
