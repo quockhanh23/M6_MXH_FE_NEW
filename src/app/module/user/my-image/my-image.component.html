@@ -11,7 +11,7 @@
     <div align="left" class="col">
       <h2 *ngIf="idUser != idUserLogIn">
         <sub><span class="material-icons">collections</span></sub> Ảnh của : {{fullNameUser}}</h2>
-      <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImage(idUser)" class="a1 a2">
+      <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImage(idUser); closeListImageDelete()" class="a1 a2">
         <sub><span class="material-icons">collections</span></sub>&nbsp;Ảnh của bạn</h2>
     </div>
     <div align="center" class="col">
@@ -19,26 +19,47 @@
         <sub><span class="material-icons">add_a_photo</span></sub>&nbsp;Thêm ảnh</h2>
     </div>
     <div align="right" class="col">
-      <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImageDeleted()" class="a1 a2">
+      <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImageDeleted(); openListImageDelete()" class="a1 a2">
         <sub><span class="material-icons">delete</span></sub>&nbsp;Ảnh đã xóa</h2>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="checkListImage && !checkListImageDelete">
     <div *ngFor="let image of images">
       <div class="row">
-          <span *ngIf="image.user.id == idUserLogIn && check1" matTooltip="Xóa ảnh" (click)="delete(image.id)"
-                class="a1 material-icons">highlight_off
-          </span>
-        <span *ngIf="image.user.id == idUserLogIn && check2" matTooltip="Xóa hẳn không hồi phục"
-              (click)="delete2(image.id)"
-              class="a1 material-icons">highlight_off
-          </span>
+        <span style="margin-right: 7px; margin-left: 13px" *ngIf="image?.user?.id == idUserLogIn && check1"
+              (click)="delete(image?.id)"
+              matTooltip="Xóa ảnh" class="a1 a2 material-icons">delete</span>
+        <span class="material-icons a1" [matMenuTriggerFor]="menu" matTooltip="Tuỳ chọn">more_horiz</span>
+        <mat-menu #menu="matMenu">
+          <button class="a2 font-size-16" (click)="changeImage(image?.id, typeAvatar)" mat-menu-item>
+            Đặt làm ảnh đại diện
+          </button>
+          <button class="a2 font-size-16" (click)="changeImage(image?.id, typeCover)" mat-menu-item>
+            Đặt làm ảnh nền
+          </button>
+        </mat-menu>
       </div>
       <img class="zoomImage imageChange"
            style="width: 250px; height: 250px; border-radius: 10px; margin-right: 10px; margin-bottom: 10px"
            src="{{image?.linkImage}}" alt="Lỗi">
     </div>
   </div>
+
+  <div class="row" *ngIf="checkListImageDelete && !checkListImage">
+    <div *ngFor="let image of images2">
+      <div class="row">
+        <span style="margin-right: 7px; margin-left: 13px" *ngIf="image?.user?.id == idUserLogIn && check2"
+              (click)="delete2(image?.id)"
+              class="a1 a2 material-icons" matTooltip="Xóa hẳn ảnh không hồi phục">delete_forever</span>
+        <span *ngIf="image?.user?.id == idUserLogIn && check2" class="a1 a2 material-icons"
+              (click)="restoreImage(image?.id)" matTooltip="Khôi phục">restore_from_trash</span>
+      </div>
+      <img class="zoomImage imageChange"
+           style="width: 250px; height: 250px; border-radius: 10px; margin-right: 10px; margin-bottom: 10px"
+           src="{{image?.linkImage}}" alt="Lỗi">
+    </div>
+  </div>
+
   <div style="{{height}}" align="center">
     <div *ngIf="count == 0 && check1">
       <h2 style="margin-top: 100px">Không có ảnh</h2>
@@ -46,7 +67,7 @@
         <span style="color: blueviolet; font-size: 100px" class="material-icons">collections</span>
       </sub>
     </div>
-    <div *ngIf="count == 0 && check2">
+    <div *ngIf="count2 == 0 && check2">
       <h2 style="margin-top: 100px">Không có ảnh đã xóa</h2>
       <sub>
         <span style="color: limegreen; font-size: 100px" class="material-icons">recycling</span>
@@ -54,3 +75,4 @@
     </div>
   </div>
 </div>
+

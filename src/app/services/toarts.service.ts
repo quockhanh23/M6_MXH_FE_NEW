@@ -26,4 +26,9 @@ export class ToartsService {
   openToartsShortNewCreateSuccess() {
     this.toarts.success('Tạo tin thành công', this.title)
   }
+
+  openToartsChangeImage(type: any) {
+    if (type == 'Avatar') this.toarts.success('Đổi ảnh đại diện thành công', this.title)
+    if (type == 'Cover') this.toarts.success('Đổi ảnh nền thành công', this.title)
+  }
 }

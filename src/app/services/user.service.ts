@@ -54,4 +54,8 @@ export class UserService {
   listImageDefault(): Observable<ListAvatarDTO[]> {
     return this.http.get<ListAvatarDTO[]>(API_URL + '/listImageDefault')
   }
+
+  changeImage(idUser: any, idImage: any, type: any): Observable<any> {
+    return this.http.delete<any>(API_URL + `/changeImage?idUser=${idUser}&idImage=${idImage}&type=${type}`)
+  }
 }

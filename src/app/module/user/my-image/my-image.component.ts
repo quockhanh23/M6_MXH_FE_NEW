@@ -3,6 +3,7 @@ import {Image} from "../../../models/image";
 import {ImageService} from "../../../services/image.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
+import {ToartsService} from "../../../services/toarts.service";
 
 @Component({
   selector: 'app-my-image',
@@ -13,17 +14,24 @@ export class MyImageComponent implements OnInit {
 
   idUserLogIn = localStorage.getItem("USERID")
   images?: Image[]
+  images2?: Image[]
   idUser?: any
   fullNameUser?: any
   count?: any
+  count2?: any
   height?: string
   check1 = false
   check2 = false
+  typeAvatar = 'Avatar'
+  typeCover = 'Cover'
+  checkListImageDelete = false
+  checkListImage = true
 
   constructor(private imageService: ImageService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private userService: UserService,) {
+              private userService: UserService,
+              private toarts: ToartsService,) {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const id: any = paramMap.get('id');
       console.log("id user: " + id)
@@ -41,8 +49,21 @@ export class MyImageComponent implements OnInit {
   delete(idImage: any) {
     console.log("idImage là: " + idImage);
     this.imageService.delete(idImage, this.idUser).subscribe(result => {
-      this.ngOnInit()
+      this.getAllImage(this.idUserLogIn)
+      console.log("vào đây")
     }, error => {
+      console.log("Lỗi: " + error)
+    })
+    this.getAllImage(this.idUserLogIn)
+  }
+
+  restoreImage(idImage: any) {
+    console.log("idImage là: " + idImage);
+    this.imageService.restoreImage(idImage, this.idUser).subscribe(result => {
+      console.log("vào đây")
+      this.getAllImageDeleted()
+    }, error => {
+      this.getAllImageDeleted()
       console.log("Lỗi: " + error)
     })
   }
@@ -83,11 +104,31 @@ export class MyImageComponent implements OnInit {
     this.check1 = false
     this.check2 = true
     this.imageService.getAllImageDeleted(this.idUser).subscribe(result => {
-      this.images = result
-      this.count = result.length
+      this.images2 = result
+      this.count2 = result.length
       this.ngOnInit()
     }, error => {
       console.log("Lỗi: " + error)
     })
+  }
+
+  changeImage(idImage: any, type: any) {
+    console.log('vào hàm changeImage')
+    this.userService.changeImage(this.idUser, idImage, type).subscribe(result => {
+      this.ngOnInit()
+      this.toarts.openToartsChangeImage(type)
+    }, error => {
+      console.log("Lỗi: " + error)
+    })
+  }
+
+  openListImageDelete() {
+    this.checkListImageDelete = true
+    this.checkListImage = false
+  }
+
+  closeListImageDelete() {
+    this.checkListImageDelete = false
+    this.checkListImage = true
   }
 }

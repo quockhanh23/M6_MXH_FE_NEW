@@ -35,9 +35,8 @@
                 matBadgeColor="warn" class="noti a1">offline_bolt
       </mat-icon>
       <span [routerLink]="['/user/messenger']" matTooltip="Tin nhắn" class="noti material-icons a1">offline_bolt</span>
-      <img routerLink="/user/user-detail" matTooltip="Trang cá nhân"
-           style="margin-right: 20px; margin-bottom: 25px; width: 35px; height: 35px; border-radius: 50%"
-           class=" a1" src="{{avatar}}" alt="Lỗi ảnh">
+      <sub><span style="font-size: 41px; color: white" routerLink="/user/user-detail" matTooltip="Trang cá nhân"
+                 class="a1 a2 material-icons">manage_accounts</span></sub>
     </div>
     <span *ngIf="!checkHRF2()" (click)="logOut()" matTooltip="Đăng xuất"
           style="font-size: 30px; margin-top: 34px; margin-left: 35px;"

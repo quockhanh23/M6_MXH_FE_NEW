@@ -91,7 +91,7 @@ export class EditProfileComponent implements OnInit {
       console.log(error)
     });
     this.updateForm.reset();
-    this.ngOnInit()
+    this.router.navigate(["user/edit"]).then();
   }
 
   onFileSelected(event: any) {
