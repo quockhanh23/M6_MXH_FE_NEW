@@ -32,32 +32,54 @@
         notifications
       </mat-icon>
       <mat-menu #menu3="matMenu">
-        <button mat-menu-item *ngFor="let noti of notifications">
-          <span *ngIf="!check2" [routerLink]="['/user/people-detail', noti?.idAction?.id]"
-                matTooltip="Xem trang cá nhân"
-                style="color: #0a70b9">{{noti?.idAction?.fullName}}</span>
-          <span *ngIf="!check2" [routerLink]="['/user/people-detail', noti?.idAction?.id]">&nbsp;{{noti?.title}}</span>
-        </button>
+        <div style="margin-left: 10px; margin-bottom: 5px">Thông báo</div>
+        <div class="row" *ngFor="let noti of notifications">
+          <div class="row" style="margin-left: 10px; margin-right: 5px">
+            <div class="col-2">
+              <img class="a1" [routerLink]="['/user/people-detail', noti?.idAction?.id]"
+                   src="{{noti?.idAction?.avatar}}"
+                   style="width: 50px; height: 50px; border-radius: 50%">
+            </div>
+            <div class="col" style="margin-left: 8px; margin-top: 5px">
+               <span class="a1" [routerLink]="['/user/people-detail', noti?.idAction?.id]"
+                     matTooltip="Xem trang cá nhân"
+                     style="color: #0a70b9">{{noti?.idAction?.fullName}}</span>
+              <span [routerLink]="['/user/people-detail', noti?.idAction?.id]">&nbsp;{{noti?.title}}</span>
+            </div>
+          </div>
+        </div>
         <button *ngIf="check2" mat-menu-item>Không có thông báo</button>
       </mat-menu>
 
       <mat-icon [matMenuTriggerFor]="menu2" matTooltip="Thông báo" *ngIf="checkNotifications"
-            matBadge="{{count}}" matBadgeColor="warn"
-            class="noti material-icons a1">notifications</mat-icon>
+                matBadge="{{count}}" matBadgeColor="warn"
+                class="noti material-icons a1">notifications
+      </mat-icon>
 
       <mat-icon *ngIf="check" [routerLink]="['/user/messenger']" matTooltip="Tin nhắn" matBadge="15"
                 matBadgeColor="warn" class="noti a1">offline_bolt
       </mat-icon>
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item (click)="seenAll()">
+        <div style="margin-left: 10px; margin-bottom: 5px">Thông báo</div>
+        <button mat-menu-item (click)="seenAll()" class="a2">
           <sub><span style="font-size: 17px" class="material-icons a1">notifications</span></sub>
-         Đánh dấu đã đọc tất cả
+          Đánh dấu đã đọc tất cả
         </button>
-        <button mat-menu-item *ngFor="let noti of notifications">
-          <span [routerLink]="['/user/people-detail', noti?.idAction?.id]" matTooltip="Xem trang cá nhân"
-                style="color: #0a70b9">{{noti?.idAction?.fullName}}</span>
-          <span [routerLink]="['/user/people-detail', noti?.idAction?.id]">&nbsp;{{noti?.title}}</span>
-        </button>
+        <div class="row" *ngFor="let noti of notifications">
+          <div class="row" style="margin-left: 10px; margin-right: 5px">
+            <div class="col-2">
+              <img class="a1" [routerLink]="['/user/people-detail', noti?.idAction?.id]"
+                   src="{{noti?.idAction?.avatar}}"
+                   style="width: 50px; height: 50px; border-radius: 50%">
+            </div>
+            <div class="col" style="margin-left: 8px; margin-top: 5px">
+               <span class="a1" [routerLink]="['/user/people-detail', noti?.idAction?.id]"
+                     matTooltip="Xem trang cá nhân"
+                     style="color: #0a70b9">{{noti?.idAction?.fullName}}</span>
+              <span [routerLink]="['/user/people-detail', noti?.idAction?.id]">&nbsp;{{noti?.title}}</span>
+            </div>
+          </div>
+        </div>
       </mat-menu>
       <span [routerLink]="['/user/messenger']" matTooltip="Tin nhắn" class="noti material-icons a1">offline_bolt</span>
       <sub><span style="font-size: 41px; color: white" routerLink="/user/user-detail" matTooltip="Trang cá nhân"
