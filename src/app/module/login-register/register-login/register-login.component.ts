@@ -16,6 +16,7 @@ import {DialogDuplicatedComponent} from "../../notifications/dialog-duplicated/d
 import {
   DialogConfirmPasswordComponent
 } from "../../notifications/dialog-confirm-password/dialog-confirm-password.component";
+import {NotificationService} from "../../../services/notification.service";
 
 
 declare var $: any;
