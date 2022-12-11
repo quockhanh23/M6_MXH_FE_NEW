@@ -3,3 +3,22 @@
         [routerLink]="['/user/user-detail']"
         class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
 </div>
+<div class="divFix">
+  <h2>Nhóm của bạn</h2>
+  <div *ngFor="let s of myGroup">
+    <div class="row" style="height: 86px">
+      <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5px col-11">
+        <div class="row" style="margin-top: 5px">
+          <div class="col-4">
+            <img style="font-size: 40px; width: 70px; height: 70px;  margin-bottom: 5px"
+                 [routerLink]="['/user/groupDetail', s?.id]"
+                 matTooltip="Xem nhóm" src="{{s?.coverGroup}}" alt="" class="border-radius-10 a1"/>
+          </div>
+          <div class="col-8">
+            <h2 style="margin-top: 15px">{{s?.groupName}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

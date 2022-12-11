@@ -12,6 +12,7 @@ import {Notification} from "../models/notification";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   idUser?: any
   currentUser: string = "";
   avatar?: any
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("vào header")
     this.role = localStorage.getItem("ROLE")
     this.getAllNotificationByIdSenTo()
     this.findAllByIdSendToNotSeen()

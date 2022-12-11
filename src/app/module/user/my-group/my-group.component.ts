@@ -9,7 +9,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./my-group.component.css']
 })
 export class MyGroupComponent implements OnInit {
-  theGroup?: TheGroup[]
+
+  idUserLogIn = localStorage.getItem("USERID")
+  myGroup?: TheGroup[]
 
   constructor(private groupService: GroupService,
               private router: Router,
@@ -17,7 +19,14 @@ export class MyGroupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.findGroupByIdUserCreate()
+  }
 
+  findGroupByIdUserCreate() {
+    this.groupService.findGroupByIdUserCreate(this.idUserLogIn).subscribe(rs => {
+      console.log("findGroupByIdUserCreate")
+      this.myGroup = rs
+    })
   }
 
 }

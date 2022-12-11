@@ -12,6 +12,7 @@ export class GroupSharedComponent implements OnInit {
   idUserLogIn = localStorage.getItem("USERID")
   myGroup?: TheGroup[]
   allGroup?: TheGroup[]
+  groupJoin?: TheGroup[]
 
   constructor(private groupService: GroupService,
   ) {
@@ -20,6 +21,7 @@ export class GroupSharedComponent implements OnInit {
   ngOnInit(): void {
     this.allGroupPublic()
     this.findGroupByIdUserCreate()
+    this.groupJoined()
   }
 
   allGroupPublic() {
@@ -33,6 +35,13 @@ export class GroupSharedComponent implements OnInit {
     this.groupService.findGroupByIdUserCreate(this.idUserLogIn).subscribe(rs => {
       console.log("findGroupByIdUserCreate")
       this.myGroup = rs
+    })
+  }
+
+  groupJoined() {
+    this.groupService.groupJoined(this.idUserLogIn).subscribe(rs => {
+      console.log("groupJoined")
+      this.groupJoin = rs
     })
   }
 }

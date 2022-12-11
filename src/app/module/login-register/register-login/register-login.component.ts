@@ -18,7 +18,6 @@ import {
 } from "../../notifications/dialog-confirm-password/dialog-confirm-password.component";
 import {NotificationService} from "../../../services/notification.service";
 
-
 declare var $: any;
 
 @Component({
@@ -61,6 +60,7 @@ export class RegisterLoginComponent implements OnInit {
               private router: Router,
               public dialog: MatDialog,
               private authenticationService: AuthenticationService,
+              private notificationService: NotificationService,
               private userService: UserService,
   ) {
     localStorage.clear();
@@ -73,6 +73,7 @@ export class RegisterLoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log("vào đây login")
     this.submitted = true;
     this.loading = true;
     this.authenticationService.login(this.loginForm.value)
@@ -122,7 +123,6 @@ export class RegisterLoginComponent implements OnInit {
       phone: this.registerForm.value.newPhoneNumber,
       gender: this.registerForm.value.gender,
       fullName: this.registerForm.value.fullName,
-
     }
     console.log(newUser)
     this.userService.register(newUser).subscribe(
