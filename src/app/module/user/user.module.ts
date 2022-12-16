@@ -29,6 +29,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MaterialModule} from "../material/material.module";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ShortNewsAllComponent} from './short-news-all/short-news-all.component';
+import { BlackListComponent } from './black-list/black-list.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {ShortNewsAllComponent} from './short-news-all/short-news-all.component';
     GroupDetailComponent,
     SavedListComponent,
     ShortNewsAllComponent,
+    BlackListComponent,
   ],
   exports: [
     EditProfileComponent

@@ -15,7 +15,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
   styleUrls: ['./messenger.component.css']
 })
 export class MessengerComponent implements OnInit {
-  @Output() newItemEvent = new EventEmitter<string>();
+
   idConversation?: string
   idUserLogIn = localStorage.getItem("USERID")
   url = localStorage.getItem("Url")
@@ -71,10 +71,6 @@ export class MessengerComponent implements OnInit {
               private messengerService: MessengerService,
               private storage: AngularFireStorage,
   ) {
-  }
-
-  addNewItem(value: string) {
-    this.newItemEvent.emit(value);
   }
 
   ngOnInit(): void {

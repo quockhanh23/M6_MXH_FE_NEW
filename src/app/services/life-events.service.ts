@@ -3,7 +3,6 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {LifeEvents} from "../models/life-events";
-import {User} from "../models/user";
 
 const API_URL = environment.apiUrl + "/events";
 

@@ -26,6 +26,14 @@ body {
   font-size: 22px !important;
 }
 
+.border-radius-10 {
+  border-radius: 10px !important;
+}
+
+.border-radius-5 {
+  border-radius: 5px !important;
+}
+
 .a1 {
   cursor: pointer;
 }
@@ -40,6 +48,10 @@ body {
 
 .a3:hover {
   border: #ffc107 1px solid;
+}
+
+.hc:hover {
+  background-color: #f1eded;
 }
 
 .font-size-15 {

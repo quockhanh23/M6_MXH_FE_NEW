@@ -8,7 +8,7 @@ export class ToartsService {
 
   title = 'Thông báo'
 
-  constructor(private toarts: ToastrService,) {
+  constructor(private toarts: ToastrService) {
   }
 
   openToartsSendRequestFriendSuccess() {

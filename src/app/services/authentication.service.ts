@@ -4,8 +4,9 @@ import {UserToken} from "../models/user-token";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 import {JWTResponse} from "../models/jwtresponse";
+import {environment} from "../../environments/environment";
 
-const API_LOGIN = "http://localhost:8080/api/login"
+const API_URL = environment.apiUrl + "/login";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class AuthenticationService {
   }
 
   login(user: User): Observable<JWTResponse> {
-    return this.http.post<JWTResponse>(API_LOGIN, user);
+    return this.http.post<JWTResponse>(API_URL, user);
   }
 
   logout() {

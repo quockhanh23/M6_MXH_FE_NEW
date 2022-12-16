@@ -15,12 +15,12 @@
             class="margin-bottom-0 grey a2">Nhóm do bạn quản lý</h3>
         <div *ngFor="let s of myGroup">
           <div class="row" style="height: 86px">
-            <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5px col-11">
+            <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5 col-11">
               <div class="row" style="margin-top: 5px">
                 <div class="col-4">
-                  <img style="font-size: 40px; width: 70px; height: 70px;  margin-bottom: 5px"
+                  <img style="font-size: 40px; width: 70px; height: 70px; margin-bottom: 5px; border-radius: 5px"
                        [routerLink]="['/user/groupDetail', s?.id]"
-                       matTooltip="Xem nhóm" src="{{s?.coverGroup}}" alt="" class="border-radius-10 a1"/>
+                       matTooltip="Xem nhóm" src="{{s?.coverGroup}}" alt="" class="a1"/>
                 </div>
                 <div class="col-8">
                   <h2 style="margin-top: 15px">{{s?.groupName}}</h2>
@@ -34,12 +34,12 @@
             class="margin-bottom-0  grey a2">Nhóm đã tham gia</h3>
         <div *ngFor="let s of groupJoin">
           <div class="row" style="height: 86px">
-            <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5px col-11">
+            <div style=" margin: 10px; background-color: #e5e5e5" class="border-radius-5 col-11">
               <div class="row" style="margin-top: 5px">
                 <div class="col-4">
-                  <img style="font-size: 40px; width: 70px; height: 70px; margin-bottom: 5px"
+                  <img style="font-size: 40px; width: 70px; height: 70px; margin-bottom: 5px; border-radius: 5px"
                        [routerLink]="['/user/groupDetail', s?.id]"
-                       matTooltip="Xem nhóm" src="{{s?.coverGroup}}" alt="" class="border-radius-10 a1"/>
+                       matTooltip="Xem nhóm" src="{{s?.coverGroup}}" alt="" class="a1"/>
                 </div>
                 <div class="col-8">
                   <h2 style="margin-top: 15px">{{s?.groupName}}</h2>
@@ -65,11 +65,12 @@
           </div>
         </div>
         <div class="row" style="margin-bottom: 30px;" *ngFor="let g of allGroup">
-          <div style=" background-color: #e5e5e5" class="border-radius-5px col-11">
+          <div style=" background-color: #e5e5e5" class="border-radius-5 col-11">
             <div class="row">
               <div class="col">
                 <img src="{{g.coverGroup}}"
-                     style="width: 350px; height: 200px; margin-left: 5px; margin-top: 10px; margin-bottom: 10px"
+                     style="width: 350px; height: 200px; margin-left: 5px;
+                     margin-top: 10px; margin-bottom: 10px; border-radius: 5px"
                      class="border-radius-5"
                      alt="">
               </div>

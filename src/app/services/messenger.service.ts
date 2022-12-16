@@ -7,7 +7,6 @@ import {Conversation} from "../models/conversation";
 
 const API_URL = environment.apiUrl + "/conversations";
 
-
 @Injectable({
   providedIn: 'root'
 })

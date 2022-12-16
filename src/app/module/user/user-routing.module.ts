@@ -20,6 +20,7 @@ import {GarbageComponent} from "./garbage/garbage.component";
 import {MessengerDetailComponent} from "./messenger-detail/messenger-detail.component";
 import {SavedListComponent} from "./saved-list/saved-list.component";
 import {ShortNewsAllComponent} from "./short-news-all/short-news-all.component";
+import {BlackListComponent} from "./black-list/black-list.component";
 
 const routes: Routes = [
   {
@@ -78,6 +79,9 @@ const routes: Routes = [
   },
   {
     path: 'people-detail/:id', component: PeopleDetailComponent
+  },
+  {
+    path: 'blackList', component: BlackListComponent
   }
 ];
 
