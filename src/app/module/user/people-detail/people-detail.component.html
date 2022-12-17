@@ -40,25 +40,29 @@
                     (click)="createFollow(userDetail?.id)">
                   <sub><span class="material-icons">transcribe</span></sub><a>Theo dõi</a>
                 </li>
-                <li *ngIf="userFollow?.id == userDetail?.id" (click)="unFollow(userDetail?.id)">
+                <li *ngIf="userFollow?.id == userDetail?.id && idUserLogIn != userDetail?.id"
+                    (click)="unFollow(userDetail?.id)">
                   <sub><span class="material-icons">transcribe</span></sub><a>Bỏ theo dõi</a>
                 </li>
-                <li *ngIf="checkAcceptFriend && checkRemoveFriend" (click)="removeFriend()">
+                <li *ngIf="checkAcceptFriend && checkRemoveFriend && idUserLogIn != userDetail?.id"
+                    (click)="removeFriend()">
                   <sub><span class="material-icons">person_remove</span></sub><a>Hủy kết bạn</a>
                 </li>
-                <li *ngIf="!checkAlreadyFriend && !checkAcceptFriend" (click)="sendRequestFriend(userDetail?.id)">
+                <li *ngIf="!checkAlreadyFriend && !checkAcceptFriend && idUserLogIn != userDetail?.id"
+                    (click)="sendRequestFriend(userDetail?.id)">
                   <sub><span class="material-icons">person_add_alt_1</span></sub><a>Kết bạn</a>
                 </li>
-                <li *ngIf="checkAlreadyFriend && !checkUser2">
+                <li *ngIf="checkAlreadyFriend && !checkUser2 && idUserLogIn != userDetail?.id">
                   <sub><span class="material-icons">add_reaction</span></sub><a>Đã gửi kết bạn</a>
                 </li>
-                <li *ngIf="checkAlreadyFriend && checkUser2" (click)="acceptFriend()">
+                <li *ngIf="checkAlreadyFriend && checkUser2 && idUserLogIn != userDetail?.id"
+                    (click)="acceptFriend()">
                   <sub><span class="material-icons">group_add</span></sub><a>Đồng ý kết bạn</a>
                 </li>
-                <li *ngIf="checkAcceptFriend">
+                <li *ngIf="checkAcceptFriend && idUserLogIn != userDetail?.id">
                   <sub><span class="material-icons">people_alt</span></sub><a>Bạn bè</a>
                 </li>
-                <li [routerLink]="['/user/messengerDetail', userDetail?.id]">
+                <li [routerLink]="['/user/messengerDetail', userDetail?.id]" *ngIf="idUserLogIn != userDetail?.id">
                   <sub><span class="noti material-icons a1">offline_bolt</span></sub><a>Nhắn tin</a>
                 </li>
               </ul>

@@ -3,24 +3,69 @@
              [routerLink]="['/user/user-detail']"
              class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
 </div>
-
-<div class="divFix" *ngIf="count > 0">
-  <h2>Danh sách chặn</h2>
-  <div class="hc" *ngFor="let user of listUserInBlackList" style="border-radius: 5px; border: #afd9ee 1px solid">
-    <img
-      style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px"
-      data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
-      src="{{user?.avatar}}" routerLink="/user/people-detail/{{user?.id}}"
-      alt="" class=" a1"/>
-    <h2>{{user?.fullName}}</h2>
-    <h2>{{user?.email}}</h2>
-    <h2>{{user?.phone}}</h2>
-    <h2>{{user?.gender}}</h2>
-    <h2>{{user?.dateOfBirt}}</h2>
-    <button mat-stroked-button color="primary" (click)="unBlock(user?.id)">Bỏ chặn</button>
+<div class="divFix">
+  <div class="row">
+    <div class="col-4">
+      <h2 style="margin-top: 15px">Danh sách đã chặn</h2>
+      <div *ngIf="count > 0" style="margin-top: 20px">
+        <div class="hc" *ngFor="let user of listUserInBlackList"
+             style="border-radius: 5px; border: #afd9ee 1px solid; margin-bottom: 8px">
+          <div class="row">
+            <div class="col-3">
+              <img
+                style="font-size: 40px; width: 83px; height: 83px; border-radius: 5px; border: #d1e1ec 1px solid"
+                data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
+                src="{{user?.avatar}}" routerLink="/user/people-detail/{{user?.id}}"
+                alt="" class=" a1"/><br>
+            </div>
+            <div class="col">
+              <h3>{{user?.fullName}}</h3>
+              <p>{{user?.email}}</p>
+            </div>
+            <div class="col" align="right">
+              <button class="a3" mat-stroked-button color="primary"
+                      (click)="unBlock(user?.id)">Bỏ chặn
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="count == 0">
+        <h2>Không có</h2>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row" style="margin-top: 10px">
+        <div class="col-3" align="right">
+          <mat-form-field class="example-full-width">
+            <input id="search" matTooltip="Tìm kiếm theo tên và email"
+                   (input)="searchByFullNameOrEmail()"
+                   type="tel" matInput placeholder="Tìm kiếm...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="height: 500px">
+        <div class="row" *ngFor="let user of listUser"
+             style="border: #ead6e7 1px solid; border-radius: 5px; margin-bottom: 5px">
+          <div class="col">
+            <img style="height: 60px; width: 60px; border-radius: 10px;margin-left: 10px; margin-top: 10px"
+                 matTooltip="Xem trang cá nhân"
+                 routerLink="/user/people-detail/{{user?.id}}"
+                 src="{{user?.avatar}}" class="a1">
+          </div>
+          <div class="col">
+            <h3>{{user?.fullName}}</h3>
+            <p>{{user?.email}}</p>
+          </div>
+          <div class="col">
+            <sub><span style="margin-top: 5px"
+                       matTooltip="Chặn người này"
+                       class="a1 a2 material-icons">remove_circle</span>
+            </sub>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div class="divFix" *ngIf="count == 0">
-  <h2>Danh sách chặn</h2>
-  <h2>Không có</h2>
 </div>

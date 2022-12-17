@@ -45,6 +45,7 @@
                      matTooltip="Xem trang cá nhân"
                      style="color: #0a70b9">{{noti?.idAction?.fullName}}</span>
               <span [routerLink]="['/user/people-detail', noti?.idAction?.id]">&nbsp;{{noti?.title}}</span>
+              <p>{{noti?.createAt  | date:"HH:mm | dd/MM/yyyy" }}</p>
             </div>
           </div>
         </div>

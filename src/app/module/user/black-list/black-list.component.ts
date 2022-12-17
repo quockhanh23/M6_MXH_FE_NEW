@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserBlackListDTO} from "../../../models/user-black-list-dto";
 import {BlackListService} from "../../../services/black-list.service";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-black-list',
@@ -11,13 +12,27 @@ export class BlackListComponent implements OnInit {
 
   idUserLogIn = localStorage.getItem("USERID")
   listUserInBlackList?: UserBlackListDTO[];
+  listUser?: UserBlackListDTO[];
   count = 0
+  check = false
 
-  constructor(private blackListService: BlackListService) {
+  constructor(private blackListService: BlackListService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.listBlockedByUser()
+  }
+
+  searchByFullNameOrEmail() {
+    // @ts-ignore
+    let value = document.getElementById('search').value
+    console.log(value)
+    this.userService.searchByFullNameOrEmail(value).subscribe(rs => {
+      console.log("vào đây")
+      this.listUser = rs
+      console.log(JSON.stringify(rs))
+    })
   }
 
   listBlockedByUser() {

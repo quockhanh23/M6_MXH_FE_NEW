@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {User} from "../models/user";
 import {ListAvatarDTO} from "../models/list-avatar-dto";
+import {UserBlackListDTO} from "../models/user-black-list-dto";
 
 const API_URL = environment.apiUrl;
 
@@ -17,6 +18,10 @@ export class UserService {
 
   historyLoginLocal(): Observable<User[]> {
     return this.http.get<User[]>(API_URL + '/historyLogin');
+  }
+
+  searchByFullNameOrEmail(search: string): Observable<UserBlackListDTO[]> {
+    return this.http.get<UserBlackListDTO[]>(API_URL + `/searchByFullNameOrEmail?search=${search}`);
   }
 
   allUser(): Observable<User[]> {

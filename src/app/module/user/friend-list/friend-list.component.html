@@ -35,25 +35,26 @@
     </div>
   </div>
   <div class="row" style="margin-top: 10px">
+    <div class="col-1"></div>
     <div class="col">
-      <h2 class="a1" style="{{colorCheckFriend}}" (click)="changeListFriend()" align="{{alignCenter}}"
+      <span class="a1" style="font-size: 20px;{{colorCheckFriend}}" (click)="changeListFriend()"
           *ngIf="idUser == idUserLogIn">
         <span class="a2">Tất cả bạn bè ({{count}}) </span>
-      </h2>
+      </span>
     </div>
     <div class="col">
-      <h2 class="a1" style="{{colorCheckFollow}}" (click)="changeListFollow()" align="{{alignCenter}}"
+      <span class="a1" style="font-size: 20px;{{colorCheckFollow}}" (click)="changeListFollow()"
           *ngIf="idUser == idUserLogIn">
         <span *ngIf="countFollowList > 0" class="a2">Bạn đang theo dõi ({{countFollowList}})</span>
         <span *ngIf="countFollowList == 0" class="a2">Bạn đang theo dõi</span>
-      </h2>
+      </span>
     </div>
     <div class="col">
-      <h2 class="a1" style="{{colorCheckWatching}}" (click)="changeListWatching()" align="{{alignCenter}}"
+      <span class="a1" style="font-size: 20px;{{colorCheckWatching}}" (click)="changeListWatching()"
           *ngIf="idUser == idUserLogIn">
         <span *ngIf="countWatchingList > 0" class="a2">Đang theo dõi bạn ({{countWatchingList}})</span>
         <span *ngIf="countWatchingList == 0" class="a2">Đang theo dõi bạn</span>
-      </h2>
+      </span>
     </div>
   </div>
 </div>

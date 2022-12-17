@@ -449,12 +449,14 @@ export class PeopleDetailComponent implements OnInit {
 
   createFollow(idUserFollow: any) {
     this.followWatchingService.createFollow(this.idUserLogIn, idUserFollow).subscribe(rs => {
+      this.getOne(idUserFollow)
     })
     this.getOne(idUserFollow)
   }
 
   unFollow(idUserFollow: any) {
     this.followWatchingService.unFollow(this.idUserLogIn, idUserFollow).subscribe(rs => {
+      this.getOne(idUserFollow)
     })
     this.getOne(idUserFollow)
   }

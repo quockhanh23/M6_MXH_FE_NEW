@@ -29,7 +29,8 @@
         <span style="margin-right: 7px; margin-left: 13px" *ngIf="image?.user?.id == idUserLogIn && check1"
               (click)="delete(image?.id)"
               matTooltip="Xóa ảnh" class="a1 a2 material-icons">delete</span>
-        <span class="material-icons a1" [matMenuTriggerFor]="menu" matTooltip="Tuỳ chọn">more_horiz</span>
+        <span *ngIf="idUser == idUserLogIn" [matMenuTriggerFor]="menu"
+              class="material-icons a1" matTooltip="Tuỳ chọn">more_horiz</span>
         <mat-menu #menu="matMenu">
           <button class="a2 font-size-16" (click)="changeImage(image?.id, typeAvatar)" mat-menu-item>
             Đặt làm ảnh đại diện
