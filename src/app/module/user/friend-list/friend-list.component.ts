@@ -30,7 +30,7 @@ export class FriendListComponent implements OnInit {
   checkLength = false
   col = 4
   col2 = 8
-  align = 'left'
+  alignLeft = 'left'
   alignCenter = 'center'
   userFollow?: UserDTO[]
   userWatching?: UserDTO[]
@@ -60,7 +60,7 @@ export class FriendListComponent implements OnInit {
     })
     this.friendRelationService.listFriend(this.idUser).subscribe(rs => {
       if (rs.length == 0 || rs.length == undefined) {
-        this.align = 'center'
+        this.alignLeft = 'center'
         this.col = 12
         this.col2 = 0
         this.checkLength = true
@@ -156,6 +156,17 @@ export class FriendListComponent implements OnInit {
   acceptFriend(idFriend: any) {
     this.friendRelationService.acceptFriend(this.idUserLogIn, idFriend).subscribe(rs => {
       this.ngOnInit()
+    })
+  }
+
+  searchFriend() {
+    // @ts-ignore
+    let value = document.getElementById('search').value
+    console.log(value)
+    this.userService.searchFriend(value, this.idUserLogIn).subscribe(rs => {
+      console.log("vào đây")
+      this.listFriend = rs
+      console.log(JSON.stringify(rs))
     })
   }
 }

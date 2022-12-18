@@ -71,4 +71,8 @@ export class GroupService {
   groupJoined(idUser: any): Observable<TheGroup[]> {
     return this.httpClient.get<TheGroup[]>(API_URL + `/groupJoined?idUser=${idUser}`);
   }
+
+  searchAllByGroupNameAndType(search: string, idUser: any): Observable<TheGroup[]> {
+    return this.httpClient.get<TheGroup[]>(API_URL + `/searchAllByGroupNameAndType?search=${search}&idUser=${idUser}`);
+  }
 }

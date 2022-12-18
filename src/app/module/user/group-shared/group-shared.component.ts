@@ -44,4 +44,15 @@ export class GroupSharedComponent implements OnInit {
       this.groupJoin = rs
     })
   }
+
+  searchAllByGroupNameAndType() {
+    // @ts-ignore
+    let value = document.getElementById('search').value
+    console.log(value)
+    this.groupService.searchAllByGroupNameAndType(value, this.idUserLogIn).subscribe(rs => {
+      console.log("vào đây")
+      this.allGroup = rs
+      console.log(JSON.stringify(rs))
+    })
+  }
 }

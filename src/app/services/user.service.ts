@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment";
 import {User} from "../models/user";
 import {ListAvatarDTO} from "../models/list-avatar-dto";
 import {UserBlackListDTO} from "../models/user-black-list-dto";
+import {UserDTO} from "../models/user-dto";
 
 const API_URL = environment.apiUrl;
 
@@ -22,6 +23,10 @@ export class UserService {
 
   searchByFullNameOrEmail(search: string): Observable<UserBlackListDTO[]> {
     return this.http.get<UserBlackListDTO[]>(API_URL + `/searchByFullNameOrEmail?search=${search}`);
+  }
+
+  searchFriend(search: string, idUser: any): Observable<UserDTO[]> {
+    return this.http.get<UserDTO[]>(API_URL + `/searchFriend?search=${search}&idUser=${idUser}`);
   }
 
   allUser(): Observable<User[]> {

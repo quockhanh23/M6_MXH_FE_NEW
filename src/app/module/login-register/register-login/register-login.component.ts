@@ -92,7 +92,7 @@ export class RegisterLoginComponent implements OnInit {
             this.userName = data.username
             setTimeout(() => {
               this.router.navigate([this.returnUrl]).then()
-            }, 500)
+            }, 600)
             setTimeout(() => {
               this.dialog.open(DialogLoginSuccessComponent)
             }, 200)

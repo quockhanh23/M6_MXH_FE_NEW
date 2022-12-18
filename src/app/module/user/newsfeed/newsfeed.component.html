@@ -32,8 +32,7 @@
           <div><a class="a1 a2" routerLink="/user/user-detail">Trang cá nhân</a></div>
         </li>
         <li><i class="icon ion-ios-people"></i>
-          <div><a class="a1 a2" [routerLink]="['/user/requests']">Bạn bè</a>
-          </div>
+          <div><a class="a1 a2" [routerLink]="['/user/requests']">Bạn bè</a></div>
         </li>
         <li><i class="icon ion-ios-people"></i>
           <div><a class="a1 a2" [routerLink]="['/user/groupShare']">Nhóm</a></div>
@@ -83,10 +82,12 @@
                     <input type="file" name="image" autocomplete="off" class="a1 form-control"></span>
                 </ul>
                 <button *ngIf="!checkButton" disabled mat-raised-button style="width: 130px;
-                 margin-top: 7px" class="border-radius-10 btn btn-primary pull-right">Đăng
+                 margin-top: 7px"
+                        class="border-radius-10 btn btn-primary pull-right">Đăng
                 </button>
                 <button *ngIf="checkButton" mat-raised-button style="width: 130px;
-                 margin-top: 7px" class="border-radius-10 btn btn-primary pull-right">Đăng
+                 margin-top: 7px"
+                        class="border-radius-10 btn btn-primary pull-right">Đăng
                 </button>
               </div>
             </div>
@@ -99,16 +100,23 @@
         *ngFor=" let p of posts">
         <div class="post-container">
           <img *ngIf="p?.userDTO?.id == idUserLogIn" src="{{p?.userDTO?.avatar}}"
-               matTooltip="{{detailUser}}" routerLink="/user/user-detail" class="a1 profile-photo-md pull-left"/>
-          <img *ngIf="p?.userDTO?.id != idUserLogIn" routerLink="/user/people-detail/{{p?.userDTO?.id}}"
+               matTooltip="{{detailUser}}"
+               routerLink="/user/user-detail"
+               class="a1 profile-photo-md pull-left"/>
+          <img *ngIf="p?.userDTO?.id != idUserLogIn"
+               routerLink="/user/people-detail/{{p?.userDTO?.id}}"
                src="{{p?.userDTO?.avatar}}"
                matTooltip="{{detailUser}}" class="a1 profile-photo-md pull-left"/>
           <div class="post-detail">
             <div class="user-info">
-              <h2 *ngIf="p?.userDTO?.id == idUserLogIn"><a routerLink="/user/user-detail"
-                                                           class="profile-link a1">{{p?.userDTO?.fullName}}</a></h2>
-              <h2 *ngIf="p?.userDTO?.id != idUserLogIn"><a routerLink="/user/people-detail/{{p?.userDTO?.id}}"
-                                                           class="profile-link a1">{{p?.userDTO?.fullName}}</a></h2>
+              <h2 *ngIf="p?.userDTO?.id == idUserLogIn">
+                <a routerLink="/user/user-detail"
+                   class="profile-link a1">{{p?.userDTO?.fullName}}</a>
+              </h2>
+              <h2 *ngIf="p?.userDTO?.id != idUserLogIn">
+                <a routerLink="/user/people-detail/{{p?.userDTO?.id}}"
+                   class="profile-link a1">{{p?.userDTO?.fullName}}</a>
+              </h2>
               <p style="font-size: 14px" class="text-muted">{{p.createAt | date:"dd/MM/yyyy"}}</p>
             </div>
             <div class="reaction" *ngIf="p?.userDTO?.id == idUserLogIn">
@@ -186,7 +194,8 @@
                               (ngSubmit)="createAnswerComment(c.id)">
                           <div class="row">
                             <div class="col-1" style="margin-right: 3%">
-                              <img src="{{userDetail.avatar}}" alt="" style="height: 35px; width: 35px; border-radius: 50%"/>
+                              <img src="{{userDetail.avatar}}"
+                                   style="height: 35px; width: 35px; border-radius: 50%"/>
                             </div>
                             <div class="col-9">
                               <input style="width: 100% !important; height: 35px; border-radius: 11px;"
@@ -223,17 +232,14 @@
                                 class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
                           </div>
                           <div *ngIf="an?.comment?.id === c.id" class="col-1">
-                            <span class="font-size-14">
-                        {{an?.createAt | date:"HH:mm|dd/MM"}}</span>
+                            <span class="font-size-14">{{an?.createAt | date:"HH:mm|dd/MM"}}</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-3">
-                    <span class="font-size-15">
-                        {{c.createAt | date:"HH:mm | dd/MM/yyyy" }}
-                    </span>
+                    <span class="font-size-15">{{c.createAt | date:"HH:mm | dd/MM/yyyy" }}</span>
                   </div>
                 </div>
               </div>
@@ -273,7 +279,8 @@
         <h3 align="center" style="color: #ef0b93; margin-left: 11%" class="grey">Những người bạn có thể biết</h3>
         <div style="margin-left: 3px" class="follow-user" *ngFor=" let user of users">
           <div *ngIf="user?.id != idUserLogIn">
-            <img routerLink="/user/people-detail/{{user?.id}}" style="margin-right: 10px"
+            <img routerLink="/user/people-detail/{{user?.id}}"
+                 style="margin-right: 10px"
                  src="{{user.avatar}}"
                  alt="" class="profile-photo-sm pull-left a1"/>
             <div>

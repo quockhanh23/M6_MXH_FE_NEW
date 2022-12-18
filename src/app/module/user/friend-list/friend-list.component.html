@@ -9,11 +9,11 @@
 <div class="divFix">
   <div class="row">
     <div class="col-{{col}}">
-      <h2 align="{{align}}" *ngIf="idUser == idUserLogIn">
+      <h2 align="{{alignLeft}}" *ngIf="idUser == idUserLogIn">
         <sub><span class="material-icons">assignment</span></sub>
         {{list}} bạn bè
       </h2>
-      <h2 align="{{align}}" *ngIf="idUser != idUserLogIn">
+      <h2 align="{{alignLeft}}" *ngIf="idUser != idUserLogIn">
         <sub><span class="material-icons">assignment</span></sub>
         {{list}} bạn bè của: <span
         style="color: #0fd90f">{{nameUser}} ({{count}})</span>
@@ -26,9 +26,10 @@
             <sub><span style="font-size: 25px" class="material-icons">search</span></sub>
           </div>
           <div class="col" align="right">
-            <input placeholder="Tìm kiếm bạn bè"
-                   style="outline: none;border-radius: 8px; border: 1px solid; width: 350px; height: 30px; font-size: 25px;
-            background-repeat: no-repeat !important;" type="search" id="search">
+            <input placeholder="Tìm kiếm bạn bè" (input)="searchFriend()"
+                   style="outline: none; border-radius: 8px; border: 1px solid;
+                   width: 350px; height: 30px; font-size: 25px;
+                   background-repeat: no-repeat !important;" type="search" id="search">
           </div>
         </div>
       </form>
@@ -38,20 +39,20 @@
     <div class="col-1"></div>
     <div class="col">
       <span class="a1" style="font-size: 20px;{{colorCheckFriend}}" (click)="changeListFriend()"
-          *ngIf="idUser == idUserLogIn">
+            *ngIf="idUser == idUserLogIn">
         <span class="a2">Tất cả bạn bè ({{count}}) </span>
       </span>
     </div>
     <div class="col">
       <span class="a1" style="font-size: 20px;{{colorCheckFollow}}" (click)="changeListFollow()"
-          *ngIf="idUser == idUserLogIn">
+            *ngIf="idUser == idUserLogIn">
         <span *ngIf="countFollowList > 0" class="a2">Bạn đang theo dõi ({{countFollowList}})</span>
         <span *ngIf="countFollowList == 0" class="a2">Bạn đang theo dõi</span>
       </span>
     </div>
     <div class="col">
       <span class="a1" style="font-size: 20px;{{colorCheckWatching}}" (click)="changeListWatching()"
-          *ngIf="idUser == idUserLogIn">
+            *ngIf="idUser == idUserLogIn">
         <span *ngIf="countWatchingList > 0" class="a2">Đang theo dõi bạn ({{countWatchingList}})</span>
         <span *ngIf="countWatchingList == 0" class="a2">Đang theo dõi bạn</span>
       </span>
@@ -63,10 +64,10 @@
   <div style="margin-left: 200px">
     <div class="row" style="height: 86px">
       <div
-        style="border-radius: 5px;margin-top: 10px;
-         margin-right: 10px; margin-bottom: 10px; border: #afd9ee 1px solid"
+        *ngFor=" let friend of listFriend"
         class="col-5 hc"
-        *ngFor=" let friend of listFriend">
+        style="border-radius: 5px;margin-top: 10px;
+         margin-right: 10px; margin-bottom: 10px; border: #afd9ee 1px solid">
         <div class="left1">
           <img *ngIf="idUser == idUserLogIn"
                style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px"
