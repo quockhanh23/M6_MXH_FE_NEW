@@ -28,6 +28,10 @@
                   <sub><span class="material-icons">grade</span></sub>
                   <a (click)="backToRequest()">Trang tìm bạn</a>
                 </li>
+                <li *ngIf="urlBlackList == 'http://localhost:4200/user/blackList'">
+                  <sub><span class="material-icons">grade</span></sub>
+                  <a (click)="backToBlackList()">Dánh sách chặn</a>
+                </li>
                 <li *ngIf="checkUrl()">
                   <sub><span class="material-icons">grade</span></sub>
                   <a (click)="backToUserDetail()">Danh sách bạn bè</a>
@@ -234,21 +238,21 @@
                               <form [formGroup]="answerCommentsForm"
                                     (ngSubmit)="createAnswerComment(c.id)">
                                 <div class="row">
-                                  <div class="col-1">
+                                  <div class="col-1" style="margin-right: 3%">
                                     <img src="{{avatarUserLogin}}" alt=""
                                          class="profile-photo-sm"/>
                                   </div>
-                                  <div class="col-8">
-                                    <input style="width: 370px !important; height: 40px; border-radius: 11px"
+                                  <div class="col-9">
+                                    <input style="width: 100% !important; height: 40px; border-radius: 11px; margin-bottom: 10px"
                                            onfocus="this.value=''" type="text"
                                            class="form-control c1 i1 font-size-18" formControlName="content"
                                            placeholder="Trả lời : {{c?.user?.fullName}}">
                                   </div>
-                                  <div class="col-3">
-                                    <button
-                                      style="text-align: center; width: 100px; margin-left: 60px; margin-top: 3px; border-radius: 8px"
-                                      type="submit" mat-raised-button
-                                      class="btn btn-primary btn-block mb-4 c2">Gửi
+                                  <div class="col-1">
+                                    <button type="submit" style="border: none; background-color: white; margin-bottom: 10px">
+                                      <sub><span style="font-size: 30px; color: #0a70b9"
+                                                  matTooltip="Gửi"
+                                                  class="material-icons">send</span></sub>
                                     </button>
                                   </div>
                                 </div>
@@ -305,9 +309,10 @@
                           </div>
                         </div>
                         <div class="col-2">
-                          <button style="text-align: center; width: 130px; margin-top: 3px;"
-                                  type="submit"
-                                  mat-raised-button class="border-radius-10 btn btn-primary btn-block mb-4 c2">Gửi
+                          <button type="submit" style="border: none; background-color: white">
+                            <sub><span style="font-size: 30px; color: #0a70b9"
+                                       matTooltip="Gửi"
+                                       class="material-icons">send</span></sub>
                           </button>
                         </div>
                       </div>

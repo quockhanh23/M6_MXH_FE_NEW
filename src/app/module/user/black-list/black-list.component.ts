@@ -21,6 +21,7 @@ export class BlackListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.setItem('UrlBlackList', window.location.href);
     this.listBlockedByUser()
   }
 

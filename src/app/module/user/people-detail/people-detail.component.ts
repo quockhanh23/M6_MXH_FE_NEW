@@ -29,6 +29,7 @@ export class PeopleDetailComponent implements OnInit {
 
   idUserLogIn = localStorage.getItem("USERID")
   urlMessage = localStorage.getItem("UrlMessage")
+  urlBlackList = localStorage.getItem("UrlBlackList")
   url = localStorage.getItem("Url")
   friendRelations?: any;
   friend?: FriendRelation;
@@ -432,6 +433,13 @@ export class PeopleDetailComponent implements OnInit {
   backToRequest() {
     console.log(this.url)
     this.router.navigate(['user/requests']).then(rs => {
+      console.log(rs)
+    })
+  }
+
+  backToBlackList() {
+    console.log(this.urlBlackList)
+    this.router.navigate(['user/blackList']).then(rs => {
       console.log(rs)
     })
   }

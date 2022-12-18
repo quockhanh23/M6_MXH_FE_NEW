@@ -185,21 +185,20 @@
                         <form [formGroup]="answerCommentsForm"
                               (ngSubmit)="createAnswerComment(c.id)">
                           <div class="row">
-                            <div class="col-1">
-                              <img src="{{userDetail.avatar}}" alt="" class="profile-photo-sm"/>
+                            <div class="col-1" style="margin-right: 3%">
+                              <img src="{{userDetail.avatar}}" alt="" style="height: 35px; width: 35px; border-radius: 50%"/>
                             </div>
-                            <div class="col-10">
+                            <div class="col-9">
                               <input style="width: 100% !important; height: 35px; border-radius: 11px;"
                                      onfocus="this.value=''" type="text"
                                      class="form-control c1 i1 font-size-16" formControlName="content"
                                      placeholder="Trả lời : {{c?.user?.fullName}}">
                             </div>
                             <div class="col-1">
-                              <button
-                                style="text-align: center; width: 100px;
-                                 border-radius: 8px; height: 35px"
-                                type="submit" mat-raised-button
-                                class="btn btn-primary btn-block mb-4 c2">Gửi
+                              <button type="submit" style="border: none; background-color: #f8f8f8">
+                                <span style="font-size: 30px; color: #0a70b9; margin-top: 1px"
+                                      matTooltip="Gửi"
+                                      class="material-icons">send</span>
                               </button>
                             </div>
                           </div>
@@ -255,8 +254,10 @@
                     <span class="font-size-15">Tối đa 200 kí tự.</span>
                   </div>
                   <div class="col-3">
-                    <button style="text-align: center; width: 120px" type="submit"
-                            mat-raised-button class="border-radius-10 btn btn-primary btn-block mb-4 c2">Gửi
+                    <button type="submit" style="border: none; background-color: #f8f8f8">
+                      <sub><span style="font-size: 30px; color: #0a70b9"
+                                 matTooltip="Gửi"
+                                 class="material-icons">send</span></sub>
                     </button>
                   </div>
                 </div>
