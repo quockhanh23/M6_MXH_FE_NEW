@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserDTO} from "../../../models/user-dto";
 import {FollowWatchingService} from "../../../services/follow-watching.service";
 import {ToartsService} from "../../../services/toarts.service";
+import {BlackListService} from "../../../services/black-list.service";
 
 
 @Component({
@@ -31,7 +32,6 @@ export class FriendListComponent implements OnInit {
   col = 4
   col2 = 8
   alignLeft = 'left'
-  alignCenter = 'center'
   userFollow?: UserDTO[]
   userWatching?: UserDTO[]
   checkFriendList = true
@@ -49,6 +49,7 @@ export class FriendListComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private friendRelationService: FriendRelationService,
               private followWatchingService: FollowWatchingService,
+              private blackListService: BlackListService,
   ) {
   }
 
@@ -159,6 +160,13 @@ export class FriendListComponent implements OnInit {
     })
   }
 
+  deleteRequest(idFriend: any) {
+    this.friendRelationService.unfriend(this.idUserLogIn, idFriend).subscribe(rs => {
+      this.ngOnInit()
+      this.toarts.openToartsCancelRequestFriend()
+    })
+  }
+
   searchFriend() {
     // @ts-ignore
     let value = document.getElementById('search').value
@@ -167,6 +175,17 @@ export class FriendListComponent implements OnInit {
       console.log("vào đây")
       this.listFriend = rs
       console.log(JSON.stringify(rs))
+    })
+  }
+
+  unFollow(idUserFollow: any) {
+    this.followWatchingService.unFollow(this.idUserLogIn, idUserFollow).subscribe(rs => {
+      this.getListFollowByIdUser()
+    })
+  }
+
+  block(idBlock: any) {
+    this.blackListService.block(this.idUserLogIn, idBlock).subscribe(rs => {
     })
   }
 }

@@ -21,12 +21,12 @@
     </div>
     <div class="col-8">
       <form *ngIf="count > 0">
-        <div class="row">
+        <div class="row" *ngIf="checkFriendList">
           <div class="col-7" align="right">
             <sub><span style="font-size: 25px" class="material-icons">search</span></sub>
           </div>
           <div class="col" align="right">
-            <input placeholder="Tìm kiếm bạn bè" (input)="searchFriend()"
+            <input placeholder="Tìm kiếm bạn bè của bạn" (input)="searchFriend()"
                    style="outline: none; border-radius: 8px; border: 1px solid;
                    width: 350px; height: 30px; font-size: 25px;
                    background-repeat: no-repeat !important;" type="search" id="search">
@@ -86,8 +86,8 @@
           <p *ngIf="idUser == idUserLogIn">Bạn chung: {{friend?.mutualFriends}}</p>
         </div>
         <div class="left3" *ngIf="idUser == idUserLogIn">
-             <span matTooltip="Tuỳ chọn" [matMenuTriggerFor]="menu" style="margin-top: 10px"
-                   class="material-icons a1 a2">more_horiz</span>
+          <span matTooltip="Tuỳ chọn" [matMenuTriggerFor]="menu" style="margin-top: 10px"
+                class="material-icons a1 a2">more_horiz</span>
           <mat-menu #menu="matMenu">
             <button (click)="unfriend(friend?.id)" class="a2 font-size-17" mat-menu-item>Huỷ kết bạn</button>
           </mat-menu>
@@ -126,8 +126,11 @@
             <button *ngIf="friend?.sendRequestFriend == false && friend?.peopleSendRequestFriend == false"
                     (click)="sendRequestFriend(friend?.id)" class="a2 font-size-17" mat-menu-item>Thêm bạn bè
             </button>
-            <button class="a2 font-size-17" mat-menu-item>Bỏ theo dõi</button>
+            <button (click)="unFollow(friend?.id)" class="a2 font-size-17" mat-menu-item>Bỏ theo dõi</button>
             <button class="a2 font-size-17" mat-menu-item>Chặn người này</button>
+            <button *ngIf="friend?.sendRequestFriend == true" (click)="deleteRequest(friend?.id)"
+                    class="a2 font-size-17" mat-menu-item>Hủy lời mời kết bạn
+            </button>
           </mat-menu>
         </div>
         <button mat-raised-button color="accent" *ngIf="friend?.sendRequestFriend == true">Đã gửi kết bạn
@@ -171,6 +174,9 @@
                     class="a2 font-size-17" mat-menu-item>Thêm bạn bè
             </button>
             <button class="a2 font-size-17" mat-menu-item>Chặn người này</button>
+            <button *ngIf="friend?.sendRequestFriend == true"
+                    class="a2 font-size-17" mat-menu-item>Hủy lời mời kết bạn
+            </button>
           </mat-menu>
         </div>
         <button mat-raised-button color="accent" *ngIf="friend?.sendRequestFriend == true">Đã gửi kết bạn
