@@ -214,11 +214,11 @@
                         <div class="col-8">
                           <span *ngIf="c?.user?.id != idUserLogIn" style="margin-top: 9px">
                             <a routerLink="/user/people-detail/{{c?.user?.id}}"
-                               class="font-size-16profile-link a1">{{c?.user?.fullName}}
+                               class="font-size-16profile-link a1 word-wrap">{{c?.user?.fullName}}
                               : </a> {{c.content}} </span>
                           <span *ngIf="c?.user?.id == idUserLogIn" style="margin-top: 9px">
                             <a [routerLink]="['/user/user-detail']"
-                               class="font-size-16 profile-link a1">{{c?.user?.fullName}}
+                               class="font-size-16 profile-link a1 word-wrap">{{c?.user?.fullName}}
                               : </a> {{c.content}} </span>
                           <div style=" padding: 0px">
                             <span (click)="createLikeComment(c.id)" matTooltip="Thích"
@@ -268,10 +268,11 @@
                                 </div>
                                 <div class="col-10" *ngIf="an?.comment?.id === c.id">
                                   <span *ngIf="an?.user?.id != idUserLogIn"
-                                        class="font-size-16">
+                                        class="font-size-16 word-wrap">
                                     <a routerLink="/user/people-detail/{{an?.user?.id}}"
                                        class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
-                                  <span *ngIf="an?.user?.id == idUserLogIn" class="font-size-16">
+                                  <span *ngIf="an?.user?.id == idUserLogIn"
+                                        class="font-size-16 word-wrap">
                                     <a [routerLink]="['/user/user-detail']"
                                        class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
                                 </div>

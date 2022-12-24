@@ -66,6 +66,10 @@ body {
   overflow-x: hidden !important;
 }
 
+.word-wrap {
+  word-wrap: break-word
+}
+
 .btn-file {
   position: relative;
   overflow: hidden;
