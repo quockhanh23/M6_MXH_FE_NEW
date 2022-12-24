@@ -91,4 +91,11 @@ export class HeaderComponent implements OnInit {
       this.ngOnInit()
     })
   }
+
+  deleteAll() {
+    // @ts-ignore
+    this.notificationService.deleteAll(this.idUserLogIn).subscribe(rs => {
+      this.ngOnInit()
+    })
+  }
 }

@@ -21,4 +21,8 @@ export class AnswerCommentService {
   save(answerComment: AnswerComment, idUser: any, idComment: any): Observable<AnswerComment> {
     return this.httpClient.post<AnswerComment>(API_URL + `/createAnswerComment?idUser=${idUser}&idComment=${idComment}`, answerComment)
   }
+
+  deleteAnswerComment(idUser: any, idComment: any, idAnswerComment: any): Observable<any> {
+    return this.httpClient.delete<any>(API_URL + `/deleteAnswerComment?idUser=${idUser}&idComment=${idComment}&idAnswerComment=${idAnswerComment}`)
+  }
 }

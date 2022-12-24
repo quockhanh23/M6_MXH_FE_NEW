@@ -417,6 +417,16 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     })
   }
 
+  deleteAnswerComment(idComment: any, idAnswerComment: any) {
+    console.log("idComment là: " + idComment);
+    console.log("idAnswerComment là: " + idAnswerComment);
+    this.answerCommentService.deleteAnswerComment(this.idUserLogIn, idComment, idAnswerComment).subscribe(rs => {
+      this.ngOnInit()
+    }, error => {
+      console.log(error)
+    })
+  }
+
   ngOnDestroy() {
     console.log('ChildComponent:OnDestroy');
     localStorage.removeItem('Url')

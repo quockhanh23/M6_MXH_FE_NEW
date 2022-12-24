@@ -26,4 +26,8 @@ export class NotificationService {
     return this.httpClient.get<any>(API_URL + `/seenAll?idSenTo=${idSenTo}`);
   }
 
+  deleteAll(idSenTo: string): Observable<any> {
+    return this.httpClient.delete<any>(API_URL + `/deleteAll?idSenTo=${idSenTo}`);
+  }
+
 }

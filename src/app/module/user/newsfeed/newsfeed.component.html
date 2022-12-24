@@ -236,8 +236,9 @@
                           </div>
                           <span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
                                 style="font-size: 5px;margin-top: 2px"
+                                (click)="deleteAnswerComment(an?.comment?.id, an?.id)"
                                 class="material-icons a1 font-size-18">delete_forever</span>
-                          <div *ngIf="an?.comment?.id === c.id" >
+                          <div *ngIf="an?.comment?.id === c.id">
                             <span class="font-size-14">{{an?.createAt | date:"HH:mm | dd/MM"}}</span>
                           </div>
                         </div>
