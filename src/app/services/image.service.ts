@@ -38,4 +38,8 @@ export class ImageService {
   getAllImageDeleted(idUser: any): Observable<Image[]> {
     return this.httpClient.get<Image[]>(API_URL + `/getAllImageDeleted?idUser=${idUser}`);
   }
+
+  addPhoto(idUser: any, image: Image): Observable<Image> {
+    return this.httpClient.post<Image>(API_URL + `/addPhoto?idUser=${idUser}`, image);
+  }
 }

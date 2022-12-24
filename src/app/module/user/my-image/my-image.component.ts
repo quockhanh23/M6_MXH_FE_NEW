@@ -4,6 +4,8 @@ import {ImageService} from "../../../services/image.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 import {ToartsService} from "../../../services/toarts.service";
+import {finalize, Observable} from "rxjs";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Component({
   selector: 'app-my-image',
@@ -26,12 +28,18 @@ export class MyImageComponent implements OnInit {
   typeCover = 'Cover'
   checkListImageDelete = false
   checkListImage = true
+  fb: any;
+  checkDone = false
+  checkButton = true
+  downloadURL!: Observable<string>;
+  loading = false
 
   constructor(private imageService: ImageService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private userService: UserService,
-              private toarts: ToartsService,) {
+              private toarts: ToartsService,
+              private storage: AngularFireStorage) {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const id: any = paramMap.get('id');
       console.log("id user: " + id)
@@ -90,8 +98,8 @@ export class MyImageComponent implements OnInit {
       if (this.count < 5 && this.count > 0) {
         this.height = 'height: 320px'
       }
-      if (this.count < 10 && this.count > 5) {
-        this.height = 'height: 50px'
+      if (this.count < 10 && this.count >= 5) {
+        this.height = 'height: 100px'
       }
       this.ngOnInit()
     }, error => {
@@ -130,5 +138,60 @@ export class MyImageComponent implements OnInit {
   closeListImageDelete() {
     this.checkListImageDelete = false
     this.checkListImage = true
+  }
+
+  onFileSelected(event: any) {
+    this.loading = true
+    this.checkDone = true
+    this.checkButton = false
+    let n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+              this.addPhoto(url)
+            }
+            console.log(this.fb);
+            this.checkDone = false
+            this.checkButton = true
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
+  addPhoto(linkImage: any) {
+    console.log("vào hàm addPhoto")
+    const newPhoto = {
+      linkImage: linkImage,
+      user: {
+        id: this.idUser
+      },
+    }
+    // @ts-ignore
+    this.imageService.addPhoto(this.idUserLogIn, newPhoto).subscribe(result => {
+      this.getAllImage(this.idUserLogIn)
+      this.fb = null
+      this.loading = false
+    }, error => {
+      console.log("Lỗi: " + error)
+      if (error.status == 200) {
+        this.getAllImage(this.idUserLogIn)
+        this.fb = null
+        this.loading = false
+      }
+    })
   }
 }

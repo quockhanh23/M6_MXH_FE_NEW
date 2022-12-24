@@ -15,15 +15,34 @@
         <sub><span class="material-icons">collections</span></sub>&nbsp;Ảnh của bạn</h2>
     </div>
     <div align="center" class="col">
-      <h2 *ngIf="idUser == idUserLogIn" class="a1 a2">
-        <sub><span class="material-icons">add_a_photo</span></sub>&nbsp;Thêm ảnh</h2>
+      <h2 *ngIf="idUser == idUserLogIn && !checkListImageDelete">
+        <ul class="publishing-tools list-inline" *ngIf="!loading">
+          <sub>
+            <span #userPhoto (change)="onFileSelected($event)"
+                  matTooltip="Tải ảnh lên"
+                  class="a1 a2 material-icons btn-file">add_a_photo
+                    <input type="file" name="image" autocomplete="off" class="a1 form-control">
+            </span>
+          </sub>
+          &nbsp;Thêm ảnh
+        </ul>
+        <ul class="publishing-tools list-inline" *ngIf="loading">
+          <sub>
+            <span #userPhoto style="color: gray"
+                  matTooltip="Tải ảnh lên"
+                  class="a1 a2 material-icons btn-file">add_a_photo
+            </span>
+          </sub>
+          &nbsp;Thêm ảnh
+        </ul>
+      </h2>
     </div>
     <div align="right" class="col">
       <h2 *ngIf="idUser == idUserLogIn" (click)="getAllImageDeleted(); openListImageDelete()" class="a1 a2">
         <sub><span class="material-icons">delete</span></sub>&nbsp;Ảnh đã xóa</h2>
     </div>
   </div>
-  <div class="row" *ngIf="checkListImage && !checkListImageDelete">
+  <div class="row" *ngIf="checkListImage && !checkListImageDelete && !loading">
     <div *ngFor="let image of images">
       <div class="row">
         <span style="margin-right: 7px; margin-left: 13px" *ngIf="image?.user?.id == idUserLogIn && check1"
@@ -59,6 +78,12 @@
            style="width: 250px; height: 250px; border-radius: 10px; margin-right: 10px; margin-bottom: 10px"
            src="{{image?.linkImage}}" alt="Lỗi">
     </div>
+  </div>
+  <div align="center" *ngIf="loading">
+    <div style="height: 180px" class="row"></div>
+    <mat-spinner [diameter]="100"></mat-spinner>
+    <span style="font-size: 18px">Đang tải ảnh</span>
+    <div style="height: 180px" class="row"></div>
   </div>
 
   <div style="{{height}}" align="center">
