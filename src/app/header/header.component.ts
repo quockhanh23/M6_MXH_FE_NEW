@@ -12,6 +12,7 @@ import {ToartsService} from "../services/toarts.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit {
 
   idUser?: any
@@ -38,8 +39,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     console.log("vào header")
     this.role = localStorage.getItem("ROLE")
-    this.getAllNotificationByIdSenTo()
-    this.findAllByIdSendToNotSeen()
+    if (this.idUserLogIn != null) {
+      this.getAllNotificationByIdSenTo()
+      this.findAllByIdSendToNotSeen()
+    }
   }
 
   isLoggedIn(): boolean {
@@ -55,6 +58,7 @@ export class HeaderComponent implements OnInit {
   logOut() {
     localStorage.clear();
     this.authService.logout();
+    this.notifications = []
     this.router.navigate(['/']).then()
     this.dialog.open(DialogLogoutComponent)
     setTimeout(() => {

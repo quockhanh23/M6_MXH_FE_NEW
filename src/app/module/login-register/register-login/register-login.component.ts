@@ -142,6 +142,12 @@ export class RegisterLoginComponent implements OnInit {
         });
         this.registerForm.reset()
       }, error => {
+        if (error.status == 400) {
+          console.log("Đây" + error.error.description)
+        }
+        this.dialog.open(DialogDuplicatedComponent, {
+          data: {dialogTitle: error.error.message, dialogText: error.error.description}
+        })
         if (error.status == 409) {
           this.dialog.open(DialogDuplicatedComponent)
         }

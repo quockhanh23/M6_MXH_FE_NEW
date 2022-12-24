@@ -80,7 +80,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
               private router: Router,
               private postService: PostService,
               private shortNewService: ShortNewService,
-              private storage: AngularFireStorage
+              private storage: AngularFireStorage,
   ) {
     // @ts-ignore
     this.currentUser = localStorage.getItem("currentUser")

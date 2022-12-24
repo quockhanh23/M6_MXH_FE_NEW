@@ -20,30 +20,30 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        FooterComponent,
-        HeaderComponent,
-        TestComponent,
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    TestComponent,
 
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
-        BrowserAnimationsModule,
-        MaterialModule,
-        NotificationsModule,
-        MatMenuModule,
-        ToastrModule.forRoot(),
-        MatNativeDateModule,
-        MatTooltipModule,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    BrowserAnimationsModule,
+    MaterialModule,
+    NotificationsModule,
+    MatMenuModule,
+    ToastrModule.forRoot(),
+    MatNativeDateModule,
+    MatTooltipModule,
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
