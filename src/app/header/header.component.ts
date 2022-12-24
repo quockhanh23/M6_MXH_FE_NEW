@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogLogoutComponent} from "../module/notifications/dialog-logout/dialog-logout.component";
 import {NotificationService} from "../services/notification.service";
 import {Notification} from "../models/notification";
+import {ToartsService} from "../services/toarts.service";
 
 @Component({
   selector: 'app-header',
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthenticationService,
               private router: Router,
               private notificationService: NotificationService,
+              private toartsService: ToartsService,
               public dialog: MatDialog,
   ) {
   }
@@ -89,6 +91,10 @@ export class HeaderComponent implements OnInit {
     // @ts-ignore
     this.notificationService.seenAll(this.idUserLogIn).subscribe(rs => {
       this.ngOnInit()
+    }, error => {
+      if (error.status == 200) {
+        this.ngOnInit()
+      }
     })
   }
 
@@ -96,6 +102,12 @@ export class HeaderComponent implements OnInit {
     // @ts-ignore
     this.notificationService.deleteAll(this.idUserLogIn).subscribe(rs => {
       this.ngOnInit()
+      this.toartsService.openToartsCleanNotificationSuccess()
+    }, error => {
+      if (error.status == 200) {
+        this.ngOnInit()
+        this.toartsService.openToartsCleanNotificationSuccess()
+      }
     })
   }
 }

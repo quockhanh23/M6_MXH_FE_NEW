@@ -414,6 +414,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
       this.reloadAllPostPublic()
     }, error => {
       console.log(error)
+      if (error.status == 200) {
+        this.ngOnInit()
+      }
     })
   }
 
@@ -424,6 +427,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
       this.ngOnInit()
     }, error => {
       console.log(error)
+      if (error.status == 200) {
+        this.ngOnInit()
+      }
     })
   }
 

@@ -31,4 +31,8 @@ export class ToartsService {
     if (type == 'Avatar') this.toarts.success('Đổi ảnh đại diện thành công', this.title)
     if (type == 'Cover') this.toarts.success('Đổi ảnh nền thành công', this.title)
   }
+
+  openToartsCleanNotificationSuccess() {
+    this.toarts.info('Bạn đã xóa toàn bộ thông báo', this.title)
+  }
 }
