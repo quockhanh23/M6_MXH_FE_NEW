@@ -146,10 +146,24 @@
               <span style="color: #d20845" (click)="createDisLike(p?.id)" matTooltip="Không thích"
                     class="material-icons a1">thumb_down</span>
               <sub>{{p.numberDisLike}}</sub>
-              <span [matMenuTriggerFor]="menu" matTooltip="..." style="font-size: 25px; color: rebeccapurple"
+              <span (click)="getAllDisLike(p?.id); getAllLike(p?.id); getAllHeart(p?.id)"
+                    [matMenuTriggerFor]="menu" matTooltip="Chi tiết" style="font-size: 25px; color: rebeccapurple"
                     class="material-icons a1">zoom_in</span>
               <mat-menu #menu="matMenu">
-                <button class="a2 font-size-16" mat-menu-item>Xem chi tiết</button>
+                <div mat-menu-item *ngIf="!checkLike && !checkHeart && !checkDisLike">
+                  <span>Không có lượt tương tác nào</span></div>
+                <div mat-menu-item *ngFor="let like of likes">
+                  <span routerLink="/user/people-detail/{{like?.userLike?.id}}"
+                        style="color: #0a70b9">{{like?.userLike?.fullName}}</span><span>{{liked}}</span>
+                </div>
+                <div mat-menu-item *ngFor="let heart of hearts">
+                  <span routerLink="/user/people-detail/{{heart?.user?.id}}"
+                        style="color: #0a70b9">{{heart?.user?.fullName}}</span><span>{{hearted}}</span>
+                </div>
+                <div mat-menu-item *ngFor="let disLike of disLikes">
+                  <span routerLink="/user/people-detail/{{disLike?.userDisLike?.id}}"
+                        style="color: #0a70b9">{{disLike?.userDisLike?.fullName}}</span><span>{{disLiked}}</span>
+                </div>
               </mat-menu>
             </div>
             <h3>Tất cả bình luận: {{p?.countAllComment}}</h3>

@@ -61,6 +61,7 @@ export class MyImageComponent implements OnInit {
       console.log("vào đây")
     }, error => {
       console.log("Lỗi: " + error)
+      this.getAllImage(this.idUserLogIn)
     })
     this.getAllImage(this.idUserLogIn)
   }
@@ -82,6 +83,7 @@ export class MyImageComponent implements OnInit {
       this.ngOnInit()
     }, error => {
       console.log("Lỗi: " + error)
+      this.ngOnInit()
     })
   }
 

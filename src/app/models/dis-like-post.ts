@@ -4,6 +4,6 @@ import {Post2} from "./post2";
 export interface DisLikePost {
   id?: string
   createAt?: string
-  userLike?: User
+  userDisLike?: User
   post?: Post2
 }

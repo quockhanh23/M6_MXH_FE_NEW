@@ -18,6 +18,7 @@ import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {LikePost} from "../../../models/like-post";
 import {LikePostService} from "../../../services/like-post.service";
+import {DisLikePost} from "../../../models/dis-like-post";
 
 @Component({
   selector: 'app-newsfeed',
@@ -34,6 +35,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   posts?: Post2[]
   post?: Post2
   like?: LikePost[]
+  likes?: LikePost[]
+  hearts?: IconHeart[]
+  disLikes?: DisLikePost[]
   comment?: Comment[]
   commentOne?: Comment
   heart?: IconHeart
@@ -48,6 +52,12 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   fb: any;
   downloadURL!: Observable<string>;
   detailUser = 'Xem trang cá nhân'
+  liked = ' đã thích'
+  disLiked = ' không thích'
+  hearted = ' đã tim'
+  checkLike = false
+  checkHeart = false
+  checkDisLike = false
 
   commentCreateForm: FormGroup = new FormGroup({
     content: new FormControl("",)
@@ -429,6 +439,45 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
       console.log(error)
       if (error.status == 200) {
         this.ngOnInit()
+      }
+    })
+  }
+
+  getAllLike(idUser: any) {
+    this.likePostService.getAllLike(idUser).subscribe(rs => {
+      console.log("checkLike" + rs.length)
+      this.likes = rs
+      if (rs.length > 0) {
+        this.checkLike = true
+      }
+      if (rs.length == 0) {
+        this.checkLike = false
+      }
+    })
+  }
+
+  getAllHeart(idUser: any) {
+    this.likePostService.getAllHeart(idUser).subscribe(rs => {
+      console.log("checkHeart" + rs.length)
+      this.hearts = rs
+      if (rs.length > 0) {
+        this.checkHeart = true
+      }
+      if (rs.length == 0) {
+        this.checkHeart = false
+      }
+    })
+  }
+
+  getAllDisLike(idUser: any) {
+    this.likePostService.getAllDisLike(idUser).subscribe(rs => {
+      this.disLikes = rs
+      console.log("checkDisLike" + rs.length)
+      if (rs.length > 0) {
+        this.checkDisLike = true
+      }
+      if (rs.length == 0) {
+        this.checkDisLike = false
       }
     })
   }

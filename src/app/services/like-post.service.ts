@@ -27,4 +27,16 @@ export class LikePostService {
   createHeart(iconHeart: IconHeart, idPost: string, idUser: string): Observable<IconHeart> {
     return this.httpClient.post<IconHeart>(API_URL + `/createHeart?idPost=${idPost}&idUser=${idUser}`, iconHeart);
   }
+
+  getAllLike(idPost: string): Observable<LikePost[]> {
+    return this.httpClient.get<LikePost[]>(API_URL + `/getAllLike?idPost=${idPost}`);
+  }
+
+  getAllHeart(idPost: string): Observable<IconHeart[]> {
+    return this.httpClient.get<IconHeart[]>(API_URL + `/getAllHeart?idPost=${idPost}`);
+  }
+
+  getAllDisLike(idPost: string): Observable<DisLikePost[]> {
+    return this.httpClient.get<DisLikePost[]>(API_URL + `/getAllDisLike?idPost=${idPost}`);
+  }
 }
