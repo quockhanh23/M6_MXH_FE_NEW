@@ -7,6 +7,8 @@ import {LifeEvents} from "../../../models/life-events";
 import {FriendRelationService} from "../../../services/friend-relation.service";
 import {UserDTO} from "../../../models/user-dto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {DescriptionService} from "../../../services/description.service";
+import {UserDescription} from "../../../models/user-description";
 
 @Component({
   selector: 'app-user-detail',
@@ -29,7 +31,9 @@ export class UserDetailComponent implements OnInit {
   lifeEvent?: LifeEvents
   checkFromCreateLifeEvent = false
   checkUpdateLifeEvent = false
+  checkShowDescription = false
   idLifeEvent?: any
+  descriptions?: UserDescription
 
   lifeEventsCreateForm: FormGroup = new FormGroup({
     work: new FormControl("",),
@@ -47,6 +51,7 @@ export class UserDetailComponent implements OnInit {
               private lifeEventsService: LifeEventsService,
               private activatedRoute: ActivatedRoute,
               private friendRelationService: FriendRelationService,
+              private descriptionService: DescriptionService,
   ) {
     if (localStorage.getItem('currentUser') == null) {
       this.router.navigate(['']).then()
@@ -71,6 +76,7 @@ export class UserDetailComponent implements OnInit {
     localStorage.setItem('UrlUserDetail', window.location.href);
     this.findListByIdUser()
     this.friends()
+    this.getDescriptionByIdUser()
   }
 
   findListByIdUser() {
@@ -149,6 +155,14 @@ export class UserDetailComponent implements OnInit {
     this.checkUpdateLifeEvent = false
   }
 
+  openDescription() {
+    this.checkShowDescription = true
+  }
+
+  closeDescription() {
+    this.checkShowDescription = false
+  }
+
   getOne(idLifeEvent: any) {
     // @ts-ignore
     this.lifeEventsService.getOne(this.idUserLogIn, idLifeEvent).subscribe(result => {
@@ -160,6 +174,12 @@ export class UserDetailComponent implements OnInit {
         work: new FormControl(this.lifeEvent.work),
         timeline: new FormControl(this.lifeEvent.timeline),
       });
+    })
+  }
+
+  getDescriptionByIdUser() {
+    this.descriptionService.getDescriptionByIdUser(this.idUserLogIn).subscribe(rs => {
+      this.descriptions = rs
     })
   }
 }

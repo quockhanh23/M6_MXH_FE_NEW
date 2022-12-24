@@ -50,11 +50,11 @@
               <div class="divLi1">
                 <li *ngIf="!showLifeEvents" (click)="openLifeEvents()" class="a1 li1 active"><i
                   class="icon ion-ios-information-outline"></i>
-                  <a matTooltip="Xem tất cả">Các sự kiện</a>
+                  <a matTooltip="Xem sự kiện">Các sự kiện</a>
                 </li>
                 <li *ngIf="showLifeEvents" (click)="closeLifeEvents()" class="a1 li1 active"><i
                   class="icon ion-ios-information-outline"></i>
-                  <a matTooltip="Ẩn">Các sự kiện</a>
+                  <a matTooltip="Ẩn sự kiện">Các sự kiện</a>
                 </li>
                 <div *ngIf="showLifeEvents">
                   <div class="row" style="margin-bottom: 10px; margin-top: 5px">
@@ -104,8 +104,21 @@
                   <hr>
                 </div>
               </div>
-              <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a>Giới thiệu</a></li>
+              <li *ngIf="!checkShowDescription" class="a1 active"><i class="icon ion-ios-information-outline"></i>
+                <a matTooltip="Xem giới thiệu" (click)="openDescription()">Giới thiệu</a>
+              </li>
+              <li *ngIf="checkShowDescription" class="a1 active"><i class="icon ion-ios-information-outline"></i>
+                <a matTooltip="Ẩn giới thiệu" (click)="closeDescription()">Giới thiệu</a>
+              </li>
+              <div *ngIf="checkShowDescription">
+                  <span *ngIf="descriptions?.description == null"
+                        matTooltip="Thêm giới thiệu" style="margin-top: 5px"
+                        class="a1 a2 material-icons">add_circle</span>
+                <span *ngIf="descriptions?.description != null"
+                      matTooltip="Chỉnh sửa" style="font-size: 16px; margin-top: 10px"
+                      class="a1 a2 material-icons">edit</span>
+                <p>{{descriptions?.description}}</p>
+              </div>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
                 <a routerLink="/user/listImage/{{currentUser?.id}}">Ảnh {{my}}</a></li>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
