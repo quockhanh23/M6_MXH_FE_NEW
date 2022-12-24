@@ -219,11 +219,12 @@
                         <div class="row">
                           <div class="col-1">
                             <span *ngIf="an?.comment?.id === c.id" class="font-size-15">
-                      <img style="margin-left: 9px; width: 20px; height: 20px " src="{{an?.user?.avatar}}"
-                           class="profile-photo-sm" alt=""/>
+                              <img style="margin-left: 9px; width: 20px; height: 20px"
+                                   src="{{an?.user?.avatar}}"
+                                   class="profile-photo-sm" alt=""/>
                             </span>
                           </div>
-                          <div class="col-10" *ngIf="an?.comment?.id === c.id">
+                          <div class="col-8" *ngIf="an?.comment?.id === c.id">
                            <span *ngIf="an?.user?.id != idUserLogIn"
                                  class="font-size-16 word-wrap">
                              <a routerLink="/user/people-detail/{{an?.user?.id}}"
@@ -233,8 +234,11 @@
                              <a [routerLink]="['/user/user-detail']"
                                 class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
                           </div>
-                          <div *ngIf="an?.comment?.id === c.id" class="col-1">
-                            <span class="font-size-14">{{an?.createAt | date:"HH:mm|dd/MM"}}</span>
+                          <span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
+                                style="font-size: 5px;margin-top: 2px"
+                                class="material-icons a1 font-size-18">delete_forever</span>
+                          <div *ngIf="an?.comment?.id === c.id" >
+                            <span class="font-size-14">{{an?.createAt | date:"HH:mm | dd/MM"}}</span>
                           </div>
                         </div>
                       </div>
@@ -256,8 +260,7 @@
                   </div>
                   <div class="col-8">
                     <input style="width: 100% !important; height: 37px; border-radius: 11px" onfocus="this.value=''"
-                           type="text"
-                           class="form-control c1 i1 font-size-18" formControlName="content"
+                           type="text" class="form-control c1 i1 font-size-18" formControlName="content"
                            placeholder="Bình luận...">
                     <span class="font-size-15">Tối đa 200 kí tự.</span>
                   </div>
