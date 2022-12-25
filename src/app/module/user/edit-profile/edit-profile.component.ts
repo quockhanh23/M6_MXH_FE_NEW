@@ -7,7 +7,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {ListAvatarDTO} from "../../../models/list-avatar-dto";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogSuccessComponent} from "../../notifications/dialog-success/dialog-success.component";
-import {DialogFailComponent} from "../../notifications/dialog-fail/dialog-fail.component";
+import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -87,8 +87,9 @@ export class EditProfileComponent implements OnInit {
     this.userService.updateUserProfile(this.currentUser.id, this.currentUser).subscribe(result => {
       this.dialog.open(DialogSuccessComponent)
     }, error => {
-      this.dialog.open(DialogFailComponent)
-      console.log(error)
+      this.dialog.open(DialogCommonComponent, {
+        data: {dialogTitle: error.error.message, dialogText: error.error.description}
+      })
     });
     this.updateForm.reset();
     this.router.navigate(["user/edit"]).then();

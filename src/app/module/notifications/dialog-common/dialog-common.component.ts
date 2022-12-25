@@ -2,15 +2,16 @@ import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-dialog-duplicated',
-  templateUrl: './dialog-duplicated.component.html',
-  styleUrls: ['./dialog-duplicated.component.css']
+  selector: 'app-dialog-common',
+  templateUrl: './dialog-common.component.html',
+  styleUrls: ['./dialog-common.component.css']
 })
-export class DialogDuplicatedComponent implements OnInit {
+export class DialogCommonComponent implements OnInit {
+
   @Output() submitClicked = new EventEmitter<any>();
   dialogTitle?: string;
   dialogText?: string;
-  constructor(public dialogRef: MatDialogRef<DialogDuplicatedComponent>,
+  constructor(public dialogRef: MatDialogRef<DialogCommonComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -22,4 +23,5 @@ export class DialogDuplicatedComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }

@@ -29,10 +29,9 @@ export class BlackListComponent implements OnInit {
     // @ts-ignore
     let value = document.getElementById('search').value
     console.log(value)
-    this.userService.searchByFullNameOrEmail(value).subscribe(rs => {
+    this.userService.searchByFullNameOrEmail(value, this.idUserLogIn).subscribe(rs => {
       console.log("vào đây")
       this.listUser = rs
-      console.log(JSON.stringify(rs))
     })
   }
 

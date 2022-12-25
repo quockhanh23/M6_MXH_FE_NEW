@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {UserRoutingModule} from './user-routing.module';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -29,7 +28,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MaterialModule} from "../material/material.module";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ShortNewsAllComponent} from './short-news-all/short-news-all.component';
-import { BlackListComponent } from './black-list/black-list.component';
+import {BlackListComponent} from './black-list/black-list.component';
 
 
 @NgModule({

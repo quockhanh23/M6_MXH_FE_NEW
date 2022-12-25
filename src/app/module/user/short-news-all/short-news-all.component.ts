@@ -125,10 +125,7 @@ export class ShortNewsAllComponent implements OnInit {
     const filePath = `RoomsImages/${n}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(`RoomsImages/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
+    task.snapshotChanges().pipe(finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(url => {
             if (url) {
@@ -139,8 +136,7 @@ export class ShortNewsAllComponent implements OnInit {
             this.checkButton = true
           });
         })
-      )
-      .subscribe(url => {
+      ).subscribe(url => {
         if (url) {
           console.log(url);
         }

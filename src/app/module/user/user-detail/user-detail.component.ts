@@ -6,7 +6,7 @@ import {LifeEventsService} from "../../../services/life-events.service";
 import {LifeEvents} from "../../../models/life-events";
 import {FriendRelationService} from "../../../services/friend-relation.service";
 import {UserDTO} from "../../../models/user-dto";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {DescriptionService} from "../../../services/description.service";
 import {UserDescription} from "../../../models/user-description";
 

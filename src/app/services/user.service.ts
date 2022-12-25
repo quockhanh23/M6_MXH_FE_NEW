@@ -21,8 +21,8 @@ export class UserService {
     return this.http.get<User[]>(API_URL + '/historyLogin');
   }
 
-  searchByFullNameOrEmail(search: string): Observable<UserBlackListDTO[]> {
-    return this.http.get<UserBlackListDTO[]>(API_URL + `/searchByFullNameOrEmail?search=${search}`);
+  searchByFullNameOrEmail(search: string, idUserLogin: any): Observable<UserBlackListDTO[]> {
+    return this.http.get<UserBlackListDTO[]>(API_URL + `/searchByFullNameOrEmail?search=${search}&idUserLogin=${idUserLogin}`);
   }
 
   searchFriend(search: string, idUser: any): Observable<UserDTO[]> {

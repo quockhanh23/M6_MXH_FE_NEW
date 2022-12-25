@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
 import {environment} from "../../environments/environment";
-import {AuthenticationService} from "./authentication.service";
 
 const API_URL = environment.apiUrl + "/admins";
 
@@ -12,8 +11,7 @@ const API_URL = environment.apiUrl + "/admins";
 })
 export class AdminService {
 
-  constructor(private httpClient: HttpClient,
-              private authenticationService: AuthenticationService) {
+  constructor(private httpClient: HttpClient) {
   }
 
   getAll(): Observable<User[]> {

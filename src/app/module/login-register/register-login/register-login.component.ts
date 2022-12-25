@@ -10,13 +10,8 @@ import {DialogLoginSuccessComponent} from "../../notifications/dialog-login-succ
 import {
   DialogRegisterSuccessComponent
 } from "../../notifications/dialog-register-success/dialog-register-success.component";
-import {DialogLoginFailComponent} from "../../notifications/dialog-login-fail/dialog-login-fail.component";
-import {DialogLockedComponent} from "../../notifications/dialog-locked/dialog-locked.component";
-import {DialogDuplicatedComponent} from "../../notifications/dialog-duplicated/dialog-duplicated.component";
-import {
-  DialogConfirmPasswordComponent
-} from "../../notifications/dialog-confirm-password/dialog-confirm-password.component";
 import {NotificationService} from "../../../services/notification.service";
+import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 
 declare var $: any;
 
@@ -73,7 +68,7 @@ export class RegisterLoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log("vào đây login")
+    console.log("vào login")
     this.submitted = true;
     this.loading = true;
     this.authenticationService.login(this.loginForm.value)
@@ -104,13 +99,9 @@ export class RegisterLoginComponent implements OnInit {
           })
         }
       }, error => {
-        console.log("error1:" + error)
-        if (error.status == 401) {
-          this.dialog.open(DialogLoginFailComponent)
-        }
-        if (error.status == 423) {
-          this.dialog.open(DialogLockedComponent)
-        }
+        this.dialog.open(DialogCommonComponent, {
+          data: {dialogTitle: error.error.message, dialogText: error.error.description}
+        })
       })
   }
 
@@ -142,18 +133,9 @@ export class RegisterLoginComponent implements OnInit {
         });
         this.registerForm.reset()
       }, error => {
-        if (error.status == 400) {
-          console.log("Đây" + error.error.description)
-        }
-        this.dialog.open(DialogDuplicatedComponent, {
+        this.dialog.open(DialogCommonComponent, {
           data: {dialogTitle: error.error.message, dialogText: error.error.description}
         })
-        if (error.status == 409) {
-          this.dialog.open(DialogDuplicatedComponent)
-        }
-        if (newUser.password != newUser.confirmPassword && error.status == 400) {
-          this.dialog.open(DialogConfirmPasswordComponent)
-        }
       }
     )
   }

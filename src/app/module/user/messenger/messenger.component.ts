@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MessengerService} from "../../../services/messenger.service";
 import {UserService} from "../../../services/user.service";
 import {FriendRelationService} from "../../../services/friend-relation.service";

@@ -29,5 +29,4 @@ export class NotificationService {
   deleteAll(idSenTo: string): Observable<any> {
     return this.httpClient.delete<any>(API_URL + `/deleteAll?idSenTo=${idSenTo}`);
   }
-
 }
