@@ -10,5 +10,5 @@ export interface Messenger {
   createAt?: string
   format?: string
   idSender?: User
-  conversation: Conversation
+  conversation?: Conversation
 }

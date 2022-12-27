@@ -6,22 +6,60 @@
 
 <div class="divFix">
   <div class="row">
-    <div class="col-4">
-      <div class="row">
-        <div class="col">
-          <p>Tên nhóm</p>
-          <p>Thể loại</p>
+    <div class="col-5" style="background-color:whitesmoke; border-radius: 5px">
+      <div class="row" style="margin-top: 10px; margin-left: 10px; margin-bottom: 10px">
+        <div class="col-3">
+          <h2>Tạo nhóm</h2>
+        </div>
+        <div class="verticalLine" style="margin-right: 20px">
         </div>
         <div class="col">
-          <input><br>
-          <input><br>
-          <button>Tạo nhóm</button>
+          <div style="margin-top: 5px; margin-right: 10px; margin-bottom: 10px">
+            <div>Tên nhóm</div>
+            <input #text1 maxlength="50" placeholder="Aa"
+                   style="width: 100% !important; font-size: 18px; border: #c0a16b 1px solid"
+                   onfocus="this.value=''" type="text"
+                   class="form-control c1 i1" formControlName="content">
+            <mat-hint style="margin-left: 10px" align="end">{{text1.value.length}} / 50</mat-hint>
+            <br>
+            <div>Thể loại</div>
+            <input #text2 maxlength="50" placeholder="Aa"
+                   style="width: 100% !important; font-size: 18px; border: #c0a16b 1px solid"
+                   onfocus="this.value=''" type="text"
+                   class="form-control c1 i1" formControlName="a">
+            <mat-hint style="margin-left: 10px" align="end">{{text2.value.length}} / 50</mat-hint>
+            <br>
+            <div>Mô tả</div>
+            <input #text3 maxlength="200" placeholder="Aa"
+                   style="width: 100% !important; font-size: 18px; border: #c0a16b 1px solid"
+                   onfocus="this.value=''" type="text"
+                   class="form-control c1 i1" formControlName="b">
+            <mat-hint style="margin-left: 10px" align="end">{{text3.value.length}} / 200</mat-hint>
+            <p>Tải ảnh nền</p>
+            <p>Tải ảnh đại diện</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-8">
-      <div class="row">
+    <div class="col-2">
+      <div>
+        <div style="float: left; width: 50%">
+          <span style="font-size: 18px">Xem trước</span>
+        </div>
+        <div style="float: left; width: 20%" align="left">
+          <span class="material-icons a1 a2">play_arrow</span>
+        </div>
+      </div>
+      <button mat-raised-button color="primary">Tạo nhóm</button>
+    </div>
+    <div class="col-5">
+      <div class="col-5">
         <img src="">
+      </div>
+      <div class="col-7">
+        <h2>{{text1.value}}</h2>
+        <h2>{{text2.value}}</h2>
+        <h2>{{text3.value}}</h2>
       </div>
     </div>
   </div>

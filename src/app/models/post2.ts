@@ -11,5 +11,5 @@ export interface Post2 {
   comment?: Comment
   image?: string
   iconHeart?: string
-  countAllComment:string
+  countAllComment?: string
 }

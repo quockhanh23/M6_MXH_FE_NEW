@@ -4,6 +4,8 @@ import {GroupService} from "../../../services/group.service";
 import {finalize, Observable} from "rxjs";
 import {TheGroup} from "../../../models/the-group";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-group-create',
@@ -13,20 +15,21 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 export class GroupCreateComponent implements OnInit {
 
   idUserLogIn = localStorage.getItem("USERID")
-  fb: any = null;
-  fb1: any = null;
+  avatarGroup?: any;
+  coverGroup?: any;
   downloadURL: Observable<string> | undefined;
   downloadURL1: Observable<string> | undefined;
-  avatar: string = "";
-  cover: string = "";
   theGroup?: TheGroup
+
   groupCreateForm: FormGroup = new FormGroup({
-    groupName: new FormControl("",[Validators.required]),
-    createBy: new FormControl("",[Validators.required]),
-    type: new FormControl("",[Validators.required]),
+    groupName: new FormControl("", [Validators.required]),
+    createBy: new FormControl("", [Validators.required]),
+    type: new FormControl("", [Validators.required]),
+    subtype: new FormControl("", [Validators.required]),
   })
 
   constructor(private groupService: GroupService,
+              public dialog: MatDialog,
               private storage: AngularFireStorage) {
   }
 
@@ -39,16 +42,18 @@ export class GroupCreateComponent implements OnInit {
       groupName: this.groupCreateForm.value.groupName,
       createBy: this.groupCreateForm.value.createBy,
       type: this.groupCreateForm.value.type,
-      avatarGroup: this.fb,
-      coverGroup: this.fb1,
+      avatarGroup: this.avatarGroup,
+      coverGroup: this.coverGroup,
       idUserCreate: this.idUserLogIn
     }
     console.log(newGroup)
     // @ts-ignore
-    this.groupService.createGroup(newGroup, this.idUser).subscribe(result => {
+    this.groupService.createGroup(newGroup, this.idUserLogIn).subscribe(result => {
       this.theGroup = result
     }, error => {
-      console.log("Lỗi: " + error)
+      this.dialog.open(DialogCommonComponent, {
+        data: {dialogTitle: error.error.message, dialogText: error.error.description}
+      })
     })
   }
 
@@ -65,8 +70,9 @@ export class GroupCreateComponent implements OnInit {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(url => {
             if (url) {
-              this.fb = url;
+              this.avatarGroup = url;
             }
+            console.log(this.avatarGroup);
           });
         })
       )
@@ -90,9 +96,9 @@ export class GroupCreateComponent implements OnInit {
           this.downloadURL1 = fileRef1.getDownloadURL();
           this.downloadURL1.subscribe(url => {
             if (url) {
-              this.fb1 = url;
+              this.coverGroup = url;
             }
-            console.log(this.fb1);
+            console.log(this.coverGroup);
           });
         })
       )
@@ -101,5 +107,9 @@ export class GroupCreateComponent implements OnInit {
           console.log(url);
         }
       });
+  }
+
+  removeThePreview(downloadUrl: any) {
+    return this.storage.storage.refFromURL(downloadUrl).delete();
   }
 }

@@ -88,12 +88,9 @@
             </div>
             <div class="form-group col-12">
               <label for="cover">{{changeImage}} nền</label>
-              <input type="file"
-                     id="cover"
-                     #userPhoto
-                     (change)="onFileSelected1($event)"
-                     name="image"
-                     autocomplete="off"/>
+              <input type="file" name="image"
+                     id="cover" autocomplete="off"
+                     #userPhoto (change)="onFileSelected1($event)"/>
             </div>
             <form [formGroup]="updateForm" (ngSubmit)="update()" name="basic-info" id="basic-info"
                   class="form-inline">
@@ -156,8 +153,9 @@
                 <div class="form-group col-xs-12">
                   <label for="my-favorite">Sở thích</label>
                   <textarea formControlName="favorite" id="my-favorite" name="information" class="form-control"
-                            rows="4"
+                            rows="4" maxlength="200" #text
                             cols="400"></textarea>
+                  <span style="margin-left: 10px">{{text.value.length}} / 200</span>
                 </div>
               </div>
               <button class="btn btn-primary">Lưu lại thay đổi</button>

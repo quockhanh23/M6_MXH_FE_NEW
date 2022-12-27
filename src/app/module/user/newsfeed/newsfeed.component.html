@@ -56,12 +56,12 @@
             <div class="col-6">
               <div class="form-group">
                 <img src="{{userDetail?.avatar}}" alt="" class="profile-photo-md a1"/>
-                <input style="width: 400px !important; height: 50px"
+                <input #text maxlength="500" style="width: 400px !important; height: 50px"
                        onfocus="this.value=''" type="text"
                        class="font-size-18 form-control c1 i1" formControlName="content"
                        placeholder="Bạn đang nghĩ gì thế?">
               </div>
-              <span class="font-size-15" style="margin-left: 60px">Tối đa 500 kí tự.</span>
+              <span class="font-size-15" style="margin-left: 60px">{{text.value.length}} / 500</span>
               <br>
               <div style="margin-left: 60px" *ngIf="checkDone">
                 <mat-spinner [diameter]="30"></mat-spinner>

@@ -85,7 +85,7 @@
                     </div>
                   </div>
                   <div style="margin-left: 32px" *ngFor="let life of lifeEvents">
-                    <div class="row">
+                    <div class="row word-wrap">
                       <div class="col-1">
                         <span class="material-icons">work_history</span>
                       </div>
@@ -111,13 +111,27 @@
                 <a matTooltip="Ẩn giới thiệu" (click)="closeDescription()">Giới thiệu</a>
               </li>
               <div *ngIf="checkShowDescription">
-                  <span *ngIf="descriptions?.description == null"
-                        matTooltip="Thêm giới thiệu" style="margin-top: 5px"
-                        class="a1 a2 material-icons">add_circle</span>
-                <span *ngIf="descriptions?.description != null"
-                      matTooltip="Chỉnh sửa" style="font-size: 16px; margin-top: 10px"
-                      class="a1 a2 material-icons">edit</span>
-                <p>{{descriptions?.description}}</p>
+                <div class="row word-wrap">
+                  <div class="col-1">
+                    <span *ngIf="descriptions?.description != null"
+                          style="margin-top: 5px"
+                          class="material-icons">article</span>
+                  </div>
+                  <div class="col-10">
+                    <span *ngIf="descriptions?.description == null"
+                          matTooltip="Thêm giới thiệu" style="margin-top: 5px"
+                          class="a1 a2 material-icons">add_circle</span>
+                    <p *ngIf="descriptions?.description == null"
+                       style="margin-top: 10px">Mô tả</p>
+                    <p *ngIf="descriptions?.description != null"
+                       style="margin-top: 10px">{{descriptions?.description}}</p>
+                  </div>
+                  <div class="col-1">
+                    <span *ngIf="descriptions?.description != null"
+                          matTooltip="Chỉnh sửa" style="font-size: 16px; margin-top: 10px"
+                          class="a1 a2 material-icons">edit</span>
+                  </div>
+                </div>
               </div>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
                 <a routerLink="/user/listImage/{{currentUser?.id}}">Ảnh {{my}}</a></li>
