@@ -71,10 +71,10 @@ export class MessengerComponent implements OnInit {
               private messengerService: MessengerService,
               private storage: AngularFireStorage,
   ) {
+    localStorage.setItem('UrlMessage', window.location.href);
   }
 
   ngOnInit(): void {
-    localStorage.setItem('UrlMessage', window.location.href);
     this.friendRelationService.listFriend(this.idUserLogIn).subscribe(rs => {
       this.listFriend = rs
       try {

@@ -10,6 +10,7 @@ import {GroupParticipant} from "../../../models/group-participant";
   styleUrls: ['./group-detail.component.css']
 })
 export class GroupDetailComponent implements OnInit {
+
   idUserLogIn = localStorage.getItem("USERID")
   theGroup?: TheGroup
   groupParticipant?: GroupParticipant[]

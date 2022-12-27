@@ -18,10 +18,10 @@ export class BlackListComponent implements OnInit {
 
   constructor(private blackListService: BlackListService,
               private userService: UserService) {
+    localStorage.setItem('UrlBlackList', window.location.href);
   }
 
   ngOnInit(): void {
-    localStorage.setItem('UrlBlackList', window.location.href);
     this.listBlockedByUser()
   }
 

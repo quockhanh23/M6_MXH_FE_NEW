@@ -53,6 +53,8 @@ export class UserDetailComponent implements OnInit {
               private friendRelationService: FriendRelationService,
               private descriptionService: DescriptionService,
   ) {
+    localStorage.setItem('UrlShortNew', window.location.href);
+    localStorage.setItem('UrlUserDetail', window.location.href);
     if (localStorage.getItem('currentUser') == null) {
       this.router.navigate(['']).then()
     }
@@ -72,8 +74,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.setItem('UrlShortNew', window.location.href);
-    localStorage.setItem('UrlUserDetail', window.location.href);
     this.findListByIdUser()
     this.friends()
     this.getDescriptionByIdUser()

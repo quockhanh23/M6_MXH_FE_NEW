@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from "../../../services/post.service";
 import {UserService} from "../../../services/user.service";
-
 import {ActivatedRoute, Router} from "@angular/router";
 import {Post2} from "../../../models/post2";
 import {LikePost} from "../../../models/like-post";

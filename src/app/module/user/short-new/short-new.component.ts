@@ -17,10 +17,10 @@ export class ShortNewComponent implements OnInit {
   constructor(private userService: UserService,
               private shortNewService: ShortNewService
   ) {
+    this.shortNewService.newDay().subscribe()
   }
 
   ngOnInit(): void {
-    this.shortNewService.newDay().subscribe()
     this.allShortNews()
     this.shortNewsLimit()
   }

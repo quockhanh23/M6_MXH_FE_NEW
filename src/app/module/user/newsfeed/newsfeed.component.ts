@@ -58,6 +58,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   checkLike = false
   checkHeart = false
   checkDisLike = false
+  checkConnectInput = false
 
   commentCreateForm: FormGroup = new FormGroup({
     content: new FormControl("",)
@@ -82,6 +83,8 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
               private shortNewService: ShortNewService,
               private storage: AngularFireStorage,
   ) {
+    localStorage.removeItem('UrlMessage')
+    localStorage.setItem('Url', window.location.href);
     // @ts-ignore
     this.currentUser = localStorage.getItem("currentUser")
     this.idUser = JSON.parse(this.currentUser).id;
@@ -99,8 +102,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    localStorage.removeItem('UrlMessage')
-    localStorage.setItem('Url', window.location.href);
     this.getListFriends(this.idUserLogIn)
     this.allAnswerComment()
     this.allFriend(this.idUserLogIn)
@@ -480,6 +481,16 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
         this.checkDisLike = false
       }
     })
+  }
+
+  connectInput() {
+    this.checkConnectInput = true
+  }
+
+  leaveInput() {
+    // @ts-ignore
+    let value = document.getElementById('value').value
+    this.checkConnectInput = value.length > 0;
   }
 
   ngOnDestroy() {

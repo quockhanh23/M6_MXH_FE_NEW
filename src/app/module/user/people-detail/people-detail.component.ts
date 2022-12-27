@@ -81,6 +81,7 @@ export class PeopleDetailComponent implements OnInit {
               private followWatchingService: FollowWatchingService,
               private toarts: ToartsService,
   ) {
+    localStorage.setItem('Url', window.location.href);
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const id: any = paramMap.get('id');
       console.log("id user: " + id)
@@ -119,7 +120,6 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.setItem('Url', window.location.href);
     this.reloadComment()
     this.allAnswerComment()
     this.listRequest()

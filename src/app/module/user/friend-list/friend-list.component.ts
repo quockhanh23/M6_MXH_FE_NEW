@@ -51,10 +51,11 @@ export class FriendListComponent implements OnInit {
               private followWatchingService: FollowWatchingService,
               private blackListService: BlackListService,
   ) {
+    localStorage.removeItem('UrlBlackList')
+    localStorage.setItem('Url', window.location.href);
   }
 
   ngOnInit(): void {
-    localStorage.setItem('Url', window.location.href);
     this.idUser = this.activatedRoute.snapshot.paramMap.get('id');
     this.userService.findById(this.idUser).subscribe(rs => {
       this.nameUser = rs.fullName

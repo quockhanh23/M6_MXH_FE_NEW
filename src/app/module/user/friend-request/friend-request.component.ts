@@ -35,15 +35,14 @@ export class FriendRequestComponent implements OnInit {
               private router: Router,
               private toarts: ToartsService,
   ) {
+    localStorage.setItem('Url', window.location.href);
   }
 
   ngOnInit(): void {
-    localStorage.setItem('Url', window.location.href);
     this.listRequestSend()
     this.listRequest()
     this.friendList()
     this.allPeople()
-    console.log(window.location.href)
   }
 
   listRequestSend() {
