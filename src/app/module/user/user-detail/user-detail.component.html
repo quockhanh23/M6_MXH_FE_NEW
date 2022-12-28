@@ -134,13 +134,13 @@
                 </div>
               </div>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a routerLink="/user/listImage/{{currentUser?.id}}">Ảnh {{my}}</a></li>
+                <a matTooltip="Xem" routerLink="/user/listImage/{{currentUser?.id}}">Ảnh {{my}}</a></li>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a routerLink="/user/group">Nhóm {{my}}</a></li>
+                <a matTooltip="Xem" routerLink="/user/group">Nhóm {{my}}</a></li>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a routerLink="/user/blackList">Danh sách chặn</a></li>
+                <a matTooltip="Xem" routerLink="/user/blackList">Danh sách chặn</a></li>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a matTooltip="Xem tất cả" routerLink="/user/listFriend/{{currentUser?.id}}">Bạn bè {{my}}</a></li>
+                <a matTooltip="Xem tất cả bạn bè" routerLink="/user/listFriend/{{currentUser?.id}}">Bạn bè {{my}}</a></li>
               <div class="row" style="margin-top: 5px">
                 <div class="col-2" *ngFor="let friend of listFriend">
                   <img style="border-radius: 50%; height: 50px; width: 50px" src="{{friend?.avatar}}">
