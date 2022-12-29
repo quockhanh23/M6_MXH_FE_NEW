@@ -29,6 +29,10 @@ export class UserService {
     return this.http.get<UserDTO[]>(API_URL + `/searchFriend?search=${search}&idUser=${idUser}`);
   }
 
+  searchAll(search: string, idUserLogin: any): Observable<UserDTO[]> {
+    return this.http.get<UserDTO[]>(API_URL + `/searchAll?search=${search}&idUserLogin=${idUserLogin}`);
+  }
+
   allUser(): Observable<User[]> {
     return this.http.get<User[]>(API_URL + '/allUser')
   }

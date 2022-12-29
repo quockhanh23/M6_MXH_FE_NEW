@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Messenger} from "../models/messenger";
 import {environment} from "../../environments/environment";
 import {Conversation} from "../models/conversation";
+import {UserDTO} from "../models/user-dto";
 
 const API_URL = environment.apiUrl + "/conversations";
 
@@ -65,5 +66,9 @@ export class MessengerService {
 
   lastTimeMessage(idConversation: string): Observable<any> {
     return this.httpClient.get<any>(API_URL + `/lastMessage?idConversation=${idConversation}`);
+  }
+
+  searchMessage(search: string, idConversation: any): Observable<Messenger[]> {
+    return this.httpClient.get<Messenger[]>(API_URL + `/searchMessage?search=${search}&idConversation=${idConversation}`);
   }
 }

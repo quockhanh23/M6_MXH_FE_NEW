@@ -60,6 +60,8 @@ export class MessengerComponent implements OnInit {
   pressToChat = 'Ấn để trò truyện'
   closeInFor = true
   previousBackground?: string
+  checkSearch = false
+  checkSearchLength = false
 
   messengerForm: FormGroup = new FormGroup({
     content: new FormControl("",),
@@ -324,5 +326,30 @@ export class MessengerComponent implements OnInit {
     this.messengerService.lastTimeMessage(idConversation).subscribe(rs => {
       this.send = rs
     })
+  }
+
+  searchAll(idConversation: any) {
+    // @ts-ignore
+    let value = document.getElementById('search').value
+    if (!this.checkSearch) {
+      value = ""
+    }
+    console.log(value)
+    this.messengerService.searchMessage(value, idConversation).subscribe(rs => {
+      console.log("vào đây")
+      this.messengers = rs
+      this.checkSearchLength = rs.length == 0;
+    }, error => {
+      console.log(error)
+    })
+  }
+
+  openSearch() {
+    this.checkSearch = true
+  }
+
+  closeSearch(idConversation: any) {
+    this.checkSearch = false
+    this.searchAll(idConversation)
   }
 }

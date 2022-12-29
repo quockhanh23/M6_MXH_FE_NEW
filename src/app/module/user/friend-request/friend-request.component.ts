@@ -3,6 +3,7 @@ import {User} from "../../../models/user";
 import {FriendRelationService} from "../../../services/friend-relation.service";
 import {Router} from "@angular/router";
 import {ToartsService} from "../../../services/toarts.service";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-friend-request',
@@ -34,6 +35,7 @@ export class FriendRequestComponent implements OnInit {
   constructor(private friendRelationService: FriendRelationService,
               private router: Router,
               private toarts: ToartsService,
+              private userService: UserService
   ) {
     localStorage.setItem('Url', window.location.href);
   }
@@ -141,6 +143,19 @@ export class FriendRequestComponent implements OnInit {
         console.log("")
       }
       this.listPeople = rs
+    })
+  }
+
+  searchAll() {
+    // @ts-ignore
+    let value = document.getElementById('search').value
+    console.log(value)
+    this.userService.searchAll(value, this.idUserLogIn).subscribe(rs => {
+      console.log("vào đây")
+      console.log(JSON.stringify(rs))
+      this.listPeople = rs
+    }, error => {
+      console.log(error)
     })
   }
 }

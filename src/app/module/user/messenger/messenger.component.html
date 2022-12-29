@@ -102,7 +102,21 @@
             <img *ngIf="idUserLogIn == conversation?.idReceiver?.id && conversation != null"
                  class="imgFix imc" style="margin-left: 10px"
                  src="{{conversation?.idSender?.avatar}}">
-            <span *ngIf="count > 0" style="color: red;" class="material-icons">announcement</span>
+            <sub><span *ngIf="count > 0" matTooltip="Đến lượt bạn"
+                       style="color: red;" class="material-icons">announcement</span></sub>
+            <sub><span *ngIf="conversation != null && !checkSearch" (click)="openSearch()"
+                       style="margin-left: 10px; font-size: 25px"
+                       class="material-icons a1 a2"
+                       matTooltip="Tìm kiếm tin nhắn">search</span></sub>
+            <sub><span *ngIf="conversation != null && checkSearch" (click)="closeSearch(conversation?.id)"
+                       style="margin-left: 10px; font-size: 25px"
+                       class="material-icons a1 a2"
+                       matTooltip="Ẩn tìm kiếm">search</span></sub>
+            <input *ngIf="conversation != null && checkSearch" placeholder="Tìm kiếm tin nhắn..."
+                   (input)="searchAll(conversation?.id)"
+                   style="outline: none; border-radius: 8px; border: 1px solid;
+                      width: 200px; height: 30px; font-size: 25px;
+                      background-repeat: no-repeat !important;" type="search" id="search">
             <span *ngIf="conversation != null" (click)="closeMessage()"
                   style="float: right; margin-top: 1px"
                   matTooltip="Đóng" class="color-whitesmoke a1 a2 material-icons">close</span>
@@ -157,7 +171,7 @@
                 </div>
               </div>
               <p style="text-align: left; font-size: 10px"
-                 *ngIf="lastIdSend == idUserLogIn && checkCreateMessage">
+                 *ngIf="lastIdSend == idUserLogIn && checkCreateMessage && messengers != null && !checkSearchLength">
                 Đã gửi&nbsp;|&nbsp;{{send | date:"HH:mm:ss | dd/MM/yyyy"}}
                 <sub><span style="font-size: 10px" class="material-icons">done</span></sub>
               </p>
