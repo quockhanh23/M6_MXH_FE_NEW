@@ -54,7 +54,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   detailUser = 'Xem trang cá nhân'
   liked = ' đã thích'
   disLiked = ' không thích'
-  hearted = ' đã tim'
+  hearted = ' đã thả tim'
   checkLike = false
   checkHeart = false
   checkDisLike = false
@@ -91,7 +91,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log(this.idUser);
     this.userService.userDetail(this.idUser + "").subscribe(result => {
       this.userDetail = result;
-      console.log("User: " + result);
     }, error => {
       console.log("Lỗi: " + error)
     });
@@ -130,7 +129,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   }
 
   updateLikePost(idPost: any) {
-    console.log("vào hàm updateReflectPost")
+    console.log("vào hàm updateLikePost")
     this.postService.updateLikePost(idPost).subscribe(result => {
       this.reloadAllPostPublic()
     })
