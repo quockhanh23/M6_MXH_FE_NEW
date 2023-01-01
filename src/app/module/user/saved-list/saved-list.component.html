@@ -4,4 +4,35 @@
              class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
 </div>
 
-<div style="height: 500px"></div>
+<div class="divFix" *ngIf="checkSaveList">
+  <h2>Danh sách lưu trữ</h2>
+  <div *ngFor="let s of saveList">
+    <div class="row" style="margin-bottom: 10px; background-color: whitesmoke; border-radius: 5px">
+      <div class="col-3">
+        <img *ngIf="s?.postDTO?.image != null" src="{{s?.postDTO?.image}}"
+             style="width: 180px; height: 180px; border-radius: 5px">
+      </div>
+      <div class="col">
+        <h2>{{s?.postDTO?.content}}</h2>
+        <span>Bài viết của: </span>
+        <span style="color: #0a70b9" class="a1 a2"
+              [routerLink]="['/user/people-detail/', s?.postDTO?.userDTO?.id]">
+          {{s?.postDTO?.userDTO?.fullName}}</span>
+      </div>
+      <div class="col-1">
+        <sub><span (click)="removeSavePost(s?.postDTO?.id, s?.id)"
+                   matTooltip="Xóa khỏi danh sách chờ"
+                   class="a1 a2 material-icons">remove_circle_outline</span></sub>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divFix" *ngIf="!checkSaveList">
+  <div style="height: 100px"></div>
+  <div style="height: 320px">
+    <div align="center">
+      <h2>Bạn không có lưu trữ nào cả</h2>
+      <span style="font-size: 100px" class="material-icons">bedroom_baby</span>
+    </div>
+  </div>
+</div>

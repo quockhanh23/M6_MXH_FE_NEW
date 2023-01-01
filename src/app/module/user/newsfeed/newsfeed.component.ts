@@ -19,6 +19,8 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {LikePost} from "../../../models/like-post";
 import {LikePostService} from "../../../services/like-post.service";
 import {DisLikePost} from "../../../models/dis-like-post";
+import {SaveService} from "../../../services/save.service";
+import {ToartsService} from "../../../services/toarts.service";
 
 @Component({
   selector: 'app-newsfeed',
@@ -82,6 +84,8 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
               private postService: PostService,
               private shortNewService: ShortNewService,
               private storage: AngularFireStorage,
+              private saveService: SaveService,
+              private toartsService: ToartsService,
   ) {
     localStorage.removeItem('UrlMessage')
     localStorage.setItem('Url', window.location.href);
@@ -490,6 +494,13 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     // @ts-ignore
     let value = document.getElementById('value').value
     this.checkConnectInput = value.length > 0;
+  }
+
+  savePost(idPost: any) {
+    console.log("vào hàm savePost")
+    this.saveService.savePost(idPost, this.idUserLogIn).subscribe(() => {
+      this.toartsService.openToartsSavePost('save')
+    })
   }
 
   ngOnDestroy() {

@@ -67,9 +67,9 @@
                       <p style="font-size: 18px"><sub></sub>Dòng thời gian</p>
                     </div>
                     <div class="col-1">
-                       <span *ngIf="!checkFromCreateLifeEvent" (click)="openFromCreateLifeEvent()"
-                             matTooltip="Thêm sự kiện" style="margin-top: 5px"
-                             class="a1 a2 material-icons">add_circle</span>
+                      <span *ngIf="!checkFromCreateLifeEvent" (click)="openFromCreateLifeEvent()"
+                            matTooltip="Thêm sự kiện" style="margin-top: 5px"
+                            class="a1 a2 material-icons">add_circle</span>
                       <span *ngIf="checkFromCreateLifeEvent" (click)="closeFromCreateLifeEvent()"
                             matTooltip="Đóng" style="margin-top: 5px"
                             class="a1 a2 material-icons">add_circle</span>
@@ -106,28 +106,35 @@
                   <hr>
                 </div>
               </div>
-              <li *ngIf="!checkShowDescription" class="a1 active"><i class="icon ion-ios-information-outline"></i>
-                <a matTooltip="Xem giới thiệu" (click)="openDescription()">Giới thiệu</a>
-              </li>
-              <li *ngIf="checkShowDescription" class="a1 active"><i class="icon ion-ios-information-outline"></i>
-                <a matTooltip="Ẩn giới thiệu" (click)="closeDescription()">Giới thiệu</a>
-              </li>
-              <div *ngIf="checkShowDescription">
-                <div class="row word-wrap">
-                  <div class="col-1">
+              <div class="divLi1">
+                <li *ngIf="!checkShowDescription" class="a1 active"><i class="icon ion-ios-information-outline"></i>
+                  <a matTooltip="Xem giới thiệu" (click)="openDescription()">Giới thiệu</a>
+                </li>
+                <li *ngIf="checkShowDescription" class="a1 active"><i class="icon ion-ios-information-outline"></i>
+                  <a matTooltip="Ẩn giới thiệu" (click)="closeDescription()">Giới thiệu</a>
+                </li>
+                <div *ngIf="checkShowDescription">
+                  <div class="row word-wrap" style="margin-bottom: 10px; margin-top: 5px">
+                    <div class="col-1">
                     <span *ngIf="descriptions?.description != null"
                           style="margin-top: 5px" class="material-icons">article</span>
-                  </div>
-                  <div class="col-10">
-                    <span *ngIf="descriptions?.description == null"
-                          matTooltip="Thêm giới thiệu" style="margin-top: 5px"
-                          class="a1 a2 material-icons">add_circle</span>
-                    <p *ngIf="descriptions?.description == null"
-                       style="margin-top: 10px">Mô tả</p>
+                    </div>
                     <p *ngIf="descriptions?.description != null"
                        style="margin-top: 10px">{{descriptions?.description}}</p>
                   </div>
-                  <div class="col-1">
+                  <div class="row" style="margin-bottom: 10px; margin-top: 5px">
+                    <div class="col-1"></div>
+                    <div class="col">
+                      <p *ngIf="descriptions?.description == null"
+                         style="margin-top: 10px">Mô tả</p>
+                    </div>
+                    <div class="col-1">
+                         <span *ngIf="descriptions?.description == null"
+                               matTooltip="Thêm giới thiệu" style="margin-top: 5px"
+                               class="a1 a2 material-icons">add_circle</span>
+                    </div>
+                  </div>
+                  <div align="right" class="col-1">
                     <span *ngIf="descriptions?.description != null"
                           matTooltip="Chỉnh sửa" style="font-size: 16px; margin-top: 10px"
                           class="a1 a2 material-icons">edit</span>

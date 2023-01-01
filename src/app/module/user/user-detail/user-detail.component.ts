@@ -16,6 +16,7 @@ import {UserDescription} from "../../../models/user-description";
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
+
   my? = 'của tôi'
   currentUser: any
   avatar: string = "";

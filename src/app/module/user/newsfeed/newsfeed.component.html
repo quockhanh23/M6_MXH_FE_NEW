@@ -98,9 +98,9 @@
         </form>
       </div>
       <!--List post-->
-      <div
-        class="post-content font-size-18" style="border: 1px violet !important; margin-bottom: 20px"
-        *ngFor=" let p of posts">
+      <div class="post-content font-size-18"
+           style="border: 1px violet !important; margin-bottom: 20px"
+           *ngFor=" let p of posts">
         <div class="post-container">
           <img *ngIf="p?.userDTO?.id == idUserLogIn" src="{{p?.userDTO?.avatar}}"
                matTooltip="{{detailUser}}"
@@ -123,12 +123,19 @@
               <p style="font-size: 14px" class="text-muted">{{p.createAt | date:"dd/MM/yyyy"}}</p>
             </div>
             <div class="reaction" *ngIf="p?.userDTO?.id == idUserLogIn">
-              <span class="material-icons a1" [matMenuTriggerFor]="menu" matTooltip="Tuỳ chọn">more_horiz</span>
+              <span class="material-icons a1 a2" [matMenuTriggerFor]="menu" matTooltip="Tuỳ chọn">more_horiz</span>
               <mat-menu #menu="matMenu">
                 <button routerLink="/user/detailNewsfeed/{{p?.id}}" class="a2 font-size-16" mat-menu-item>
                   Chỉnh sửa bài viết
                 </button>
                 <button class="a2 font-size-16" mat-menu-item>Xóa bài viết</button>
+              </mat-menu>
+            </div>
+            <div class="reaction" *ngIf="p?.userDTO?.id != idUserLogIn">
+              <span class="material-icons a1 a2" [matMenuTriggerFor]="menu2" matTooltip="Tuỳ chọn">more_horiz</span>
+              <mat-menu #menu2="matMenu">
+                <button (click)="savePost(p?.id)" class="a2 font-size-16" mat-menu-item>Thêm vào lưu trữ</button>
+                <button class="a2 font-size-16" mat-menu-item>Ẩn bài viết</button>
               </mat-menu>
             </div>
             <div class="line-divider"></div>

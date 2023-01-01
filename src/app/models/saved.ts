@@ -6,4 +6,5 @@ export interface Saved {
   status?: string
   saveDate?: string
   post2?: Post2
+  postDTO?: Post2
 }

@@ -35,4 +35,9 @@ export class ToartsService {
   openToartsCleanNotificationSuccess() {
     this.toarts.info('Bạn đã xóa toàn bộ thông báo', this.title)
   }
+
+  openToartsSavePost(type: any) {
+    if (type == 'save') this.toarts.info('Bạn đã bài viết vào danh sách chờ', this.title)
+    if (type == 'remove') this.toarts.info('Bạn đã gỡ bài viết khỏi danh sách chờ', this.title)
+  }
 }
