@@ -49,7 +49,8 @@
     <div class="col-6">
       <app-short-new></app-short-new>
       <hr>
-      <div class="border-radius-10 create-post" style="border: #e5e5e5 1px solid">
+      <div class="border-radius-10 create-post"
+           style="border: #e5e5e5 1px solid;">
         <form [formGroup]="newPostForm"
               (ngSubmit)="createPost(userDetail?.id)">
           <div class="row">
@@ -99,7 +100,8 @@
       </div>
       <!--List post-->
       <div class="post-content font-size-18"
-           style="border: 1px violet !important; margin-bottom: 20px"
+           style="border: 1px violet !important; margin-bottom: 20px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0.1, 0.1)"
            *ngFor=" let p of posts">
         <div class="post-container">
           <img *ngIf="p?.userDTO?.id == idUserLogIn" src="{{p?.userDTO?.avatar}}"
