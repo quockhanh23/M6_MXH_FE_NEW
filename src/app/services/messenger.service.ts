@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {Messenger} from "../models/messenger";
 import {environment} from "../../environments/environment";
 import {Conversation} from "../models/conversation";
-import {UserDTO} from "../models/user-dto";
 
 const API_URL = environment.apiUrl + "/conversations";
 

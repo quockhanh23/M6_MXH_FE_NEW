@@ -59,7 +59,7 @@ export class UserService {
   }
 
   findById(id: any): Observable<User> {
-    return this.http.get<User>(`http://localhost:8080/api/findById/${id}`);
+    return this.http.get<User>(API_URL + `/findById/${id}`);
   }
 
   updateUserProfile(id: any, user: User): Observable<User> {
