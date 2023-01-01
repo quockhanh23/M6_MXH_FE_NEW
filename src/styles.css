@@ -6,8 +6,9 @@ html, body {
 }
 
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Lato', sans-serif;
+  line-height: 26px;
+  color: #6d6e71;
 }
 
 .mat-tooltip {
@@ -185,10 +186,6 @@ body {
   width: 96%
 }
 
-.border-radius-5px {
-  border-radius: 5px
-}
-
 .color-whitesmoke {
   color: whitesmoke
 }
@@ -212,18 +209,6 @@ body {
 input {
   font-size: 16px !important;
 }
-
-html, body {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  font-family: 'Lato', sans-serif;
-  line-height: 26px;
-  color: #6d6e71;
-}
-
 
 /*==================================================
   Typography
