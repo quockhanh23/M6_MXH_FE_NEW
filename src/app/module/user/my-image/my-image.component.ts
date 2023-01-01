@@ -56,7 +56,7 @@ export class MyImageComponent implements OnInit {
 
   delete(idImage: any) {
     console.log("idImage là: " + idImage);
-    this.imageService.delete(idImage, this.idUser).subscribe(result => {
+    this.imageService.delete(idImage, this.idUser).subscribe(() => {
       this.getAllImage(this.idUserLogIn)
       console.log("vào đây")
     }, error => {
@@ -68,7 +68,7 @@ export class MyImageComponent implements OnInit {
 
   restoreImage(idImage: any) {
     console.log("idImage là: " + idImage);
-    this.imageService.restoreImage(idImage, this.idUser).subscribe(result => {
+    this.imageService.restoreImage(idImage, this.idUser).subscribe(() => {
       console.log("vào đây")
       this.getAllImageDeleted()
     }, error => {
@@ -79,7 +79,7 @@ export class MyImageComponent implements OnInit {
 
   delete2(idImage: any) {
     console.log("idImage là: " + idImage);
-    this.imageService.deleteInDataBase(idImage, this.idUser).subscribe(result => {
+    this.imageService.deleteInDataBase(idImage, this.idUser).subscribe(() => {
       this.ngOnInit()
     }, error => {
       console.log("Lỗi: " + error)
@@ -124,7 +124,7 @@ export class MyImageComponent implements OnInit {
 
   changeImage(idImage: any, type: any) {
     console.log('vào hàm changeImage')
-    this.userService.changeImage(this.idUser, idImage, type).subscribe(result => {
+    this.userService.changeImage(this.idUser, idImage, type).subscribe(() => {
       this.ngOnInit()
       this.toarts.openToartsChangeImage(type)
     }, error => {
@@ -183,7 +183,7 @@ export class MyImageComponent implements OnInit {
       },
     }
     // @ts-ignore
-    this.imageService.addPhoto(this.idUserLogIn, newPhoto).subscribe(result => {
+    this.imageService.addPhoto(this.idUserLogIn, newPhoto).subscribe(() => {
       this.getAllImage(this.idUserLogIn)
       this.fb = null
       this.loading = false

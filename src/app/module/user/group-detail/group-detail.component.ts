@@ -60,40 +60,40 @@ export class GroupDetailComponent implements OnInit {
   }
 
   joinGroupParticipant() {
-    this.groupService.createGroupParticipant(this.idUserLogIn, this.idGroup).subscribe(rs => {
+    this.groupService.createGroupParticipant(this.idUserLogIn, this.idGroup).subscribe(() => {
       console.log("joinGroupParticipant")
       this.ngOnInit()
     })
   }
 
   acceptUserJoinGroup(idUser: any) {
-    this.groupService.acceptUserJoinGroup(this.idUserLogIn, idUser, this.idGroup).subscribe(rs => {
+    this.groupService.acceptUserJoinGroup(this.idUserLogIn, idUser, this.idGroup).subscribe(() => {
       console.log("acceptUserJoinGroup")
       this.ngOnInit()
     })
   }
 
   rejectUserJoinGroup(idUser: any) {
-    this.groupService.rejectUserJoinGroup(this.idUserLogIn, idUser, this.idGroup).subscribe(rs => {
+    this.groupService.rejectUserJoinGroup(this.idUserLogIn, idUser, this.idGroup).subscribe(() => {
       console.log("rejectUserJoinGroup")
       this.ngOnInit()
     })
   }
 
   lockGroup() {
-    this.groupService.lockGroup(this.idGroup, this.idUserLogIn).subscribe(rs => {
+    this.groupService.lockGroup(this.idGroup, this.idUserLogIn).subscribe(() => {
       console.log("lockGroup")
     })
   }
 
   acceptUserUpPost() {
-    this.groupService.acceptUserUpPost(this.idGroup, this.idUserLogIn).subscribe(rs => {
+    this.groupService.acceptUserUpPost(this.idGroup, this.idUserLogIn).subscribe(() => {
       console.log("acceptUserUpPost")
     })
   }
 
   rejectUserUpPost() {
-    this.groupService.rejectUserUpPost(this.idGroup, this.idUserLogIn).subscribe(rs => {
+    this.groupService.rejectUserUpPost(this.idGroup, this.idUserLogIn).subscribe(() => {
       console.log("rejectUserUpPost")
     })
   }

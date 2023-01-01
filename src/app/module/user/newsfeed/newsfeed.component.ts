@@ -130,21 +130,21 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
 
   updateLikePost(idPost: any) {
     console.log("vào hàm updateLikePost")
-    this.postService.updateLikePost(idPost).subscribe(result => {
+    this.postService.updateLikePost(idPost).subscribe(() => {
       this.reloadAllPostPublic()
     })
   }
 
   updateDisLikePost(idPost: any) {
     console.log("vào hàm updateDisLikePost")
-    this.postService.updateDisLikePost(idPost).subscribe(result => {
+    this.postService.updateDisLikePost(idPost).subscribe(() => {
       this.reloadAllPostPublic()
     })
   }
 
   updateHeartPost(idPost: any) {
     console.log("vào hàm updateHeartPost")
-    this.postService.updateHeartPost(idPost).subscribe(result => {
+    this.postService.updateHeartPost(idPost).subscribe(() => {
       this.reloadAllPostPublic()
     })
   }
@@ -162,7 +162,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     }
     console.log(likePost)
     // @ts-ignore
-    this.likePostService.createLike(likePost, idPost, this.idUser).subscribe(result => {
+    this.likePostService.createLike(likePost, idPost, this.idUser).subscribe(() => {
       this.updateLikePost(idPost)
     }, error => {
       console.log("Lỗi: " + error)
@@ -182,7 +182,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     }
     console.log(disLikePost)
     // @ts-ignore
-    this.likePostService.createDisLike(disLikePost, idPost, this.idUser).subscribe(result => {
+    this.likePostService.createDisLike(disLikePost, idPost, this.idUser).subscribe(() => {
       this.updateDisLikePost(idPost)
     }, error => {
       console.log("Lỗi: " + error)
@@ -202,7 +202,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     }
     console.log(heart)
     // @ts-ignore
-    this.likePostService.createHeart(heart, idPost, this.idUser).subscribe(result => {
+    this.likePostService.createHeart(heart, idPost, this.idUser).subscribe(() => {
       this.updateHeartPost(idPost)
     }, error => {
       console.log("Lỗi: " + error)
@@ -346,7 +346,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     }
     console.log(commentLike)
     // @ts-ignore
-    this.likeCommentService.createLikeComment(commentLike, idComment, this.idUser).subscribe(rs => {
+    this.likeCommentService.createLikeComment(commentLike, idComment, this.idUser).subscribe(() => {
       this.reloadLikeAllComment()
     }, error => {
       console.log("Lỗi: " + error)
@@ -366,7 +366,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     }
     console.log(dislikeComment)
     // @ts-ignore
-    this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUser).subscribe(rs => {
+    this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUser).subscribe(() => {
       this.reloadDisLikeAllComment()
     }, error => {
       console.log("Lỗi: " + error)
@@ -420,7 +420,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
 
   deleteComment(idComment: any, idPost: any) {
     console.log("idComment là: " + idComment);
-    this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(rs => {
+    this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(() => {
       this.reloadAllPostPublic()
     }, error => {
       console.log(error)
@@ -433,7 +433,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   deleteAnswerComment(idComment: any, idAnswerComment: any) {
     console.log("idComment là: " + idComment);
     console.log("idAnswerComment là: " + idAnswerComment);
-    this.answerCommentService.deleteAnswerComment(this.idUserLogIn, idComment, idAnswerComment).subscribe(rs => {
+    this.answerCommentService.deleteAnswerComment(this.idUserLogIn, idComment, idAnswerComment).subscribe(() => {
       this.ngOnInit()
     }, error => {
       console.log(error)

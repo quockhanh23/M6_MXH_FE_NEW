@@ -34,6 +34,7 @@ export class UserDetailComponent implements OnInit {
   checkShowDescription = false
   idLifeEvent?: any
   descriptions?: UserDescription
+  switchChangePassword = false
 
   lifeEventsCreateForm: FormGroup = new FormGroup({
     work: new FormControl("",),
@@ -181,5 +182,13 @@ export class UserDetailComponent implements OnInit {
     this.descriptionService.getDescriptionByIdUser(this.idUserLogIn).subscribe(rs => {
       this.descriptions = rs
     })
+  }
+
+  openChangePassword() {
+    this.switchChangePassword = true
+  }
+
+  closeChangePassword() {
+    this.switchChangePassword = false
   }
 }

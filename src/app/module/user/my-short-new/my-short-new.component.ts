@@ -47,13 +47,13 @@ export class MyShortNewComponent implements OnInit {
   }
 
   delete(idSortNew: any) {
-    this.shortNewService.deleteShortNew(idSortNew, this.idUserLogIn).subscribe(rs => {
+    this.shortNewService.deleteShortNew(idSortNew, this.idUserLogIn).subscribe(() => {
       this.ngOnInit()
     })
   }
 
   delete2(idSortNew: any) {
-    this.shortNewService.deleteShortNewInDataBase(idSortNew, this.idUserLogIn).subscribe(rs => {
+    this.shortNewService.deleteShortNewInDataBase(idSortNew, this.idUserLogIn).subscribe(() => {
       this.ngOnInit()
     })
   }

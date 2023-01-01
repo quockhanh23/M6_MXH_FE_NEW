@@ -381,7 +381,7 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   sendRequestFriend(idFriend: any) {
-    this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(rs => {
+    this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(() => {
       this.ngOnInit()
       this.toarts.openToartsSendRequestFriendSuccess()
     })
@@ -403,14 +403,14 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   acceptFriend() {
-    this.friendRelationService.acceptFriend(this.idUserLogIn, this.idUser).subscribe(rs => {
+    this.friendRelationService.acceptFriend(this.idUserLogIn, this.idUser).subscribe(() => {
       this.checkAlreadyFriend = false
       this.ngOnInit()
     })
   }
 
   removeFriend() {
-    this.friendRelationService.unfriend(this.idUserLogIn, this.idUser).subscribe(rs => {
+    this.friendRelationService.unfriend(this.idUserLogIn, this.idUser).subscribe(() => {
       this.checkRemoveFriend = false
       this.ngOnInit()
       this.toarts.openToartsUnFriend()

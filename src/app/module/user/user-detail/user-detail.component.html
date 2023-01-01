@@ -45,8 +45,10 @@
             <ul class="edit-menu">
               <li class="active"><i class="icon ion-ios-information-outline"></i>
                 <a routerLink="/user/edit">Chỉnh sửa thông tin cá nhân</a></li>
-              <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a routerLink="/user/password">Đổi mật khẩu</a></li>
+              <li *ngIf="!switchChangePassword" class="active a1"><i class="icon ion-ios-information-outline"></i>
+                <a (click)="openChangePassword()">Đổi mật khẩu</a></li>
+              <li *ngIf="switchChangePassword" class="active a1"><i class="icon ion-ios-information-outline"></i>
+                <a (click)="closeChangePassword()">Đổi mật khẩu</a></li>
               <div class="divLi1">
                 <li *ngIf="!showLifeEvents" (click)="openLifeEvents()" class="a1 li1 active"><i
                   class="icon ion-ios-information-outline"></i>
@@ -114,8 +116,7 @@
                 <div class="row word-wrap">
                   <div class="col-1">
                     <span *ngIf="descriptions?.description != null"
-                          style="margin-top: 5px"
-                          class="material-icons">article</span>
+                          style="margin-top: 5px" class="material-icons">article</span>
                   </div>
                   <div class="col-10">
                     <span *ngIf="descriptions?.description == null"
@@ -140,7 +141,8 @@
               <li class="active"><i class="icon ion-ios-information-outline"></i>
                 <a matTooltip="Xem" routerLink="/user/blackList">Danh sách chặn</a></li>
               <li class="active"><i class="icon ion-ios-information-outline"></i>
-                <a matTooltip="Xem tất cả bạn bè" routerLink="/user/listFriend/{{currentUser?.id}}">Bạn bè {{my}}</a></li>
+                <a matTooltip="Xem tất cả bạn bè" routerLink="/user/listFriend/{{currentUser?.id}}">Bạn bè {{my}}</a>
+              </li>
               <div class="row" style="margin-top: 5px">
                 <div class="col-2" *ngFor="let friend of listFriend">
                   <img style="border-radius: 50%; height: 50px; width: 50px" src="{{friend?.avatar}}">
@@ -149,7 +151,12 @@
               </div>
             </ul>
           </div>
-          <div class="col-5">
+          <div class="col-8" *ngIf="switchChangePassword">
+            <span style="float: right; margin-top: 1px" (click)="closeChangePassword()"
+                  matTooltip="Đóng" class=" a1 a2 material-icons">close</span>
+            <app-edit-password></app-edit-password>
+          </div>
+          <div class="col-8" *ngIf="!switchChangePassword">
             <div>
               <div class="about-profile">
                 <div class="about-content-block" style="font-size: 18px; color: #1c75bc">

@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import {NewsfeedComponent} from "./newsfeed/newsfeed.component";
 import {FriendRequestComponent} from "./friend-request/friend-request.component";
-import {EditPasswordComponent} from "./edit-password/edit-password.component";
 import {UserDetailComponent} from "./user-detail/user-detail.component";
 import {PeopleDetailComponent} from "./people-detail/people-detail.component";
 import {FriendListComponent} from "./friend-list/friend-list.component";
@@ -69,9 +68,6 @@ const routes: Routes = [
   },
   {
     path: 'edit', component: EditProfileComponent
-  },
-  {
-    path: 'password', component: EditPasswordComponent
   },
   {
     path: 'user-detail', component: UserDetailComponent,

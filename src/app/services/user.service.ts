@@ -6,6 +6,7 @@ import {User} from "../models/user";
 import {ListAvatarDTO} from "../models/list-avatar-dto";
 import {UserBlackListDTO} from "../models/user-black-list-dto";
 import {UserDTO} from "../models/user-dto";
+import {UserChangePassword} from "../models/user-change-password";
 
 const API_URL = environment.apiUrl;
 
@@ -45,8 +46,8 @@ export class UserService {
     return this.http.post<User>(API_URL + 'users/login', user);
   }
 
-  matchPassword(user: User): Observable<User> {
-    return this.http.post<User>(API_URL + '/matchPassword', user);
+  matchPassword(userChangePassword: UserChangePassword, idUser: any): Observable<UserChangePassword> {
+    return this.http.post<UserChangePassword>(API_URL + `/matchPassword?idUser=${idUser}`, userChangePassword);
   }
 
   userDetail(id: any): Observable<User> {

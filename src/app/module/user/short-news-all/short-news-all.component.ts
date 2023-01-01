@@ -46,7 +46,7 @@ export class ShortNewsAllComponent implements OnInit {
   }
 
   allShortNews() {
-    this.shortNewService.allShortNews().subscribe(rs => {
+    this.shortNewService.allShortNews().subscribe(() => {
       // console.log("Kiểu dữ liệu: " + JSON.stringify(rs))
     })
   }
