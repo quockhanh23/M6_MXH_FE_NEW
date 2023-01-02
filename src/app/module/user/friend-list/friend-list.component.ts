@@ -189,4 +189,14 @@ export class FriendListComponent implements OnInit {
     this.blackListService.block(this.idUserLogIn, idBlock).subscribe(rs => {
     })
   }
+
+  changeColorInput() {
+    // @ts-ignore
+    document.getElementById('search').style.background = "#e0e6ef";
+  }
+
+  changeColorInput2() {
+    // @ts-ignore
+    document.getElementById('search').style.background = 'white';
+  }
 }

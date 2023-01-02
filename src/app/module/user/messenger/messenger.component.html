@@ -36,7 +36,7 @@
     </div>
     <div *ngIf="checkFriendMessage" class="col" id="scroll2">
       <div class="col">
-        <div class="row hc" (click)="createConversation(list?.id)" *ngFor="let list of listFriend"
+        <div class="row hc shadow-box" (click)="createConversation(list?.id)" *ngFor="let list of listFriend"
              style="{{border}}; border-radius: 5px; margin-top: 5px">
           <img class="imageListAvatarMessage"
                src="{{list?.avatar}}">
@@ -48,7 +48,7 @@
     </div>
     <div *ngIf="!checkFriendMessage" class="col" id="scroll5">
       <div class="col">
-        <div style="{{border}}; border-radius: 5px; margin-top: 5px" class="row hc"
+        <div style="{{border}}; border-radius: 5px; margin-top: 5px" class="row hc shadow-box"
              *ngFor="let user of conversationsNotFriend">
           <img *ngIf="user?.idSender?.id != idUserLogIn" class="imageListAvatarMessage"
                src="{{user?.idSender?.avatar}}">

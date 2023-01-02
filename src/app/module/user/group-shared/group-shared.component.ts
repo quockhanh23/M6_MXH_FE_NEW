@@ -55,4 +55,14 @@ export class GroupSharedComponent implements OnInit {
       console.log(JSON.stringify(rs))
     })
   }
+
+  changeColorInput() {
+    // @ts-ignore
+    document.getElementById('search').style.background = "#e0e6ef";
+  }
+
+  changeColorInput2() {
+    // @ts-ignore
+    document.getElementById('search').style.background = 'white';
+  }
 }
