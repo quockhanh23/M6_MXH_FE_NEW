@@ -126,7 +126,7 @@ export class MessengerDetailComponent implements OnInit {
   }
 
   checkCount() {
-    console.log("alo")
+    console.log("vào hàm checkCount")
     if (this.count == 0 && this.count2 == 0) {
       this.height = 'height: 400px'
       console.log("vào đây 1 " + this.count + this.count2)

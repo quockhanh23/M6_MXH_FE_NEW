@@ -4,6 +4,7 @@ import {FriendRelationService} from "../../../services/friend-relation.service";
 import {Router} from "@angular/router";
 import {ToartsService} from "../../../services/toarts.service";
 import {UserService} from "../../../services/user.service";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-friend-request',
@@ -35,7 +36,8 @@ export class FriendRequestComponent implements OnInit {
   constructor(private friendRelationService: FriendRelationService,
               private router: Router,
               private toarts: ToartsService,
-              private userService: UserService
+              private userService: UserService,
+              private commonService: CommonService
   ) {
     localStorage.setItem('Url', window.location.href);
   }
@@ -157,5 +159,13 @@ export class FriendRequestComponent implements OnInit {
     }, error => {
       console.log(error)
     })
+  }
+
+  changeColorInput() {
+    this.commonService.changeColorInput()
+  }
+
+  changeColorInput2() {
+    this.commonService.changeColorInput2()
   }
 }

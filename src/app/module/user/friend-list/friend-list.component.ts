@@ -6,6 +6,7 @@ import {UserDTO} from "../../../models/user-dto";
 import {FollowWatchingService} from "../../../services/follow-watching.service";
 import {ToartsService} from "../../../services/toarts.service";
 import {BlackListService} from "../../../services/black-list.service";
+import {CommonService} from "../../../services/common.service";
 
 
 @Component({
@@ -50,6 +51,7 @@ export class FriendListComponent implements OnInit {
               private friendRelationService: FriendRelationService,
               private followWatchingService: FollowWatchingService,
               private blackListService: BlackListService,
+              private commonService: CommonService
   ) {
     localStorage.removeItem('UrlBlackList')
     localStorage.setItem('Url', window.location.href);
@@ -191,12 +193,10 @@ export class FriendListComponent implements OnInit {
   }
 
   changeColorInput() {
-    // @ts-ignore
-    document.getElementById('search').style.background = "#e0e6ef";
+    this.commonService.changeColorInput()
   }
 
   changeColorInput2() {
-    // @ts-ignore
-    document.getElementById('search').style.background = 'white';
+    this.commonService.changeColorInput2()
   }
 }

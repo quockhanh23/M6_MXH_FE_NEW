@@ -58,7 +58,7 @@
     </div>
   </div>
   <hr>
-  <div class="a1">
+  <div>
     <h2 class="h2MarginLeft a2">Bạn bè của bạn
       <sub>
         <mat-icon matBadge="{{count3}}" matBadgeColor="warn"></mat-icon>
@@ -101,6 +101,7 @@
     <h2 class="h2MarginLeft a2">Tìm kiếm bạn bè</h2>
     <form>
       <input class="h2MarginLeft" placeholder="Tìm kiếm theo tên hoặc email" (input)="searchAll()"
+             (mouseover)="changeColorInput()" (mouseout)="changeColorInput2()"
              style="outline: none;border-radius: 8px; border: 1px solid; width: 400px; height: 30px; font-size: 25px;
             background-repeat: no-repeat !important;" type="search" id="search">
     </form>

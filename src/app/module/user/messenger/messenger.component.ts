@@ -285,11 +285,7 @@ export class MessengerComponent implements OnInit {
     // @ts-ignore
     this.messengerService.getAllMessageHavePhoto(this.idConversation).subscribe(rs => {
       this.messengersHavePhoto = rs
-      if (rs.length == 0) {
-        this.countMessengersHavePhoto = true
-      } else {
-        this.countMessengersHavePhoto = false
-      }
+      this.countMessengersHavePhoto = rs.length == 0;
       console.log(this.countMessengersHavePhoto)
     })
   }
@@ -298,11 +294,7 @@ export class MessengerComponent implements OnInit {
     // @ts-ignore
     this.messengerService.getAllMessageHaveLink(this.idConversation).subscribe(rs => {
       this.messengersHaveLink = rs
-      if (rs.length == 0) {
-        this.countMessengersHaveLink = true
-      } else {
-        this.countMessengersHaveLink = false
-      }
+      this.countMessengersHaveLink = rs.length == 0;
       console.log(this.countMessengersHaveLink)
     })
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../../../services/group.service";
 import {TheGroup} from "../../../models/the-group";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-group-shared',
@@ -15,6 +16,7 @@ export class GroupSharedComponent implements OnInit {
   groupJoin?: TheGroup[]
 
   constructor(private groupService: GroupService,
+              private commonService: CommonService
   ) {
   }
 
@@ -57,12 +59,10 @@ export class GroupSharedComponent implements OnInit {
   }
 
   changeColorInput() {
-    // @ts-ignore
-    document.getElementById('search').style.background = "#e0e6ef";
+    this.commonService.changeColorInput()
   }
 
   changeColorInput2() {
-    // @ts-ignore
-    document.getElementById('search').style.background = 'white';
+    this.commonService.changeColorInput2()
   }
 }
