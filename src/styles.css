@@ -79,6 +79,10 @@ body {
   background-color: #f1eded;
 }
 
+.hoverInput:hover {
+  border: #27aae1 1px solid
+}
+
 .border-green-b2dba1 {
   border: #b2dba1 1px solid
 }

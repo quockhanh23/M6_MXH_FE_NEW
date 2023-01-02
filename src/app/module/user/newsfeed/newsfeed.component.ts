@@ -61,6 +61,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   checkHeart = false
   checkDisLike = false
   checkConnectInput = false
+  checkConnectInput2 = false
 
   commentCreateForm: FormGroup = new FormGroup({
     content: new FormControl("",)
@@ -490,11 +491,22 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.checkConnectInput = true
   }
 
+  connectInput2() {
+    this.checkConnectInput2 = true
+  }
+
   leaveInput() {
     // @ts-ignore
     let value = document.getElementById('value').value
     this.checkConnectInput = value.length > 0;
   }
+
+  leaveInput2() {
+    // @ts-ignore
+    let value = document.getElementById('value').value
+    this.checkConnectInput2 = value.length > 0;
+  }
+
 
   savePost(idPost: any) {
     console.log("vào hàm savePost")

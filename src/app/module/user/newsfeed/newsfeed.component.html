@@ -49,7 +49,7 @@
     <div class="col-6">
       <app-short-new></app-short-new>
       <hr>
-      <div class="border-radius-10 create-post"
+      <div class="border-radius-10 create-post shadow-box"
            style="border: #e5e5e5 1px solid;">
         <form [formGroup]="newPostForm"
               (ngSubmit)="createPost(userDetail?.id)">
@@ -57,13 +57,14 @@
             <div class="col-6">
               <div class="form-group">
                 <img src="{{userDetail?.avatar}}" alt="" class="profile-photo-md a1"/>
-                <input #text maxlength="500" style="width: 400px !important; height: 50px" id="value"
+                <input #text maxlength="500" id="value"
+                       style="background: whitesmoke ;width: 400px !important; height: 50px;"
                        onfocus="this.value=''" type="text" (mouseover)="connectInput()" (mouseleave)="leaveInput()"
                        class="font-size-18 form-control c1 i1" formControlName="content"
                        placeholder="Bạn đang nghĩ gì thế?">
               </div>
               <span *ngIf="checkConnectInput" class="font-size-15"
-                    style="margin-left: 60px">{{text.value.length}}/ 500</span>
+                    style="margin-left: 60px">{{text.value.length}}/ 500.</span>
               <span *ngIf="!checkConnectInput" class="font-size-15"
                     style="margin-left: 60px">Tối đa 500 kí tự.</span>
               <br>
@@ -287,9 +288,12 @@
                   </div>
                   <div class="col-8">
                     <input style="width: 100% !important; height: 37px; border-radius: 11px" onfocus="this.value=''"
-                           type="text" class="form-control c1 i1 font-size-18" formControlName="content"
-                           placeholder="Bình luận...">
-                    <span class="font-size-15">Tối đa 200 kí tự.</span>
+                           type="text" class="hoverInput form-control c1 i1 font-size-18" formControlName="content"
+                           placeholder="Bình luận..." #text2 (mouseover)="connectInput2()" (mouseleave)="leaveInput2()">
+                    <span *ngIf="!checkConnectInput2" class="font-size-15"
+                          style="margin-left: 5px">Tối đa 200 kí tự.</span>
+                    <span *ngIf="checkConnectInput2" class="font-size-15"
+                          style="margin-left: 5px">{{text2.value.length}}/ 200.</span>
                   </div>
                   <div class="col-3">
                     <button type="submit" style="border: none; background-color: #f8f8f8">
