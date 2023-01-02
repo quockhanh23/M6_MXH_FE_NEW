@@ -6,22 +6,26 @@ import {DialogLoginSuccessComponent} from './dialog-login-success/dialog-login-s
 import {MaterialModule} from "../material/material.module";
 import {DialogLogoutComponent} from './dialog-logout/dialog-logout.component';
 import {DialogCommonComponent} from './dialog-common/dialog-common.component';
+import {DialogCheckLoginComponent} from "./dialog-check-login/dialog-check-login.component";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 const NotificationComponents = [
   DialogRegisterSuccessComponent,
   DialogSuccessComponent,
-  DialogLoginSuccessComponent
+  DialogLoginSuccessComponent,
+  DialogCheckLoginComponent,
+  DialogLogoutComponent,
+  DialogCommonComponent
 ]
 
 @NgModule({
   declarations: [
     NotificationComponents,
-    DialogLogoutComponent,
-    DialogCommonComponent,
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    MatProgressBarModule
   ],
   exports: []
 })

@@ -12,6 +12,7 @@ import {
 } from "../../notifications/dialog-register-success/dialog-register-success.component";
 import {NotificationService} from "../../../services/notification.service";
 import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
+import {DialogCheckLoginComponent} from "../../notifications/dialog-check-login/dialog-check-login.component";
 
 declare var $: any;
 
@@ -68,6 +69,7 @@ export class RegisterLoginComponent implements OnInit {
   }
 
   login(): void {
+    this.dialog.open(DialogCheckLoginComponent)
     console.log("vào login")
     this.submitted = true;
     this.loading = true;
@@ -85,9 +87,11 @@ export class RegisterLoginComponent implements OnInit {
             this.currentUser = result;
             localStorage.setItem('currentUser', JSON.stringify(result));
             this.userName = data.username
+            this.loading = false;
             setTimeout(() => {
               this.router.navigate([this.returnUrl]).then()
             }, 600)
+            this.dialog.closeAll()
             setTimeout(() => {
               this.dialog.open(DialogLoginSuccessComponent)
             }, 200)
@@ -95,7 +99,9 @@ export class RegisterLoginComponent implements OnInit {
               this.dialog.closeAll()
             }, 2000)
           }, error => {
-            console.log(error);
+            this.dialog.open(DialogCommonComponent, {
+              data: {dialogTitle: error.error.message, dialogText: error.error.description}
+            })
           })
         }
       }, error => {
