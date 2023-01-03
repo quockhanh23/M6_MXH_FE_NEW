@@ -35,7 +35,7 @@ export class ActionUserComponent implements OnInit {
       }, error => {
         console.log("Lỗi: " + error)
       })
-      this.postService.getAllPostByUser(id).subscribe(result => {
+      this.postService.allPostPublic(id).subscribe(result => {
         console.log("ALO" + result)
         this.post = result
         this.count = result.length

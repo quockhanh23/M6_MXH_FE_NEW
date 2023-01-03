@@ -36,7 +36,7 @@ export class MyPostComponent implements OnInit {
 
   myPost() {
     console.log("id user = " + this.idUserLogIn)
-    this.postService.getAllPostByUser(<string>this.idUserLogIn).subscribe(result => {
+    this.postService.allPostPublic(<string>this.idUserLogIn).subscribe(result => {
       console.log("ALO" + result)
       this.post = result
       if (result.length == 0 || result.length == undefined) {

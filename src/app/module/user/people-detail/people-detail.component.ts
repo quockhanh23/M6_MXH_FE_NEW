@@ -130,7 +130,7 @@ export class PeopleDetailComponent implements OnInit {
 
   getAllPostByUser() {
     // @ts-ignore
-    this.postService.getAllPostByUser(this.idUser).subscribe(result => {
+    this.postService.allPostPublic(this.idUser).subscribe(result => {
       this.post = result
     }, error => {
       console.log("Lỗi: " + error)

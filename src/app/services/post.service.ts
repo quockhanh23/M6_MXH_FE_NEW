@@ -15,20 +15,12 @@ export class PostService {
   constructor(private httpClient: HttpClient) {
   }
 
-  allPost(): Observable<Post2[]> {
-    return this.httpClient.get<Post2[]>(API_URL + '/allPostPublic')
-  }
-
-  getAllPostByUser(id: string): Observable<Post2[]> {
-    return this.httpClient.get<Post2[]>(API_URL + `/findAllPostByUser?id=${id}`);
-  }
-
   createPost(post2: Post2, idUser: string): Observable<Post2> {
     return this.httpClient.post<Post2>(API_URL + `/createPost?idUser=${idUser}`, post2);
   }
 
-  reloadAllPostPublic(): Observable<Post2[]> {
-    return this.httpClient.get<Post2[]>(API_URL + '/reloadAllPostPublic')
+  allPostPublic(idUser: string): Observable<Post2[]> {
+    return this.httpClient.get<Post2[]>(API_URL + `/allPostPublic?idUser=${idUser}`)
   }
 
   updateLikePost(idPost: any): Observable<any> {
