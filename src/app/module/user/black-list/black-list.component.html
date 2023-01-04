@@ -6,7 +6,7 @@
 <div class="divFix">
   <div class="row">
     <div class="col-4">
-      <h2 style="margin-top: 15px">Danh sách đã chặn</h2>
+      <h2 align="center" style="margin-top: 15px">Danh sách đã chặn</h2>
       <div *ngIf="count > 0" style="margin-top: 20px">
         <div class="hc shadow-box" *ngFor="let user of listUserInBlackList"
              style="border-radius: 5px; border: #afd9ee 1px solid; margin-bottom: 8px">
@@ -30,8 +30,15 @@
           </div>
         </div>
       </div>
-      <div *ngIf="count == 0">
-        <h2>Không có</h2>
+      <div *ngIf="count == 0" align="center" style="background-color: whitesmoke">
+        <div style="background-color: whitesmoke; height: 50px"></div>
+        <h3>Bạn không chặn ai cả</h3>
+        <span style="font-size: 30px" class="material-icons">sentiment_satisfied</span>
+        <div style="background-color: whitesmoke; height: 50px"></div>
+        <div style="background-color: white; height: 5px"></div>
+        <div style="background-color: whitesmoke; height: 50px"></div>
+        <h3>Có ai đang làm phiền bạn?</h3>
+        <div style="background-color: whitesmoke; height: 50px"></div>
       </div>
     </div>
     <div class="col">

@@ -514,5 +514,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     localStorage.removeItem('UrlUserDetail')
     localStorage.removeItem('UrlShortNew')
     localStorage.removeItem('UrlBlackList')
+    localStorage.removeItem('UrlGroupByUser')
   }
 }

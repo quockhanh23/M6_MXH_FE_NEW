@@ -6,6 +6,7 @@ import {TheGroup} from "../../../models/the-group";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 import {MatDialog} from "@angular/material/dialog";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-group-create',
@@ -14,6 +15,7 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class GroupCreateComponent implements OnInit {
 
+  urlGroupByUser = localStorage.getItem("UrlGroupByUser")
   idUserLogIn = localStorage.getItem("USERID")
   avatarGroup?: any;
   coverGroup?: any;
@@ -30,7 +32,8 @@ export class GroupCreateComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               public dialog: MatDialog,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private router: Router,) {
   }
 
   ngOnInit(): void {
@@ -111,5 +114,13 @@ export class GroupCreateComponent implements OnInit {
 
   removeThePreview(downloadUrl: any) {
     return this.storage.storage.refFromURL(downloadUrl).delete();
+  }
+
+  back() {
+    if (this.urlGroupByUser == 'http://localhost:4200/user/group') {
+      this.router.navigate(['user/group']).then()
+    } else {
+      this.router.navigate(['user/groupShare']).then()
+    }
   }
 }

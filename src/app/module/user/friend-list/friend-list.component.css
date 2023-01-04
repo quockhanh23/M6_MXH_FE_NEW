@@ -21,3 +21,33 @@
 .height450px {
   height: 400px;
 }
+
+#subscribeButton {
+  -webkit-animation-name: shake;
+  animation-name: shake;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  40% {
+    transform: rotate(6deg);
+  }
+  40%,
+  60% {
+    transform: rotate(0deg);
+  }
+  60%,
+  90% {
+    transform: rotate(-6deg);
+  }
+}
+

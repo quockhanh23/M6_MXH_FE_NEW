@@ -4,9 +4,11 @@
         class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
 </div>
 <div class="divFix">
-  <div *ngIf="count == 0" style="height: 300px">
-    <h2 style="margin-top: 200px" align="center">Bạn không có nhóm</h2>
-    <p class="a1 a2" [routerLink]="['/user/groupCreate']" align="center"><a>Tạo nhóm?</a></p>
+  <div *ngIf="count == 0" style="height: 350px" align="center">
+
+    <h2 style="margin-top: 150px">Bạn không có nhóm</h2>
+    <span style="font-size: 30px" class="material-icons">groups</span>
+    <p class="a1 a2" [routerLink]="['/user/groupCreate']"><a>Tạo nhóm ngay?</a></p>
   </div>
   <div *ngIf="count > 0">
     <h2>Nhóm của bạn</h2>

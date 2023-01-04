@@ -73,42 +73,41 @@ export class RegisterLoginComponent implements OnInit {
     console.log("vào login")
     this.submitted = true;
     this.loading = true;
-    this.authenticationService.login(this.loginForm.value)
-      .subscribe((data: JWTResponse) => {
-        localStorage.setItem('currentUser', JSON.stringify(data));
-        localStorage.setItem('ACCESS_TOKEN', data.token);
-        // localStorage.setItem('ROLE', data.roles[0].authority);
-        localStorage.setItem('USERNAME', data.username);
-        localStorage.setItem('USERID', data.id + "");
-        if (data.roles[0].authority == "ROLE_ADMIN") {
-          this.router.navigate([this.adminUrl]).then()
-        } else {
-          this.userService.getUserProfile(data.id + "").subscribe(result => {
-            this.currentUser = result;
-            localStorage.setItem('currentUser', JSON.stringify(result));
-            this.userName = data.username
-            this.loading = false;
-            setTimeout(() => {
-              this.router.navigate([this.returnUrl]).then()
-            }, 600)
+    this.authenticationService.login(this.loginForm.value).subscribe((data: JWTResponse) => {
+      localStorage.setItem('currentUser', JSON.stringify(data));
+      localStorage.setItem('ACCESS_TOKEN', data.token);
+      // localStorage.setItem('ROLE', data.roles[0].authority);
+      localStorage.setItem('USERNAME', data.username);
+      localStorage.setItem('USERID', data.id + "");
+      if (data.roles[0].authority == "ROLE_ADMIN") {
+        this.router.navigate([this.adminUrl]).then()
+      } else {
+        this.userService.getUserProfile(data.id + "").subscribe(result => {
+          this.currentUser = result;
+          localStorage.setItem('currentUser', JSON.stringify(result));
+          this.userName = data.username
+          this.loading = false;
+          setTimeout(() => {
+            this.router.navigate([this.returnUrl]).then()
+          }, 600)
+          this.dialog.closeAll()
+          setTimeout(() => {
+            this.dialog.open(DialogLoginSuccessComponent)
+          }, 200)
+          setTimeout(() => {
             this.dialog.closeAll()
-            setTimeout(() => {
-              this.dialog.open(DialogLoginSuccessComponent)
-            }, 200)
-            setTimeout(() => {
-              this.dialog.closeAll()
-            }, 2000)
-          }, error => {
-            this.dialog.open(DialogCommonComponent, {
-              data: {dialogTitle: error.error.message, dialogText: error.error.description}
-            })
-          })
-        }
-      }, error => {
+          }, 2000)
+        })
+      }
+    }, error => {
+      console.log("vào đây 2")
+      this.dialog.closeAll()
+      setTimeout(() => {
         this.dialog.open(DialogCommonComponent, {
           data: {dialogTitle: error.error.message, dialogText: error.error.description}
         })
-      })
+      }, 100)
+    })
   }
 
   register() {

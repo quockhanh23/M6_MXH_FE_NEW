@@ -37,7 +37,7 @@
       </form>
     </div>
   </div>
-  <div class="row" style="margin-top: 10px">
+  <div class="row" style="margin-top: 5px; margin-bottom: 5px">
     <div class="col-1"></div>
     <div class="col">
       <span class="a1" style="font-size: 20px;{{colorCheckFriend}}" (click)="changeListFriend()"
@@ -48,15 +48,17 @@
     <div class="col">
       <span class="a1" style="font-size: 20px;{{colorCheckFollow}}" (click)="changeListFollow()"
             *ngIf="idUser == idUserLogIn">
-        <span *ngIf="countFollowList > 0" class="a2">Bạn đang theo dõi ({{countFollowList}})</span>
-        <span *ngIf="countFollowList == 0" class="a2">Bạn đang theo dõi</span>
+        <span *ngIf="countFollowList > 0" style="margin-left: 50px" class="a2">Bạn đang theo dõi ({{countFollowList}}
+          )</span>
+        <span *ngIf="countFollowList == 0" style="margin-left: 60px" class="a2">Bạn đang theo dõi</span>
       </span>
     </div>
     <div class="col">
       <span class="a1" style="font-size: 20px;{{colorCheckWatching}}" (click)="changeListWatching()"
             *ngIf="idUser == idUserLogIn">
-        <span *ngIf="countWatchingList > 0" class="a2">Đang theo dõi bạn ({{countWatchingList}})</span>
-        <span *ngIf="countWatchingList == 0" class="a2">Đang theo dõi bạn</span>
+        <span *ngIf="countWatchingList > 0" style="margin-left: 100px"
+              class="a2">Đang theo dõi bạn ({{countWatchingList}})</span>
+        <span *ngIf="countWatchingList == 0" style="margin-left: 100px" class="a2">Đang theo dõi bạn</span>
       </span>
     </div>
   </div>
@@ -194,7 +196,7 @@
   <div style="background-color: whitesmoke; {{heightIfBlank1}}">
   </div>
   <div>
-    <p align="center"><span style="font-size: 30px" class="material-icons">sensors</span></p>
+    <p id="subscribeButton" align="center"><span style="font-size: 50px" class="material-icons">sensors</span></p>
     <p *ngIf="idUser == idUserLogIn" style="font-size: 25px" align="center">Bạn không có bạn bè</p>
     <p *ngIf="idUser != idUserLogIn" style="font-size: 25px" align="center">Không có bạn bè</p>
     <p *ngIf="idUser == idUserLogIn" class="a1 a2" [routerLink]="['/user/requests']"

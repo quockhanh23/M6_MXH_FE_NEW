@@ -363,27 +363,38 @@ export class PeopleDetailComponent implements OnInit {
       console.log("Đã vào")
       // @ts-ignore
       this.commentOne = rs
-      this.ngOnInit()
+      this.getAllPostByUser()
+      this.allAnswerComment()
     }, error => {
       console.log("Lỗi: " + error)
-      this.ngOnInit()
+      this.getAllPostByUser()
+      this.allAnswerComment()
     })
   }
 
   deleteComment(idComment: any, idPost: any) {
     console.log("idComment là: " + idComment);
-    this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(rs => {
-      this.ngOnInit()
+    this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(() => {
+      this.getAllPostByUser()
+      this.reloadComment()
     }, error => {
       console.log(error)
-      this.ngOnInit()
+      if (error.status == 200) {
+        this.getAllPostByUser()
+        this.reloadComment()
+      }
     })
   }
 
   sendRequestFriend(idFriend: any) {
     this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(() => {
-      this.ngOnInit()
+      this.listRequest()
       this.toarts.openToartsSendRequestFriendSuccess()
+    }, error => {
+      if (error.status == 200) {
+        this.listRequest()
+        this.toarts.openToartsSendRequestFriendSuccess()
+      }
     })
   }
 
