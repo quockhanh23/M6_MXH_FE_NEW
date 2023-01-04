@@ -8,7 +8,6 @@ import {ToartsService} from "../../../services/toarts.service";
 import {BlackListService} from "../../../services/black-list.service";
 import {CommonService} from "../../../services/common.service";
 
-
 @Component({
   selector: 'app-friend-list',
   templateUrl: './friend-list.component.html',

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupService} from "../../../services/group.service";
 import {TheGroup} from "../../../models/the-group";
 import {CommonService} from "../../../services/common.service";
@@ -8,7 +8,7 @@ import {CommonService} from "../../../services/common.service";
   templateUrl: './group-shared.component.html',
   styleUrls: ['./group-shared.component.css']
 })
-export class GroupSharedComponent implements OnInit {
+export class GroupSharedComponent implements OnInit, OnDestroy {
 
   idUserLogIn = localStorage.getItem("USERID")
   myGroup?: TheGroup[]
@@ -64,5 +64,9 @@ export class GroupSharedComponent implements OnInit {
 
   changeColorInput2() {
     this.commonService.changeColorInput2()
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('UrlGroupByUser')
   }
 }
