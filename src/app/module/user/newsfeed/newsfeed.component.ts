@@ -101,7 +101,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     });
     this.shortNewService.newDay().subscribe()
     this.allPeople()
-    this.allComment()
+    this.allCommentUpdated()
     this.allPostPublic()
   }
 
@@ -115,7 +115,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log("vào hàm allPostPublic")
     this.postService.allPostPublic("").subscribe(result => {
       this.posts = result
-      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
@@ -275,6 +274,16 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     })
   }
 
+  allCommentUpdated() {
+    console.log("vào hàm allComment")
+    this.commentService.allCommentUpdated().subscribe(result => {
+      // @ts-ignore
+      this.comment = result
+    }, error => {
+      console.log("Lỗi: " + error)
+    })
+  }
+
   // Tạo comment
   createComment(idPost: any) {
     console.log("vào hàm createComment")
@@ -295,6 +304,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
       // @ts-ignore
       this.commentOne = rs
       this.allPostPublic()
+      this.allComment()
       console.log("Đã vào" + rs)
     }, error => {
       console.log("Lỗi: " + error)
@@ -314,11 +324,11 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log(commentLike)
     // @ts-ignore
     this.likeCommentService.createLikeComment(commentLike, idComment, this.idUser).subscribe(() => {
-      this.allComment()
+      this.allCommentUpdated()
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.allComment()
+    this.allCommentUpdated()
   }
 
   createDisLikeComment(idComment: any) {
@@ -334,11 +344,11 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log(dislikeComment)
     // @ts-ignore
     this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUser).subscribe(() => {
-      this.allComment()
+      this.allCommentUpdated()
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.allComment()
+    this.allCommentUpdated()
   }
 
   getListFriends(idUser: any) {
@@ -406,11 +416,13 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log("idAnswerComment là: " + idAnswerComment);
     this.answerCommentService.deleteAnswerComment(this.idUserLogIn, idComment, idAnswerComment).subscribe(() => {
       this.allPostPublic()
+      this.allComment()
       this.allAnswerComment()
     }, error => {
       console.log(error)
       if (error.status == 200) {
         this.allPostPublic()
+        this.allComment()
         this.allAnswerComment()
       }
     })

@@ -18,6 +18,10 @@ export class CommentService {
     return this.httpClient.get<Comment[]>(API_URL + '/allComment');
   }
 
+  allCommentUpdated(): Observable<Comment[]> {
+    return this.httpClient.get<Comment[]>(API_URL + '/allCommentUpdated');
+  }
+
   deleteComment(idUser: any, idComment: any, idPost: any): Observable<AnswerComment> {
     return this.httpClient.delete<AnswerComment>(API_URL + `/deleteComment?idUser=${idUser}&idComment=${idComment}&idPost=${idPost}`);
   }
