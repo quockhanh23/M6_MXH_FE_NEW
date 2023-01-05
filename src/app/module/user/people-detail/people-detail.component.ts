@@ -120,7 +120,6 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reloadComment()
     this.allAnswerComment()
     this.listRequest()
     this.friendCheck()
@@ -132,7 +131,7 @@ export class PeopleDetailComponent implements OnInit {
     console.log("vào hàm reloadAllPostPublic")
     this.postService.allPostPublic(<string>this.idUser).subscribe(result => {
       this.post = result
-      this.reloadComment()
+      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
@@ -245,37 +244,7 @@ export class PeopleDetailComponent implements OnInit {
 
   allComment() {
     console.log("vào hàm allComment")
-    this.commentService.getAll().subscribe(result => {
-      // @ts-ignore
-      this.comment = result
-    }, error => {
-      console.log("Lỗi: " + error)
-    })
-  }
-
-  reloadComment() {
-    console.log("vào hàm reloadComment")
-    this.commentService.reloadComment().subscribe(result => {
-      // @ts-ignore
-      this.comment = result
-    }, error => {
-      console.log("Lỗi: " + error)
-    })
-  }
-
-  reloadLikeAllComment() {
-    console.log("vào hàm reloadLikeAllComment")
-    this.commentService.reloadLikeAllComment().subscribe(result => {
-      // @ts-ignore
-      this.comment = result
-    }, error => {
-      console.log("Lỗi: " + error)
-    })
-  }
-
-  reloadDisLikeAllComment() {
-    console.log("vào hàm reloadDisLikeAllComment")
-    this.commentService.reloadDisLikeAllComment().subscribe(result => {
+    this.commentService.allComment().subscribe(result => {
       // @ts-ignore
       this.comment = result
     }, error => {
@@ -301,12 +270,12 @@ export class PeopleDetailComponent implements OnInit {
       document.getElementById('ip2').value = "";
       // @ts-ignore
       this.commentOne = rs
-      this.ngOnInit()
+      this.allComment()
       console.log("Đã vào" + rs)
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.ngOnInit()
+    this.allComment()
   }
 
   createLikeComment(idComment: any) {
@@ -323,11 +292,11 @@ export class PeopleDetailComponent implements OnInit {
     this.likeCommentService.createLikeComment(commentLike, idComment, this.idUserLogIn).subscribe(rs => {
       this.disLikePost = rs
       console.log(rs)
-      this.reloadLikeAllComment()
+      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.reloadLikeAllComment()
+    this.allComment()
   }
 
   createDisLikeComment(idComment: any) {
@@ -343,11 +312,11 @@ export class PeopleDetailComponent implements OnInit {
     // @ts-ignore
     this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUserLogIn).subscribe(rs => {
       this.disLikePost = rs
-      this.reloadDisLikeAllComment()
+      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.reloadDisLikeAllComment()
+    this.allComment()
   }
 
   createAnswerComment(idComment: any) {
@@ -380,12 +349,12 @@ export class PeopleDetailComponent implements OnInit {
     console.log("idComment là: " + idComment);
     this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(() => {
       this.allPostPublic()
-      this.reloadComment()
+      this.allComment()
     }, error => {
       console.log(error)
       if (error.status == 200) {
         this.allPostPublic()
-        this.reloadComment()
+        this.allComment()
       }
     })
   }

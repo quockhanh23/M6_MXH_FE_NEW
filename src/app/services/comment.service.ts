@@ -14,20 +14,8 @@ export class CommentService {
   constructor(private httpClient: HttpClient) {
   }
 
-  reloadComment(): Observable<Comment[]> {
-    return this.httpClient.get<Comment[]>(API_URL + '/reloadComment');
-  }
-
-  reloadLikeAllComment(): Observable<Comment[]> {
-    return this.httpClient.get<Comment[]>(API_URL + '/reloadLikeAllComment');
-  }
-
-  reloadDisLikeAllComment(): Observable<Comment[]> {
-    return this.httpClient.get<Comment[]>(API_URL + '/reloadDisLikeAllComment');
-  }
-
-  getAll(): Observable<Comment[]> {
-    return this.httpClient.get<Comment[]>(API_URL + '/all');
+  allComment(): Observable<Comment[]> {
+    return this.httpClient.get<Comment[]>(API_URL + '/allComment');
   }
 
   deleteComment(idUser: any, idComment: any, idPost: any): Observable<AnswerComment> {

@@ -112,10 +112,10 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   }
 
   allPostPublic() {
-    console.log("vào hàm reloadAllPostPublic")
+    console.log("vào hàm allPostPublic")
     this.postService.allPostPublic("").subscribe(result => {
       this.posts = result
-      this.reloadComment()
+      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
@@ -267,37 +267,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   // Hiển thị tất cả comment của bài viết
   allComment() {
     console.log("vào hàm allComment")
-    this.commentService.getAll().subscribe(result => {
-      // @ts-ignore
-      this.comment = result
-    }, error => {
-      console.log("Lỗi: " + error)
-    })
-  }
-
-  reloadComment() {
-    console.log("vào hàm reloadComment")
-    this.commentService.reloadComment().subscribe(result => {
-      // @ts-ignore
-      this.comment = result
-    }, error => {
-      console.log("Lỗi: " + error)
-    })
-  }
-
-  reloadLikeAllComment() {
-    console.log("vào hàm reloadLikeAllComment")
-    this.commentService.reloadLikeAllComment().subscribe(result => {
-      // @ts-ignore
-      this.comment = result
-    }, error => {
-      console.log("Lỗi: " + error)
-    })
-  }
-
-  reloadDisLikeAllComment() {
-    console.log("vào hàm reloadDisLikeAllComment")
-    this.commentService.reloadDisLikeAllComment().subscribe(result => {
+    this.commentService.allComment().subscribe(result => {
       // @ts-ignore
       this.comment = result
     }, error => {
@@ -344,11 +314,11 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log(commentLike)
     // @ts-ignore
     this.likeCommentService.createLikeComment(commentLike, idComment, this.idUser).subscribe(() => {
-      this.reloadLikeAllComment()
+      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.reloadLikeAllComment()
+    this.allComment()
   }
 
   createDisLikeComment(idComment: any) {
@@ -364,11 +334,11 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log(dislikeComment)
     // @ts-ignore
     this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUser).subscribe(() => {
-      this.reloadDisLikeAllComment()
+      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.reloadDisLikeAllComment()
+    this.allComment()
   }
 
   getListFriends(idUser: any) {
@@ -421,12 +391,12 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log("idComment là: " + idComment);
     this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(() => {
       this.allPostPublic()
-      this.reloadComment()
+      this.allComment()
     }, error => {
       console.log(error)
       if (error.status == 200) {
         this.allPostPublic()
-        this.reloadComment()
+        this.allComment()
       }
     })
   }
