@@ -114,7 +114,7 @@ export class PeopleDetailComponent implements OnInit {
         }
       })
     })
-    this.getAllPostByUser()
+    this.allPostPublic()
     this.allComment()
     this.getOne(this.idUser)
   }
@@ -128,10 +128,11 @@ export class PeopleDetailComponent implements OnInit {
     this.mutualFriends()
   }
 
-  getAllPostByUser() {
-    // @ts-ignore
-    this.postService.allPostPublic(this.idUser).subscribe(result => {
+  allPostPublic() {
+    console.log("vào hàm reloadAllPostPublic")
+    this.postService.allPostPublic(<string>this.idUser).subscribe(result => {
       this.post = result
+      this.reloadComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
@@ -183,10 +184,10 @@ export class PeopleDetailComponent implements OnInit {
     // @ts-ignore
     this.likePostService.createLike(likePost, idPost, this.idUserLogIn).subscribe(result => {
       this.likePost = result
-      this.getAllPostByUser()
+      this.allPostPublic()
     }, error => {
       console.log("Lỗi: " + error)
-      this.getAllPostByUser()
+      this.allPostPublic()
     })
   }
 
@@ -205,10 +206,10 @@ export class PeopleDetailComponent implements OnInit {
     this.likePostService.createDisLike(disLikePost, idPost, this.idUserLogIn).subscribe(result => {
       this.disLikePost = result
       console.log(result)
-      this.getAllPostByUser()
+      this.allPostPublic()
     }, error => {
       console.log("Lỗi: " + error)
-      this.getAllPostByUser()
+      this.allPostPublic()
     })
   }
 
@@ -226,12 +227,12 @@ export class PeopleDetailComponent implements OnInit {
     // @ts-ignore
     this.likePostService.createHeart(heart, idPost, this.idUserLogIn).subscribe(result => {
       this.disLikePost = result
-      this.getAllPostByUser()
+      this.allPostPublic()
       console.log(result)
     }, error => {
       console.log("Lỗi: " + error)
     })
-    this.getAllPostByUser()
+    this.allPostPublic()
   }
 
   allAnswerComment() {
@@ -296,6 +297,8 @@ export class PeopleDetailComponent implements OnInit {
     // @ts-ignore
     this.commentService.createComment(comment, this.idUserLogIn, idPost).subscribe(rs => {
       console.log("Đã vào")
+      // @ts-ignore
+      document.getElementById('ip2').value = "";
       // @ts-ignore
       this.commentOne = rs
       this.ngOnInit()
@@ -362,12 +365,13 @@ export class PeopleDetailComponent implements OnInit {
     this.answerCommentService.save(answerComment, this.idUserLogIn, idComment).subscribe(rs => {
       console.log("Đã vào")
       // @ts-ignore
+      document.getElementById('ip1').value = "";
       this.commentOne = rs
-      this.getAllPostByUser()
+      this.allPostPublic()
       this.allAnswerComment()
     }, error => {
       console.log("Lỗi: " + error)
-      this.getAllPostByUser()
+      this.allPostPublic()
       this.allAnswerComment()
     })
   }
@@ -375,12 +379,12 @@ export class PeopleDetailComponent implements OnInit {
   deleteComment(idComment: any, idPost: any) {
     console.log("idComment là: " + idComment);
     this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(() => {
-      this.getAllPostByUser()
+      this.allPostPublic()
       this.reloadComment()
     }, error => {
       console.log(error)
       if (error.status == 200) {
-        this.getAllPostByUser()
+        this.allPostPublic()
         this.reloadComment()
       }
     })

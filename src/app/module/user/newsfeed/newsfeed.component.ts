@@ -215,6 +215,8 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log(newPost)
     // @ts-ignore
     this.postService.createPost(newPost, idUser).subscribe(result => {
+      // @ts-ignore
+      document.getElementById('value').value = "";
       this.post = result
       this.allPostPublic()
       this.fb = null
@@ -319,6 +321,8 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.commentService.createComment(comment, this.idUser, idPost).subscribe(rs => {
       console.log("Đã vào")
       // @ts-ignore
+      document.getElementById('ip2').value = "";
+      // @ts-ignore
       this.commentOne = rs
       this.allPostPublic()
       console.log("Đã vào" + rs)
@@ -395,6 +399,8 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     // @ts-ignore
     this.answerCommentService.save(answerComment, this.idUser, idComment).subscribe(rs => {
       console.log("Đã vào")
+      // @ts-ignore
+      document.getElementById('ip3').value = "";
       // @ts-ignore
       this.commentOne = rs
       this.ngOnInit()

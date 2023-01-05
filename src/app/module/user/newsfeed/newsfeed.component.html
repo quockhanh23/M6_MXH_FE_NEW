@@ -63,9 +63,9 @@
                        class="font-size-18 form-control c1 i1" formControlName="content"
                        placeholder="Bạn đang nghĩ gì thế?">
               </div>
-              <span *ngIf="checkConnectInput" class="font-size-15"
+              <span *ngIf="checkConnectInput || text.value.length > 0" class="font-size-15"
                     style="margin-left: 60px">{{text.value.length}}/ 500.</span>
-              <span *ngIf="!checkConnectInput" class="font-size-15"
+              <span *ngIf="!checkConnectInput && text.value.length == 0" class="font-size-15"
                     style="margin-left: 60px">Tối đa 500 kí tự.</span>
               <br>
               <div style="margin-left: 60px" *ngIf="checkDone">
@@ -228,7 +228,7 @@
                             </div>
                             <div class="col-9">
                               <input style="width: 100% !important; height: 35px; border-radius: 11px;"
-                                     onfocus="this.value=''" type="text"
+                                     onfocus="this.value=''" type="text" id="ip3"
                                      class="form-control c1 i1 font-size-16" formControlName="content"
                                      placeholder="Trả lời : {{c?.user?.fullName}}">
                             </div>
@@ -287,12 +287,13 @@
                          class="profile-photo-sm"/>
                   </div>
                   <div class="col-8">
-                    <input style="width: 100% !important; height: 37px; border-radius: 11px" onfocus="this.value=''"
-                           type="text" class="hoverInput form-control c1 i1 font-size-18" formControlName="content"
-                           placeholder="Bình luận..." #text2 (mouseover)="connectInput2()" (mouseleave)="leaveInput2()">
-                    <span *ngIf="!checkConnectInput2" class="font-size-15"
+                    <input style="width: 100% !important; height: 37px; border-radius: 11px"
+                           onfocus="this.value=''" id="ip2" type="text" placeholder="Bình luận..."
+                           class="hoverInput form-control c1 i1 font-size-18" formControlName="content"
+                           #text2 (mouseover)="connectInput2()" (mouseleave)="leaveInput2()">
+                    <span *ngIf="!checkConnectInput2 && text2.value.length == 0" class="font-size-15"
                           style="margin-left: 5px">Tối đa 200 kí tự.</span>
-                    <span *ngIf="checkConnectInput2" class="font-size-15"
+                    <span *ngIf="checkConnectInput2 || text2.value.length > 0" class="font-size-15"
                           style="margin-left: 5px">{{text2.value.length}}/ 200.</span>
                   </div>
                   <div class="col-3">
