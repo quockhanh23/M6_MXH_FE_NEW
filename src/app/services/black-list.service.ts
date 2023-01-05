@@ -18,11 +18,11 @@ export class BlackListService {
     return this.httpClient.get<UserBlackListDTO[]>(API_URL + `/listBlockedByUser?idUserLogin=${idUserLogin}`);
   }
 
-  block(idUserLogin: any, idBlock: any): Observable<any> {
-    return this.httpClient.delete<any>(API_URL + `/block?idUserLogin=${idUserLogin}&idBlock=${idBlock}`);
+  block(idUserLogin: any, idUserBlock: any): Observable<any> {
+    return this.httpClient.delete<any>(API_URL + `/block?idUserLogin=${idUserLogin}&idUserBlock=${idUserBlock}`);
   }
 
-  unBlock(idUserLogin: any, idBlock: any): Observable<any> {
-    return this.httpClient.delete<any>(API_URL + `/unBlock?idUserLogin=${idUserLogin}&idBlock=${idBlock}`);
+  unBlock(idUserLogin: any, idUserBlock: any): Observable<any> {
+    return this.httpClient.delete<any>(API_URL + `/unBlock?idUserLogin=${idUserLogin}&idUserBlock=${idUserBlock}`);
   }
 }

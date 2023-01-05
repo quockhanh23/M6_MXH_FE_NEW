@@ -487,7 +487,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.checkConnectInput2 = value.length > 0;
   }
 
-
   savePost(idPost: any) {
     console.log("vào hàm savePost")
     this.saveService.savePost(idPost, this.idUserLogIn).subscribe(() => {

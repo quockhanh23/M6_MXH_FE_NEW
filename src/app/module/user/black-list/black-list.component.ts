@@ -45,16 +45,17 @@ export class BlackListComponent implements OnInit {
   block(idBlock: any) {
     this.blackListService.block(this.idUserLogIn, idBlock).subscribe(rs => {
       this.ngOnInit()
+      this.searchByFullNameOrEmail()
     }, error => {
       this.ngOnInit()
       console.log(JSON.stringify(error))
     })
-    this.ngOnInit()
   }
 
   unBlock(idBlock: any) {
     this.blackListService.unBlock(this.idUserLogIn, idBlock).subscribe(rs => {
       this.ngOnInit()
+      this.searchByFullNameOrEmail()
     }, error => {
       this.ngOnInit()
       console.log(JSON.stringify(error))

@@ -96,12 +96,14 @@ export class FriendRequestComponent implements OnInit {
   acceptFriend(idFriend: any) {
     this.friendRelationService.acceptFriend(this.idUserLogIn, idFriend).subscribe(rs => {
       this.ngOnInit()
+      this.searchAll()
     })
   }
 
   sendRequestFriend(idFriend: any) {
     this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(rs => {
       this.ngOnInit()
+      this.searchAll()
       this.toarts.openToartsSendRequestFriendSuccess()
     })
   }
@@ -109,6 +111,7 @@ export class FriendRequestComponent implements OnInit {
   deleteRequest(idFriend: any) {
     this.friendRelationService.unfriend(this.idUserLogIn, idFriend).subscribe(rs => {
       this.ngOnInit()
+      this.searchAll()
       this.toarts.openToartsCancelRequestFriend()
     })
   }
