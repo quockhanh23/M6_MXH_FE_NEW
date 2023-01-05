@@ -19,6 +19,8 @@ import {LikePost} from "../../../models/like-post";
 import {LikePostService} from "../../../services/like-post.service";
 import {ToartsService} from "../../../services/toarts.service";
 import {FollowWatchingService} from "../../../services/follow-watching.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 
 @Component({
   selector: 'app-people-detail',
@@ -82,6 +84,7 @@ export class PeopleDetailComponent implements OnInit {
               private answerCommentService: AnswerCommentService,
               private followWatchingService: FollowWatchingService,
               private toarts: ToartsService,
+              public dialog: MatDialog,
   ) {
     localStorage.setItem('Url', window.location.href);
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -91,7 +94,10 @@ export class PeopleDetailComponent implements OnInit {
       this.userService.userDetail(id).subscribe(result => {
         this.userDetail = result
       }, error => {
-        console.log("Lỗi: " + error)
+        this.router.navigate(['user/newsfeed']).then()
+        this.dialog.open(DialogCommonComponent, {
+          data: {dialogTitle: error.error.message, dialogText: error.error.description}
+        })
       })
       this.userService.userDetail(this.idUserLogIn).subscribe(result => {
         this.avatarUserLogin = result.avatar
@@ -102,8 +108,6 @@ export class PeopleDetailComponent implements OnInit {
         } catch (err) {
           console.log("lỗi length")
         }
-      }, error => {
-        console.log("Lỗi: " + error)
       })
       this.friendRelationService.agree(this.idUserLogIn, id).subscribe(rs => {
         try {
