@@ -311,10 +311,14 @@
                         <div class="col-8">
                           <div>
                             <input style=" height: 40px; border-radius: 11px; width: 100% !important;"
-                                   onfocus="this.value=''" type="text" id="ip2"
+                                   onfocus="this.value=''" type="text" id="value" maxlength="200"
+                                   (mouseover)="connectInput()" (mouseleave)="leaveInput()"
                                    class="form-control c1 i1 font-size-18" formControlName="content"
-                                   placeholder="Bình luận...">
-                            <span class="font-size-15">Tối đa 500 kí tự.</span>
+                                   placeholder="Bình luận..." #text>
+                            <span *ngIf="checkConnectInput || text.value.length > 0" class="font-size-15"
+                                  style="">{{text.value.length}}/ 200.</span>
+                            <span *ngIf="!checkConnectInput && text.value.length == 0" class="font-size-15"
+                                  style="">Tối đa 200 kí tự.</span>
                           </div>
                         </div>
                         <div class="col-2">

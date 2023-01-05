@@ -59,6 +59,8 @@ export class PeopleDetailComponent implements OnInit {
   size: any
   avatarUserLogin?: any
   countMutualFriends = 0
+  checkConnectInput = false
+  checkConnectInput2 = false
 
   commentCreateForm: FormGroup = new FormGroup({
     content: new FormControl("",)
@@ -471,5 +473,25 @@ export class PeopleDetailComponent implements OnInit {
     this.followWatchingService.getOne(this.idUserLogIn, idUserFollow).subscribe(rs => {
       this.userFollow = rs
     })
+  }
+
+  connectInput() {
+    this.checkConnectInput = true
+  }
+
+  connectInput2() {
+    this.checkConnectInput2 = true
+  }
+
+  leaveInput() {
+    // @ts-ignore
+    let value = document.getElementById('value').value
+    this.checkConnectInput = value.length > 0;
+  }
+
+  leaveInput2() {
+    // @ts-ignore
+    let value = document.getElementById('value').value
+    this.checkConnectInput2 = value.length > 0;
   }
 }

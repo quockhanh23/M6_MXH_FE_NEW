@@ -59,7 +59,8 @@
                 <img src="{{userDetail?.avatar}}" alt="" class="profile-photo-md a1"/>
                 <input #text maxlength="500" id="value"
                        style="background: whitesmoke ;width: 400px !important; height: 50px;"
-                       onfocus="this.value=''" type="text" (mouseover)="connectInput()" (mouseleave)="leaveInput()"
+                       onfocus="this.value=''" type="text"
+                       (mouseover)="connectInput()" (mouseleave)="leaveInput()"
                        class="font-size-18 form-control c1 i1" formControlName="content"
                        placeholder="Bạn đang nghĩ gì thế?">
               </div>
