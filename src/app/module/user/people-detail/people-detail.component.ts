@@ -103,7 +103,6 @@ export class PeopleDetailComponent implements OnInit {
       }, error => {
         console.log("Lỗi: " + error)
       })
-
       this.friendRelationService.agree(this.idUserLogIn, id).subscribe(rs => {
         try {
           if (rs.length > 0) {
@@ -355,6 +354,21 @@ export class PeopleDetailComponent implements OnInit {
       if (error.status == 200) {
         this.allPostPublic()
         this.allComment()
+      }
+    })
+  }
+
+  deleteAnswerComment(idComment: any, idAnswerComment: any) {
+    console.log("idComment là: " + idComment);
+    console.log("idAnswerComment là: " + idAnswerComment);
+    this.answerCommentService.deleteAnswerComment(this.idUserLogIn, idComment, idAnswerComment).subscribe(() => {
+      this.allPostPublic()
+      this.allAnswerComment()
+    }, error => {
+      console.log(error)
+      if (error.status == 200) {
+        this.allPostPublic()
+        this.allAnswerComment()
       }
     })
   }

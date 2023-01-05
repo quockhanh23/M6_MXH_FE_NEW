@@ -243,16 +243,18 @@
                                          class="profile-photo-sm"/>
                                   </div>
                                   <div class="col-9">
-                                    <input style="width: 100% !important; height: 40px; border-radius: 11px; margin-bottom: 10px"
-                                           onfocus="this.value=''" type="text" id="ip1"
-                                           class="form-control c1 i1 font-size-18" formControlName="content"
-                                           placeholder="Trả lời : {{c?.user?.fullName}}">
+                                    <input
+                                      style="width: 100% !important; height: 40px; border-radius: 11px; margin-bottom: 10px"
+                                      onfocus="this.value=''" type="text" id="ip1"
+                                      class="form-control c1 i1 font-size-18" formControlName="content"
+                                      placeholder="Trả lời : {{c?.user?.fullName}}">
                                   </div>
                                   <div class="col-1">
-                                    <button type="submit" style="border: none; background-color: white; margin-bottom: 10px">
+                                    <button type="submit"
+                                            style="border: none; background-color: white; margin-bottom: 10px">
                                       <sub><span style="font-size: 30px; color: #0a70b9"
-                                                  matTooltip="Gửi"
-                                                  class="material-icons">send</span></sub>
+                                                 matTooltip="Gửi"
+                                                 class="material-icons">send</span></sub>
                                     </button>
                                   </div>
                                 </div>
@@ -275,6 +277,10 @@
                                         class="font-size-16 word-wrap">
                                     <a [routerLink]="['/user/user-detail']"
                                        class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
+                                  <span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
+                                        style="font-size: 5px;margin-top: 2px"
+                                        (click)="deleteAnswerComment(an?.comment?.id, an?.id)"
+                                        class="material-icons a1 font-size-18">delete_forever</span>
                                 </div>
                                 <div *ngIf="an?.comment?.id === c.id" class="col-1">
                                   <span class="font-size-15">

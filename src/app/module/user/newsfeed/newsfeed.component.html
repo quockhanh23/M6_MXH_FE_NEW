@@ -242,31 +242,31 @@
                           </div>
                         </form>
                       </div>
-                      <div *ngFor="let an of answerComments" style="margin-bottom: 10px">
+                      <div *ngFor="let an of answerComments">
                         <div class="row">
                           <div class="col-1">
-                            <span *ngIf="an?.comment?.id === c.id" class="font-size-15">
-                              <img style="margin-left: 9px; width: 20px; height: 20px"
-                                   src="{{an?.user?.avatar}}"
-                                   class="profile-photo-sm" alt=""/>
-                            </span>
+                                  <span *ngIf="an?.comment?.id === c.id" class="font-size-15">
+                                    <img style="margin-left: 9px; width: 20px; height: 20px " src="{{an?.user?.avatar}}"
+                                         class="profile-photo-sm" alt=""/>
+                                  </span>
                           </div>
-                          <div class="col-8" *ngIf="an?.comment?.id === c.id">
-                           <span *ngIf="an?.user?.id != idUserLogIn"
-                                 class="font-size-16 word-wrap">
-                             <a routerLink="/user/people-detail/{{an?.user?.id}}"
-                                class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
+                          <div class="col-10" *ngIf="an?.comment?.id === c.id">
+                                  <span *ngIf="an?.user?.id != idUserLogIn"
+                                        class="font-size-16 word-wrap">
+                                    <a routerLink="/user/people-detail/{{an?.user?.id}}"
+                                       class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
                             <span *ngIf="an?.user?.id == idUserLogIn"
                                   class="font-size-16 word-wrap">
-                             <a [routerLink]="['/user/user-detail']"
-                                class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
+                                    <a [routerLink]="['/user/user-detail']"
+                                       class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
+                            <span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
+                                  style="font-size: 5px;margin-top: 2px"
+                                  (click)="deleteAnswerComment(an?.comment?.id, an?.id)"
+                                  class="material-icons a1 font-size-18">delete_forever</span>
                           </div>
-                          <span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
-                                style="font-size: 5px;margin-top: 2px"
-                                (click)="deleteAnswerComment(an?.comment?.id, an?.id)"
-                                class="material-icons a1 font-size-18">delete_forever</span>
-                          <div *ngIf="an?.comment?.id === c.id">
-                            <span class="font-size-14">{{an?.createAt | date:"HH:mm | dd/MM"}}</span>
+                          <div *ngIf="an?.comment?.id === c.id" class="col-1">
+                                  <span class="font-size-15">
+                                    {{c.createAt | date:"hh:mm|dd/MM"}}</span>
                           </div>
                         </div>
                       </div>
