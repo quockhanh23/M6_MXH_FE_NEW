@@ -259,10 +259,10 @@
                                   class="font-size-16 word-wrap">
                                     <a [routerLink]="['/user/user-detail']"
                                        class="profile-link a1">{{an?.user?.fullName}}: </a> {{an.content}}</span>
-                            <span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
-                                  style="font-size: 5px;margin-top: 2px"
-                                  (click)="deleteAnswerComment(an?.comment?.id, an?.id)"
-                                  class="material-icons a1 font-size-18">delete_forever</span>
+                            <sub><span matTooltipPosition="right" matTooltip="Xoá" *ngIf="an?.comment?.id === c.id"
+                                       style="font-size: 5px;margin-top: 2px"
+                                       (click)="deleteAnswerComment(an?.comment?.id, an?.id)"
+                                       class="material-icons a1 font-size-18">delete_forever</span></sub>
                           </div>
                           <div *ngIf="an?.comment?.id === c.id" class="col-1">
                                   <span class="font-size-15">
@@ -270,6 +270,7 @@
                           </div>
                         </div>
                       </div>
+                      <hr>
                     </div>
                   </div>
                   <div class="col-3">
