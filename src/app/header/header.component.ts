@@ -67,10 +67,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkHRF2(): boolean {
-    if (window.location.href == 'http://localhost:4200/') {
-      return true;
-    }
-    return false;
+    return window.location.href == 'http://localhost:4200/';
   }
 
   getAllNotificationByIdSenTo() {
@@ -93,7 +90,7 @@ export class HeaderComponent implements OnInit {
 
   seenAll() {
     // @ts-ignore
-    this.notificationService.seenAll(this.idUserLogIn).subscribe(rs => {
+    this.notificationService.seenAll(this.idUserLogIn).subscribe(() => {
       this.ngOnInit()
     }, error => {
       if (error.status == 200) {
@@ -104,7 +101,7 @@ export class HeaderComponent implements OnInit {
 
   deleteAll() {
     // @ts-ignore
-    this.notificationService.deleteAll(this.idUserLogIn).subscribe(rs => {
+    this.notificationService.deleteAll(this.idUserLogIn).subscribe(() => {
       this.ngOnInit()
       this.toartsService.openToartsCleanNotificationSuccess()
     }, error => {

@@ -14,7 +14,7 @@ export class AdminService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(): Observable<User[]> {
+  getAllUser(): Observable<User[]> {
     return this.httpClient.get<User[]>(API_URL + '/getAllUser', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`

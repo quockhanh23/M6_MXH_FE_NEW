@@ -4,7 +4,8 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor { //Interceptor: đánh chặn, đại loại là thêm 1 thao tác vào trước 1 bước tương tác với http
+export class JwtInterceptor implements HttpInterceptor {
+  //Interceptor: đánh chặn, đại loại là thêm 1 thao tác vào trước 1 bước tương tác với http
   constructor(private authenticationService: AuthenticationService) {
   }
 

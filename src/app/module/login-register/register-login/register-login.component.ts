@@ -100,7 +100,6 @@ export class RegisterLoginComponent implements OnInit {
         })
       }
     }, error => {
-      console.log("vào đây 2")
       this.dialog.closeAll()
       setTimeout(() => {
         this.dialog.open(DialogCommonComponent, {
@@ -122,7 +121,7 @@ export class RegisterLoginComponent implements OnInit {
     }
     console.log(newUser)
     this.userService.register(newUser).subscribe(
-      success => {
+      () => {
         $('#registerSuccess').modal('show')
         setTimeout(() => {
           $('#registerSuccess').modal('hide');

@@ -8,6 +8,7 @@ import {User} from "../../../models/user";
   styleUrls: ['./manager-users.component.css']
 })
 export class ManagerUsersComponent implements OnInit {
+
   user?: User[]
   count?: any
 
@@ -15,12 +16,11 @@ export class ManagerUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll()
+    this.getAllUser()
   }
 
-  getAll() {
-    this.adminService.getAll().subscribe(rs => {
-      // console.log("Kiểu dữ liệu: " + JSON.stringify(rs))
+  getAllUser() {
+    this.adminService.getAllUser().subscribe(rs => {
       this.user = rs
       this.count = rs.length
     })
