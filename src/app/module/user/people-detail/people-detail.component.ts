@@ -21,6 +21,7 @@ import {ToartsService} from "../../../services/toarts.service";
 import {FollowWatchingService} from "../../../services/follow-watching.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-people-detail',
@@ -62,7 +63,7 @@ export class PeopleDetailComponent implements OnInit {
   avatarUserLogin?: any
   countMutualFriends = 0
   checkConnectInput = false
-  checkConnectInput2 = false
+  heightLine = "height: 50px";
 
   commentCreateForm: FormGroup = new FormGroup({
     content: new FormControl("",)
@@ -84,6 +85,7 @@ export class PeopleDetailComponent implements OnInit {
               private answerCommentService: AnswerCommentService,
               private followWatchingService: FollowWatchingService,
               private toarts: ToartsService,
+              private commonService: CommonService,
               public dialog: MatDialog,
   ) {
     localStorage.setItem('Url', window.location.href);
@@ -122,10 +124,11 @@ export class PeopleDetailComponent implements OnInit {
     this.allPostPublic()
     this.allComment()
     this.getOne(this.idUser)
+    this.allAnswerComment()
+    this.checkLine()
   }
 
   ngOnInit(): void {
-    this.allAnswerComment()
     this.listRequest()
     this.friendCheck()
     this.friendList()
@@ -133,10 +136,9 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   allPostPublic() {
-    console.log("vào hàm reloadAllPostPublic")
+    console.log("vào hàm allPostPublic")
     this.postService.allPostPublic(<string>this.idUser).subscribe(result => {
       this.post = result
-      this.allComment()
     }, error => {
       console.log("Lỗi: " + error)
     })
@@ -167,6 +169,7 @@ export class PeopleDetailComponent implements OnInit {
       try {
         if (rs.length > 0) {
           this.checkAcceptFriend = true;
+          console.log("checkAcceptFriend:" + this.checkAcceptFriend)
         }
       } catch (err) {
         console.log("lỗi length")
@@ -232,24 +235,32 @@ export class PeopleDetailComponent implements OnInit {
     this.likePostService.createHeart(heart, idPost, this.idUserLogIn).subscribe(result => {
       this.disLikePost = result
       this.allPostPublic()
-      console.log(result)
     }, error => {
       console.log("Lỗi: " + error)
+      this.allPostPublic()
     })
-    this.allPostPublic()
   }
 
   allAnswerComment() {
     console.log("Vào hàm allAnswerComment")
     this.answerCommentService.getAll().subscribe(rs => {
       this.answerComments = rs
-      console.log("Oke")
     })
   }
 
   allComment() {
     console.log("vào hàm allComment")
     this.commentService.allComment().subscribe(result => {
+      // @ts-ignore
+      this.comment = result
+    }, error => {
+      console.log("Lỗi: " + error)
+    })
+  }
+
+  allCommentUpdated() {
+    console.log("vào hàm allCommentUpdated")
+    this.commentService.allCommentUpdated().subscribe(result => {
       // @ts-ignore
       this.comment = result
     }, error => {
@@ -272,15 +283,17 @@ export class PeopleDetailComponent implements OnInit {
     this.commentService.createComment(comment, this.idUserLogIn, idPost).subscribe(rs => {
       console.log("Đã vào")
       // @ts-ignore
-      document.getElementById('ip2').value = "";
+      document.getElementById('value').value = "";
       // @ts-ignore
       this.commentOne = rs
       this.allComment()
       console.log("Đã vào" + rs)
     }, error => {
+      if (error.status == 200) {
+        this.allComment()
+      }
       console.log("Lỗi: " + error)
     })
-    this.allComment()
   }
 
   createLikeComment(idComment: any) {
@@ -297,11 +310,13 @@ export class PeopleDetailComponent implements OnInit {
     this.likeCommentService.createLikeComment(commentLike, idComment, this.idUserLogIn).subscribe(rs => {
       this.disLikePost = rs
       console.log(rs)
-      this.allComment()
+      this.allCommentUpdated()
     }, error => {
+      if (error.status == 200) {
+        this.allCommentUpdated()
+      }
       console.log("Lỗi: " + error)
     })
-    this.allComment()
   }
 
   createDisLikeComment(idComment: any) {
@@ -317,11 +332,13 @@ export class PeopleDetailComponent implements OnInit {
     // @ts-ignore
     this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUserLogIn).subscribe(rs => {
       this.disLikePost = rs
-      this.allComment()
+      this.allCommentUpdated()
     }, error => {
+      if (error.status == 200) {
+        this.allCommentUpdated()
+      }
       console.log("Lỗi: " + error)
     })
-    this.allComment()
   }
 
   createAnswerComment(idComment: any) {
@@ -351,12 +368,12 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   deleteComment(idComment: any, idPost: any) {
+    console.log("vào hàm deleteComment")
     console.log("idComment là: " + idComment);
     this.commentService.deleteComment(this.idUserLogIn, idComment, idPost).subscribe(() => {
       this.allPostPublic()
       this.allComment()
     }, error => {
-      console.log(error)
       if (error.status == 200) {
         this.allPostPublic()
         this.allComment()
@@ -365,13 +382,14 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   deleteAnswerComment(idComment: any, idAnswerComment: any) {
+    console.log("vào hàm deleteAnswerComment")
     console.log("idComment là: " + idComment);
     console.log("idAnswerComment là: " + idAnswerComment);
     this.answerCommentService.deleteAnswerComment(this.idUserLogIn, idComment, idAnswerComment).subscribe(() => {
       this.allPostPublic()
       this.allAnswerComment()
     }, error => {
-      console.log(error)
+      console.log("Lỗi deleteAnswerComment:" + error)
       if (error.status == 200) {
         this.allPostPublic()
         this.allAnswerComment()
@@ -380,10 +398,12 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   sendRequestFriend(idFriend: any) {
+    console.log("vào hàm sendRequestFriend")
     this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(() => {
       this.listRequest()
       this.toarts.openToartsSendRequestFriendSuccess()
     }, error => {
+      console.log("Lỗi sendRequestFriend:" + error)
       if (error.status == 200) {
         this.listRequest()
         this.toarts.openToartsSendRequestFriendSuccess()
@@ -398,6 +418,7 @@ export class PeopleDetailComponent implements OnInit {
           if (rs[i].idFriend == this.idUser) {
             this.friend = rs[i]
             this.checkAlreadyFriend = true
+            console.log("checkAlreadyFriend = " + this.checkAlreadyFriend)
           }
         }
       } catch (err) {
@@ -407,23 +428,49 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   acceptFriend() {
+    console.log("vào hàm acceptFriend")
     this.friendRelationService.acceptFriend(this.idUserLogIn, this.idUser).subscribe(() => {
       this.checkAlreadyFriend = false
       this.ngOnInit()
+    }, error => {
+      console.log("Lỗi acceptFriend:" + error)
     })
   }
 
   removeFriend() {
-    this.friendRelationService.unfriend(this.idUserLogIn, this.idUser).subscribe(() => {
+    console.log("vào hàm removeFriend")
+    this.friendRelationService.deleteFriendRelation(this.idUserLogIn, this.idUser).subscribe(() => {
       this.checkRemoveFriend = false
-      this.ngOnInit()
+      this.checkAlreadyFriend = false
+      this.checkAcceptFriend = false
       this.toarts.openToartsUnFriend()
+    }, error => {
+      console.log("Lỗi removeFriend:" + error)
+      if (error.status == 200) {
+        this.toarts.openToartsUnFriend()
+      }
+    })
+  }
+
+  deleteRequest(idFriend: any) {
+    console.log("vào hàm deleteRequest")
+    this.friendRelationService.deleteFriendRelation(this.idUserLogIn, idFriend).subscribe(() => {
+      this.checkUser2 = false
+      this.checkAlreadyFriend = false
+      this.toarts.openToartsCancelRequestFriend()
+    }, error => {
+      console.log("Lỗi deleteRequest:" + error)
+      if (error.status == 200) {
+        this.toarts.openToartsCancelRequestFriend()
+      }
     })
   }
 
   mutualFriends() {
     this.friendRelationService.mutualFriends(this.idUserLogIn, this.idUser).subscribe(rs => {
       this.countMutualFriends = rs
+    }, error => {
+      console.log("Lỗi mutualFriends:" + error)
     })
   }
 
@@ -460,17 +507,25 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   createFollow(idUserFollow: any) {
-    this.followWatchingService.createFollow(this.idUserLogIn, idUserFollow).subscribe(rs => {
+    this.followWatchingService.createFollow(this.idUserLogIn, idUserFollow).subscribe(() => {
       this.getOne(idUserFollow)
+    }, error => {
+      console.log("Lỗi createFollow:" + error)
+      if (error.status == 200) {
+        this.getOne(idUserFollow)
+      }
     })
-    this.getOne(idUserFollow)
   }
 
   unFollow(idUserFollow: any) {
-    this.followWatchingService.unFollow(this.idUserLogIn, idUserFollow).subscribe(rs => {
+    this.followWatchingService.unFollow(this.idUserLogIn, idUserFollow).subscribe(() => {
       this.getOne(idUserFollow)
+    }, error => {
+      console.log("Lỗi unFollow:" + error)
+      if (error.status == 200) {
+        this.getOne(idUserFollow)
+      }
     })
-    this.getOne(idUserFollow)
   }
 
   getOne(idUserFollow: any) {
@@ -480,22 +535,39 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   connectInput() {
-    this.checkConnectInput = true
-  }
-
-  connectInput2() {
-    this.checkConnectInput2 = true
+    this.commonService.connectInput(this.checkConnectInput)
   }
 
   leaveInput() {
-    // @ts-ignore
-    let value = document.getElementById('value').value
-    this.checkConnectInput = value.length > 0;
+    this.commonService.leaveInput(this.checkConnectInput)
   }
 
-  leaveInput2() {
-    // @ts-ignore
-    let value = document.getElementById('value').value
-    this.checkConnectInput2 = value.length > 0;
+  checkLine() {
+    let count = 0
+    if (this.urlMessage == 'http://localhost:4200/user/messenger') {
+      count = count + 1;
+    }
+    if (this.url == 'http://localhost:4200/user/requests') {
+      count = count + 1;
+    }
+    if (this.url == 'http://localhost:4200/user/listFriend/' + this.idUserLogIn) {
+      count = count + 1;
+    }
+    if (this.urlBlackList == 'http://localhost:4200/user/blackList') {
+      count = count + 1;
+    }
+    console.log("count" + count)
+    if (count == 1) {
+      this.heightLine = "height: 65px"
+    }
+    if (count == 2) {
+      this.heightLine = "height: 90px"
+    }
+    if (count == 3) {
+      this.heightLine = "height: 120px"
+    }
+    if (count == 4) {
+      this.heightLine = "height: 150px"
+    }
   }
 }

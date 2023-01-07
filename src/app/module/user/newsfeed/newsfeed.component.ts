@@ -275,7 +275,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   }
 
   allCommentUpdated() {
-    console.log("vào hàm allComment")
+    console.log("vào hàm allCommentUpdated")
     this.commentService.allCommentUpdated().subscribe(result => {
       // @ts-ignore
       this.comment = result

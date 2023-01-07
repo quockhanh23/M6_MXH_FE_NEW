@@ -94,14 +94,14 @@ export class FriendRequestComponent implements OnInit {
   }
 
   acceptFriend(idFriend: any) {
-    this.friendRelationService.acceptFriend(this.idUserLogIn, idFriend).subscribe(rs => {
+    this.friendRelationService.acceptFriend(this.idUserLogIn, idFriend).subscribe(() => {
       this.ngOnInit()
       this.searchAll()
     })
   }
 
   sendRequestFriend(idFriend: any) {
-    this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(rs => {
+    this.friendRelationService.sendRequestFriend(this.idUserLogIn, idFriend).subscribe(() => {
       this.ngOnInit()
       this.searchAll()
       this.toarts.openToartsSendRequestFriendSuccess()
@@ -109,7 +109,7 @@ export class FriendRequestComponent implements OnInit {
   }
 
   deleteRequest(idFriend: any) {
-    this.friendRelationService.unfriend(this.idUserLogIn, idFriend).subscribe(rs => {
+    this.friendRelationService.deleteFriendRelation(this.idUserLogIn, idFriend).subscribe(() => {
       this.ngOnInit()
       this.searchAll()
       this.toarts.openToartsCancelRequestFriend()
@@ -157,7 +157,6 @@ export class FriendRequestComponent implements OnInit {
     console.log(value)
     this.userService.searchAll(value, this.idUserLogIn).subscribe(rs => {
       console.log("vào đây")
-      console.log(JSON.stringify(rs))
       this.listPeople = rs
     }, error => {
       console.log(error)

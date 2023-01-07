@@ -150,7 +150,7 @@ export class FriendListComponent implements OnInit {
   }
 
   unfriend(idFriend: any) {
-    this.friendRelationService.unfriend(this.idUserLogIn, idFriend).subscribe(rs => {
+    this.friendRelationService.deleteFriendRelation(this.idUserLogIn, idFriend).subscribe(rs => {
       this.ngOnInit()
       this.toarts.openToartsUnFriend()
     })
@@ -163,7 +163,7 @@ export class FriendListComponent implements OnInit {
   }
 
   deleteRequest(idFriend: any) {
-    this.friendRelationService.unfriend(this.idUserLogIn, idFriend).subscribe(rs => {
+    this.friendRelationService.deleteFriendRelation(this.idUserLogIn, idFriend).subscribe(rs => {
       this.ngOnInit()
       this.toarts.openToartsCancelRequestFriend()
     })

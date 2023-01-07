@@ -9,6 +9,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {environment} from "../../../../environments/environment";
 import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-messenger-detail',
@@ -35,6 +36,7 @@ export class MessengerDetailComponent implements OnInit {
   checkButton = true
   fb: any;
   downloadURL!: Observable<string>;
+  checkConnectInput = false
 
   messengerForm: FormGroup = new FormGroup({
     content: new FormControl("",),
@@ -46,7 +48,8 @@ export class MessengerDetailComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private storage: AngularFireStorage,
-              private messengerService: MessengerService) {
+              private messengerService: MessengerService,
+              private commonService: CommonService,) {
   }
 
   ngOnInit(): void {
@@ -214,5 +217,15 @@ export class MessengerDetailComponent implements OnInit {
 
   changeBackgroundColor4() {
     this.background = 'background-color: #fcfcfc'
+  }
+
+  connectInput() {
+    this.checkConnectInput = this.commonService.connectInput(this.checkConnectInput)
+    console.log(this.checkConnectInput)
+  }
+
+  leaveInput() {
+    this.checkConnectInput = this.commonService.leaveInput(this.checkConnectInput)
+    console.log(this.checkConnectInput)
   }
 }

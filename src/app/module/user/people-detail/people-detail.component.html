@@ -6,72 +6,82 @@
       <div class="timeline-cover a1">
         <img class="a1 width-100-percent" style="height: 500px" src="{{userDetail?.cover}}">
         <!--Timeline Menu for Large Screens-->
-        <div class="timeline-nav-bar hidden-sm hidden-xs">
+        <div class="timeline-nav-bar hidden-sm hidden-xs" style="{{heightLine}}">
           <div class="row">
-            <div class="col-md-3">
+            <div style="float: left; width: 19%">
               <div class="profile-info">
                 <img src="{{userDetail?.avatar}}" alt="" class="img-responsive profile-photo"/>
                 <h1 style="margin-top: 10px">{{userDetail?.fullName}}</h1>
               </div>
             </div>
-            <div class="col-md-4">
-              <ul class="list-inline profile-menu">
-                <li>
-                  <sub><span class="material-icons">grade</span></sub>
-                  <a [routerLink]="['/user/newsfeed']">Trang chủ</a>
-                </li>
-                <li *ngIf="urlMessage == 'http://localhost:4200/user/messenger'">
-                  <sub><span class="material-icons">grade</span></sub>
-                  <a (click)="backToMessage()">Trang tin nhắn</a>
-                </li>
-                <li *ngIf="url == 'http://localhost:4200/user/requests'">
-                  <sub><span class="material-icons">grade</span></sub>
-                  <a (click)="backToRequest()">Trang tìm bạn</a>
-                </li>
-                <li *ngIf="urlBlackList == 'http://localhost:4200/user/blackList'">
-                  <sub><span class="material-icons">grade</span></sub>
-                  <a (click)="backToBlackList()">Dánh sách chặn</a>
-                </li>
-                <li *ngIf="checkUrl()">
-                  <sub><span class="material-icons">grade</span></sub>
-                  <a (click)="backToUserDetail()">Danh sách bạn bè</a>
-                </li>
-              </ul>
+            <div style="float: left; width: 20%; margin-top: 5px">
+              <div class="col color-whitesmoke a5">
+                <sub><span class="material-icons">grade</span></sub>
+                <span [routerLink]="['/user/newsfeed']">&ensp;Trang chủ</span>
+              </div>
+              <div class="col color-whitesmoke a5" *ngIf="urlMessage == 'http://localhost:4200/user/messenger'">
+                <sub><span class="material-icons">grade</span></sub>
+                <span (click)="backToMessage()">&ensp;Trang tin nhắn</span>
+              </div>
+              <div class="col color-whitesmoke a5" *ngIf="url == 'http://localhost:4200/user/requests'">
+                <sub><span class="material-icons">grade</span></sub>
+                <span (click)="backToRequest()">&ensp;Trang tìm bạn</span>
+              </div>
+              <div class="col color-whitesmoke a5" *ngIf="urlBlackList == 'http://localhost:4200/user/blackList'">
+                <sub><span class="material-icons">grade</span></sub>
+                <span (click)="backToBlackList()">&ensp;Dánh sách chặn</span>
+              </div>
+              <div class="col color-whitesmoke a5" *ngIf="checkUrl()">
+                <sub><span class="material-icons">grade</span></sub>
+                <span (click)="backToUserDetail()">&ensp;Danh sách bạn bè</span>
+              </div>
             </div>
-            <div class="col-md">
-              <ul class="list-inline profile-menu">
-                <li *ngIf="userFollow?.id != userDetail?.id && !checkAcceptFriend"
-                    (click)="createFollow(userDetail?.id)">
-                  <sub><span class="material-icons">transcribe</span></sub><a>Theo dõi</a>
-                </li>
-                <li *ngIf="userFollow?.id == userDetail?.id && idUserLogIn != userDetail?.id"
-                    (click)="unFollow(userDetail?.id)">
-                  <sub><span class="material-icons">transcribe</span></sub><a>Bỏ theo dõi</a>
-                </li>
-                <li *ngIf="checkAcceptFriend && checkRemoveFriend && idUserLogIn != userDetail?.id"
-                    (click)="removeFriend()">
-                  <sub><span class="material-icons">person_remove</span></sub><a>Hủy kết bạn</a>
-                </li>
-                <li *ngIf="!checkAlreadyFriend && !checkAcceptFriend && idUserLogIn != userDetail?.id"
-                    (click)="sendRequestFriend(userDetail?.id)">
-                  <sub><span class="material-icons">person_add_alt_1</span></sub><a>Kết bạn</a>
-                </li>
-                <li *ngIf="checkAlreadyFriend && !checkUser2 && idUserLogIn != userDetail?.id">
-                  <sub><span class="material-icons">add_reaction</span></sub><a>Đã gửi kết bạn</a>
-                </li>
-                <li *ngIf="checkAlreadyFriend && checkUser2 && idUserLogIn != userDetail?.id"
-                    (click)="acceptFriend()">
-                  <sub><span class="material-icons">group_add</span></sub><a>Đồng ý kết bạn</a>
-                </li>
-                <li *ngIf="checkAcceptFriend && idUserLogIn != userDetail?.id">
-                  <sub><span class="material-icons">people_alt</span></sub><a>Bạn bè</a>
-                </li>
-                <li [routerLink]="['/user/messengerDetail', userDetail?.id]" *ngIf="idUserLogIn != userDetail?.id">
-                  <sub><span class="noti material-icons a1">offline_bolt</span></sub><a>Nhắn tin</a>
-                </li>
-              </ul>
-              <ul class="follow-me list-inline">
-              </ul>
+            <div style="float: left; width: 48%; margin-top: 5px">
+              <div class="row">
+                <div class="col color-whitesmoke a4" *ngIf="userFollow?.id != userDetail?.id && !checkAcceptFriend"
+                     (click)="createFollow(userDetail?.id)">
+                  <sub><span class="material-icons">transcribe</span></sub><a>&ensp;Theo dõi</a>
+                </div>
+                <div class="col color-whitesmoke a6"
+                     *ngIf="userFollow?.id == userDetail?.id && idUserLogIn != userDetail?.id"
+                     (click)="unFollow(userDetail?.id)">
+                  <sub><span class="material-icons">transcribe</span></sub><a>&ensp;Bỏ theo dõi</a>
+                </div>
+                <div class="col color-whitesmoke a6"
+                     *ngIf="checkAcceptFriend && checkRemoveFriend && idUserLogIn != userDetail?.id"
+                     (click)="removeFriend()">
+                  <sub><span class="material-icons">person_remove</span></sub><a>&ensp;Hủy kết bạn</a>
+                </div>
+                <div class="col color-whitesmoke a5"
+                     *ngIf="!checkAlreadyFriend && !checkAcceptFriend && idUserLogIn != userDetail?.id"
+                     (click)="sendRequestFriend(userDetail?.id)">
+                  <sub><span class="material-icons">person_add_alt_1</span></sub><a>&ensp;Kết bạn</a>
+                </div>
+                <div class="col color-whitesmoke a6"
+                     *ngIf="checkAlreadyFriend && !checkUser2 && idUserLogIn != userDetail?.id"
+                     (click)="deleteRequest(userDetail?.id)">
+                  <sub><span class="material-icons">cancel</span></sub>
+                  <a>&ensp;Hủy yêu cầu</a>
+                </div>
+                <div class="col color-whitesmoke a5"
+                     *ngIf="checkAlreadyFriend && !checkUser2 && idUserLogIn != userDetail?.id">
+                  <sub><span class="material-icons">add_reaction</span></sub><a>&ensp;Đã gửi kết bạn</a>
+                </div>
+                <div class="col color-whitesmoke a5"
+                     *ngIf="checkAlreadyFriend && checkUser2 && idUserLogIn != userDetail?.id"
+                     (click)="acceptFriend()">
+                  <sub><span class="material-icons">group_add</span></sub><a>&ensp;Đồng ý kết bạn</a>
+                </div>
+                <div class="col color-whitesmoke a5" *ngIf="checkAcceptFriend && idUserLogIn != userDetail?.id">
+                  <sub><span class="material-icons">people_alt</span></sub><a>&ensp;Bạn bè</a>
+                </div>
+              </div>
+            </div>
+            <div style="float: left; width: 12%; margin-top: 5px;" align="right">
+              <div class="col color-whitesmoke a5" [routerLink]="['/user/messengerDetail', userDetail?.id]"
+                   *ngIf="idUserLogIn != userDetail?.id">
+                <sub><span class="material-icons">offline_bolt</span></sub><a>&ensp;Nhắn tin</a>
+              </div>
             </div>
           </div>
         </div>
@@ -315,10 +325,10 @@
                                    (mouseover)="connectInput()" (mouseleave)="leaveInput()"
                                    class="form-control c1 i1 font-size-18" formControlName="content"
                                    placeholder="Bình luận..." #text>
-                            <span *ngIf="checkConnectInput || text.value.length > 0" class="font-size-15"
-                                  style="">{{text.value.length}}/ 200.</span>
-                            <span *ngIf="!checkConnectInput && text.value.length == 0" class="font-size-15"
-                                  style="">Tối đa 200 kí tự.</span>
+                            <span *ngIf="checkConnectInput || text.value.length > 0"
+                                  class="font-size-15">{{text.value.length}}/ 200.</span>
+                            <span *ngIf="!checkConnectInput && text.value.length == 0"
+                                  class="font-size-15">Tối đa 200 kí tự.</span>
                           </div>
                         </div>
                         <div class="col-2">

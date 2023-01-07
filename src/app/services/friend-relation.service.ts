@@ -50,7 +50,7 @@ export class FriendRelationService {
     return this.httpClient.delete<FriendRelation>(API_URL + `/acceptRequestFriend?idUser=${idUser}&idFriend=${idFriend}`);
   }
 
-  unfriend(idUser: any, idFriend: any): Observable<FriendRelation> {
+  deleteFriendRelation(idUser: any, idFriend: any): Observable<FriendRelation> {
     return this.httpClient.delete<FriendRelation>(API_URL + `/deleteFriendRelation?idUser=${idUser}&idFriend=${idFriend}`);
   }
 

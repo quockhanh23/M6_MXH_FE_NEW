@@ -17,4 +17,14 @@ export class CommonService {
     // @ts-ignore
     document.getElementById('search').style.background = 'white';
   }
+
+  connectInput(checkConnectInput: boolean) {
+    return checkConnectInput = true
+  }
+
+  leaveInput(checkConnectInput: boolean) {
+    // @ts-ignore
+    let value = document.getElementById('value').value
+    return checkConnectInput = value.length > 0;
+  }
 }

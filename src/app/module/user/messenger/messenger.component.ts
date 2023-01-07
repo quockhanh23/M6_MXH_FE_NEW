@@ -8,6 +8,7 @@ import {Messenger} from "../../../models/messenger";
 import {FormControl, FormGroup} from "@angular/forms";
 import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-messenger',
@@ -62,6 +63,7 @@ export class MessengerComponent implements OnInit {
   previousBackground?: string
   checkSearch = false
   checkSearchLength = false
+  checkConnectInput = false
 
   messengerForm: FormGroup = new FormGroup({
     content: new FormControl("",),
@@ -72,6 +74,7 @@ export class MessengerComponent implements OnInit {
               private friendRelationService: FriendRelationService,
               private messengerService: MessengerService,
               private storage: AngularFireStorage,
+              private commonService: CommonService,
   ) {
     localStorage.setItem('UrlMessage', window.location.href);
   }
@@ -343,5 +346,15 @@ export class MessengerComponent implements OnInit {
   closeSearch(idConversation: any) {
     this.checkSearch = false
     this.searchAll(idConversation)
+  }
+
+  connectInput() {
+    this.checkConnectInput = this.commonService.connectInput(this.checkConnectInput)
+    console.log(this.checkConnectInput)
+  }
+
+  leaveInput() {
+    this.checkConnectInput = this.commonService.leaveInput(this.checkConnectInput)
+    console.log(this.checkConnectInput)
   }
 }

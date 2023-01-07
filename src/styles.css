@@ -71,6 +71,18 @@ body {
   color: #27aae1;
 }
 
+.a4:hover {
+  color: #39c919;
+}
+
+.a5:hover {
+  color: #27aae1;
+}
+
+.a6:hover {
+  color: #cb1e1e;
+}
+
 .a3:hover {
   border: #ffc107 1px solid;
 }

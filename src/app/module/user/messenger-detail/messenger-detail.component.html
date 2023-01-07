@@ -82,10 +82,11 @@
                 (ngSubmit)="createMessenger(conversation?.id)">
             <div class="row" style="margin-top: 20px">
               <div class="col-8">
-                <input #text maxlength="120" placeholder="Aa"
+                <input #text maxlength="200" placeholder="Aa"
                        style="width: 100% !important; height: 60px;
                        font-size: 18px; margin-left: 5px; border: #c0a16b 1px solid"
-                       onfocus="this.value=''" type="text"
+                       onfocus="this.value=''" type="text" id="value"
+                       (mouseover)="connectInput()" (mouseleave)="leaveInput()"
                        class="form-control c1 i1" formControlName="content">
               </div>
               <div class="col-1">
@@ -118,7 +119,10 @@
             </div>
             <div class="row">
               <div class="col-8">
-                <mat-hint style="margin-left: 10px" align="end">{{text.value.length}} / 120</mat-hint>
+                <span *ngIf="checkConnectInput || text.value.length > 0" class="font-size-15"
+                      style="margin-left: 10px">{{text.value.length}}/ 200.</span>
+                <span *ngIf="!checkConnectInput && text.value.length == 0" class="font-size-15"
+                      style="margin-left: 10px">Tối đa 200 kí tự.</span>
               </div>
               <div class="col-3">
                 <div *ngIf="fb != null">
