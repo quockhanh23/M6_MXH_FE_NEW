@@ -42,6 +42,7 @@ export class FriendListComponent implements OnInit {
   colorCheckFriend = 'color: #27aae1'
   colorCheckFollow = 'color: #27aae1'
   colorCheckWatching = 'color: #27aae1'
+  checkEmptySearch = false
 
   constructor(private router: Router,
               private toarts: ToartsService,
@@ -122,12 +123,19 @@ export class FriendListComponent implements OnInit {
     this.colorCheckFriend = 'color: #ffc107'
     this.colorCheckFollow = 'color: #27aae1'
     this.colorCheckWatching = 'color: #27aae1'
+    // @ts-ignore
+    document.getElementById('search').value = ''
+    this.userService.searchFriend("", this.idUserLogIn).subscribe(rs => {
+      this.listFriend = rs
+      this.checkEmptySearch = rs.length == 0;
+    })
   }
 
   changeListFollow() {
     this.checkFriendList = false
     this.checkFollowList = true
     this.checkWatchingList = false
+    this.checkEmptySearch = false
     this.colorCheckFriend = 'color: #27aae1'
     this.colorCheckFollow = 'color: #ffc107'
     this.colorCheckWatching = 'color: #27aae1'
@@ -137,6 +145,7 @@ export class FriendListComponent implements OnInit {
     this.checkFriendList = false
     this.checkFollowList = false
     this.checkWatchingList = true
+    this.checkEmptySearch = false
     this.colorCheckFriend = 'color: #27aae1'
     this.colorCheckFollow = 'color: #27aae1'
     this.colorCheckWatching = 'color: #ffc107'
@@ -176,7 +185,7 @@ export class FriendListComponent implements OnInit {
     this.userService.searchFriend(value, this.idUserLogIn).subscribe(rs => {
       console.log("vào đây")
       this.listFriend = rs
-      console.log(JSON.stringify(rs))
+      this.checkEmptySearch = rs.length == 0;
     })
   }
 

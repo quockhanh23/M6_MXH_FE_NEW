@@ -52,7 +52,11 @@
           </mat-form-field>
         </div>
       </div>
-      <div style="height: 500px">
+      <div *ngIf="checkEmptySearch">
+        <h2 style="margin-right: 35px" align="center">Không tìm thấy !!</h2>
+        <img style="width: 100%;" align="center" src="assets/images/565665.png">
+      </div>
+      <div style="height: 500px" *ngIf="!checkEmptySearch">
         <div class="row hc shadow-box" *ngFor="let user of listUser"
              style="border: #ead6e7 1px solid; border-radius: 5px; margin-bottom: 5px">
           <div class="col">

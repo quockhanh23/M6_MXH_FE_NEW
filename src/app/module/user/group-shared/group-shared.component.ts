@@ -14,6 +14,7 @@ export class GroupSharedComponent implements OnInit, OnDestroy {
   myGroup?: TheGroup[]
   allGroup?: TheGroup[]
   groupJoin?: TheGroup[]
+  checkEmptySearch = false
 
   constructor(private groupService: GroupService,
               private commonService: CommonService
@@ -54,6 +55,7 @@ export class GroupSharedComponent implements OnInit, OnDestroy {
     this.groupService.searchAllByGroupNameAndType(value, this.idUserLogIn).subscribe(rs => {
       console.log("vào đây")
       this.allGroup = rs
+      this.checkEmptySearch = rs.length == 0;
       console.log(JSON.stringify(rs))
     })
   }

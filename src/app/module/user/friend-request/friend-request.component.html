@@ -107,6 +107,10 @@
     </form>
   </div>
   <div class="aloPica4" style="{{heightListPeople}}">
+    <div *ngIf="checkEmptySearch">
+      <h2 style="margin-right: 35px" align="center">Không tìm thấy !!</h2>
+      <img style="width: 100%;" align="center" src="assets/images/565665.png">
+    </div>
     <div *ngFor="let people of listPeople"
          class="divRequestFriend">
       <div>

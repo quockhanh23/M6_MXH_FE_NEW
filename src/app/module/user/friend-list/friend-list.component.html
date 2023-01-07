@@ -64,7 +64,15 @@
   </div>
 </div>
 <div style="margin-left: 50px"></div>
-<div class="divFix" style="border-radius: 5px;{{height}}" *ngIf="checkFriendList && count > 0">
+<div class="divFix row" *ngIf="checkEmptySearch">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h2 style="margin-right: 35px" align="center">Không tìm thấy !!</h2>
+    <img style="width: 100%;" align="center" src="assets/images/565665.png">
+  </div>
+
+</div>
+<div class="divFix" style="border-radius: 5px;{{height}}" *ngIf="checkFriendList && count > 0 && !checkEmptySearch">
   <div style="margin-left: 200px">
     <div class="row" style="height: 86px">
       <div

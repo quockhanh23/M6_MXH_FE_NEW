@@ -65,27 +65,33 @@
             </form>
           </div>
         </div>
-        <div class="row" style="margin-bottom: 30px;" *ngFor="let g of allGroup">
-          <div style=" background-color: #e5e5e5" class="border-radius-5 col-11">
-            <div class="row">
-              <div class="col">
-                <img src="{{g.coverGroup}}"
-                     style="width: 350px; height: 200px; margin-left: 5px;
+        <div *ngIf="checkEmptySearch">
+          <h2 style="margin-right: 35px" align="center">Không tìm thấy !!</h2>
+          <img style="width: 100%;" align="center" src="assets/images/565665.png">
+        </div>
+        <div *ngIf="!checkEmptySearch">
+          <div class="row" style="margin-bottom: 30px;" *ngFor="let g of allGroup">
+            <div style="background-color: #e5e5e5" class="border-radius-5 col-11">
+              <div class="row">
+                <div class="col">
+                  <img src="{{g.coverGroup}}"
+                       style="width: 350px; height: 200px; margin-left: 5px;
                      margin-top: 10px; margin-bottom: 10px"
-                     class="border-radius-5"
-                     alt="">
-              </div>
-              <div class="col">
-                <h2 class="margin-bottom-0">{{g.groupName}}</h2>
-                <div class="row">
-                  <div class="col-6">
-                    <h3 class="margin-bottom-0">Thể loại: {{g.type}}</h3>
-                    <h3 class="margin-bottom-0">Thành viên: {{g.numberUser}}</h3>
-                  </div>
-                  <div class="col-6">
-                    <button style="margin-bottom: 10px" [routerLink]="['/user/groupDetail', g.id]" mat-raised-button
-                            color="primary">Tham gia nhóm
-                    </button>
+                       class="border-radius-5"
+                       alt="">
+                </div>
+                <div class="col">
+                  <h2 class="margin-bottom-0">{{g.groupName}}</h2>
+                  <div class="row">
+                    <div class="col-6">
+                      <h3 class="margin-bottom-0">Thể loại: {{g.type}}</h3>
+                      <h3 class="margin-bottom-0">Thành viên: {{g.numberUser}}</h3>
+                    </div>
+                    <div class="col-6">
+                      <button style="margin-bottom: 10px" [routerLink]="['/user/groupDetail', g.id]" mat-raised-button
+                              color="primary">Tham gia nhóm
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -32,6 +32,7 @@ export class FriendRequestComponent implements OnInit {
   heightFriendRequest: any
   heightFriendRequestSend: any
   heightListPeople: any
+  checkEmptySearch = false
 
   constructor(private friendRelationService: FriendRelationService,
               private router: Router,
@@ -158,6 +159,7 @@ export class FriendRequestComponent implements OnInit {
     this.userService.searchAll(value, this.idUserLogIn).subscribe(rs => {
       console.log("vào đây")
       this.listPeople = rs
+      this.checkEmptySearch = rs.length == 0;
     }, error => {
       console.log(error)
     })

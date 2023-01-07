@@ -15,6 +15,7 @@ export class BlackListComponent implements OnInit {
   listUser?: UserBlackListDTO[];
   count = 0
   check = false
+  checkEmptySearch = false
 
   constructor(private blackListService: BlackListService,
               private userService: UserService) {
@@ -32,6 +33,7 @@ export class BlackListComponent implements OnInit {
     this.userService.searchByFullNameOrEmail(value, this.idUserLogIn).subscribe(rs => {
       console.log("vào đây")
       this.listUser = rs
+      this.checkEmptySearch = rs.length == 0;
     })
   }
 
