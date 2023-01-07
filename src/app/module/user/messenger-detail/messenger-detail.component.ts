@@ -204,28 +204,28 @@ export class MessengerDetailComponent implements OnInit {
   }
 
   changeBackgroundColor1() {
-    this.background = 'background-color: pink'
+    this.background = this.commonService.changeBackgroundColor1()
   }
 
   changeBackgroundColor2() {
-    this.background = 'background-color: #afd9ee'
+    this.background = this.commonService.changeBackgroundColor2()
   }
 
   changeBackgroundColor3() {
-    this.background = 'background-color: #1deecf'
+    this.background = this.commonService.changeBackgroundColor3()
   }
 
   changeBackgroundColor4() {
-    this.background = 'background-color: #fcfcfc'
+    this.background = this.commonService.changeBackgroundColor4()
   }
 
   connectInput() {
-    this.checkConnectInput = this.commonService.connectInput(this.checkConnectInput)
+    this.checkConnectInput = this.commonService.connectInput()
     console.log(this.checkConnectInput)
   }
 
   leaveInput() {
-    this.checkConnectInput = this.commonService.leaveInput(this.checkConnectInput)
+    this.checkConnectInput = this.commonService.leaveInput()
     console.log(this.checkConnectInput)
   }
 }

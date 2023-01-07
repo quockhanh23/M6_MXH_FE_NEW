@@ -265,22 +265,22 @@ export class MessengerComponent implements OnInit {
   }
 
   changeBackgroundColor1() {
-    this.background = 'background-color: pink'
+    this.background = this.commonService.changeBackgroundColor1()
     this.previousBackground = this.background
   }
 
   changeBackgroundColor2() {
-    this.background = 'background-color: #afd9ee'
+    this.background = this.commonService.changeBackgroundColor2()
     this.previousBackground = this.background
   }
 
   changeBackgroundColor3() {
-    this.background = 'background-color: #1deecf'
+    this.background = this.commonService.changeBackgroundColor3()
     this.previousBackground = this.background
   }
 
   changeBackgroundColor4() {
-    this.background = 'background-color: #fcfcfc'
+    this.background = this.commonService.changeBackgroundColor4()
     this.previousBackground = this.background
   }
 
@@ -349,12 +349,12 @@ export class MessengerComponent implements OnInit {
   }
 
   connectInput() {
-    this.checkConnectInput = this.commonService.connectInput(this.checkConnectInput)
+    this.checkConnectInput = this.commonService.connectInput()
     console.log(this.checkConnectInput)
   }
 
   leaveInput() {
-    this.checkConnectInput = this.commonService.leaveInput(this.checkConnectInput)
+    this.checkConnectInput = this.commonService.leaveInput()
     console.log(this.checkConnectInput)
   }
 }

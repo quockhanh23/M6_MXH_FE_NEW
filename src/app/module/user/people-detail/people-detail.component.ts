@@ -535,11 +535,11 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   connectInput() {
-    this.commonService.connectInput(this.checkConnectInput)
+    this.checkConnectInput = this.commonService.connectInput()
   }
 
   leaveInput() {
-    this.commonService.leaveInput(this.checkConnectInput)
+    this.checkConnectInput = this.commonService.leaveInput()
   }
 
   checkLine() {
