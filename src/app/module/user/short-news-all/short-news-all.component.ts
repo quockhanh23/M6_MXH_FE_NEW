@@ -47,7 +47,6 @@ export class ShortNewsAllComponent implements OnInit {
 
   allShortNews() {
     this.shortNewService.allShortNews().subscribe(() => {
-      // console.log("Kiểu dữ liệu: " + JSON.stringify(rs))
     })
   }
 
@@ -82,7 +81,7 @@ export class ShortNewsAllComponent implements OnInit {
     }
     console.log(newShort)
     // @ts-ignore
-    this.shortNewService.createShortNew(newShort, this.idUserLogIn).subscribe(rs => {
+    this.shortNewService.createShortNew(newShort, this.idUserLogIn).subscribe(() => {
       this.toarts.openToartsShortNewCreateSuccess()
       this.allShortNewPublic()
     }, error => {

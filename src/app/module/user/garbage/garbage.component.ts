@@ -29,7 +29,7 @@ export class GarbageComponent implements OnInit {
 
   testRouter() {
     console.log(localStorage.key(2));
-    var pathString = location.pathname
+    let pathString = location.pathname
     console.log('appComponent: pathString...');
     console.log(pathString);
   }

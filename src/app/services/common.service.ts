@@ -43,4 +43,8 @@ export class CommonService {
     let value = document.getElementById('value').value
     return value.length > 0;
   }
+
+  consoleStringify(result: any) {
+    console.log("data: " + JSON.stringify(result))
+  }
 }

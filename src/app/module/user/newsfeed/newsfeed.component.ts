@@ -495,7 +495,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('ChildComponent:OnDestroy');
     localStorage.removeItem('Url')
     localStorage.removeItem('UrlMessage')
     localStorage.removeItem('UrlUserDetail')
