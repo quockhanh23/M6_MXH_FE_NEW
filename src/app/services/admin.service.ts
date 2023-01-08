@@ -21,4 +21,8 @@ export class AdminService {
       }
     });
   }
+
+  findById(idUser: any): Observable<User> {
+    return this.httpClient.get<User>(API_URL + `/findById?idUser=${idUser}`)
+  }
 }

@@ -19,10 +19,10 @@
       <th>&nbsp;Giới tính&nbsp;</th>
       <th>&nbsp;Trạng thái&nbsp;</th>
     </tr>
-    <tr *ngFor="let pe of user index as i">
+    <tr *ngFor="let pe of userDTOList index as i">
       <td>&nbsp;{{i + 1}}</td>
-      <td class="a1 a2" [routerLink]="['/admin/action', pe.id]" matTooltip="Tác vụ chi tiết">&nbsp;{{pe?.username}}</td>
-      <td>&nbsp;{{pe.fullName}}</td>
+      <td class="a1 a2" [routerLink]="['/admin/action', pe?.id]" matTooltip="Tác vụ chi tiết">&nbsp;{{pe?.username}}</td>
+      <td>&nbsp;{{pe?.fullName}}</td>
       <td>&nbsp;{{pe?.email}}</td>
       <td>&nbsp;{{pe?.dateOfBirth |date:"dd-MM-yyyy"}}</td>
       <td>&nbsp;{{pe?.phone}}</td>
@@ -34,5 +34,4 @@
   </table>
 </div>
 <h2 style="color: purple" id="alo"></h2>
-
 

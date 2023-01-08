@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminService} from "../../../services/admin.service";
-import {User} from "../../../models/user";
+import {UserDTO} from "../../../models/user-dto";
 
 @Component({
   selector: 'app-manager-users',
@@ -9,7 +9,7 @@ import {User} from "../../../models/user";
 })
 export class ManagerUsersComponent implements OnInit {
 
-  user?: User[]
+  userDTOList?: UserDTO[]
   count?: any
 
   constructor(private adminService: AdminService) {
@@ -20,8 +20,9 @@ export class ManagerUsersComponent implements OnInit {
   }
 
   getAllUser() {
+    console.log("vào hàm getAllUser")
     this.adminService.getAllUser().subscribe(rs => {
-      this.user = rs
+      this.userDTOList = rs
       this.count = rs.length
     })
   }

@@ -81,6 +81,10 @@ export class RegisterLoginComponent implements OnInit {
       localStorage.setItem('USERID', data.id + "");
       if (data.roles[0].authority == "ROLE_ADMIN") {
         this.router.navigate([this.adminUrl]).then()
+        this.dialog.closeAll()
+        setTimeout(() => {
+          this.dialog.open(DialogLoginSuccessComponent)
+        }, 200)
       } else {
         this.userService.getUserProfile(data.id + "").subscribe(result => {
           this.currentUser = result;
