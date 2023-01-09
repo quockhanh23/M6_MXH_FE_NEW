@@ -34,7 +34,7 @@
         <!-- Register/Login Tabs-->
         <div class="reg-options">
           <ul class="nav nav-tabs">
-            <li class="active"><a style="font-size: 20px; color: #1c75bc" href="#register" data-toggle="tab">Đăng ký</a>
+            <li class="active a1"><a style="font-size: 20px; color: #1c75bc" href="#register" data-toggle="tab">Đăng ký</a>
             </li>
             <li><a style="font-size: 20px; color: #1c75bc" id="showLogin" href="#login" data-toggle="tab">Đăng nhập</a>
             </li>
@@ -51,9 +51,9 @@
                 <div class="form-group col-xs-12">
                   <label for="username" class="sr-only">Tên đăng nhập</label>
                   <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
-                         formControlName="newUserName"
+                         formControlName="newUserName" matTooltip="Tên đăng nhập không chứa các kí tự đặc biệt"
                          id="username" class="form-control input-group-lg" type="text"
-                         name="username" title="Enter Username" placeholder="Tên đăng nhập"/>
+                         name="username" title="Enter Username" placeholder="Tên đăng nhập *"/>
                   <div style="color: red;padding-left: 20px; margin-top: 5px" role="alert"
                        *ngIf="registerForm.controls['newUserName'].errors?.['required']
                          && registerForm.controls['newUserName'].touched">{{messageNotBlank}}
@@ -63,11 +63,11 @@
               <div class="row">
                 <div class="form-group col-xs-12">
                   <label for="password" class="sr-only">Mật khẩu</label>
-                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;" matTooltip="Mật khẩu từ 6-32 kí tự"
                          formControlName="newPassWord" id="password"
                          class="form-control input-group-lg"
                          type="password" name="password" title="Enter password"
-                         placeholder="Mật khẩu từ 6-32 kí tự"/>
+                         placeholder="Mật khẩu từ 6-32 kí tự *"/>
                 </div>
                 <div style="color: red;padding-left: 30px" role="alert"
                      *ngIf="registerForm.controls['newPassWord'].errors?.['required']
@@ -89,7 +89,7 @@
                          formControlName="newConfirmPassWord"
                          id="rePassword" class="form-control input-group-lg"
                          type="password" name="rePassword" title="Enter password again"
-                         placeholder="Xác nhận lại mật khẩu"/>
+                         placeholder="Xác nhận lại mật khẩu *"/>
                 </div>
                 <div style="color: red;padding-left: 30px" role="alert"
                      *ngIf="registerForm.controls['newConfirmPassWord'].errors?.['required']
@@ -110,7 +110,7 @@
                   <input style="border-radius: 5px;font-size: 20px; width: 380px !important;" formControlName="newEmail"
                          id="email"
                          class="form-control input-group-lg" type="text"
-                         name="Email" title="Enter Email" placeholder="Email của bạn : abc@gmail.com"/>
+                         name="Email" title="Enter Email" placeholder="Email của bạn : abc@gmail.com *"/>
                 </div>
                 <div style="color: red;padding-left: 30px" role="alert"
                      *ngIf="registerForm.controls['newEmail'].errors?.['required'] && registerForm.controls['newEmail'].touched">
@@ -127,7 +127,7 @@
                            formControlName="fullName"
                            id="fullName"
                            class="form-control input-group-lg" type="text"
-                           name="fullName" title="Enter Email" placeholder="Tên đầy đủ"/>
+                           name="fullName" title="Enter Email" placeholder="Tên đầy đủ *"/>
                   </div>
                 </div>
                 <div style="color: red;padding-left: 30px" role="alert"
@@ -143,7 +143,7 @@
                   <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
                          formControlName="newPhoneNumber" id="phone"
                          class="form-control input-group-lg" type="text"
-                         name="phone" title="Enter Phone number" placeholder="Số điện thoại"/>
+                         name="phone" title="Enter Phone number" placeholder="Số điện thoại *"/>
                 </div>
                 <div style="color: red;padding-left: 30px" role="alert"
                      *ngIf="registerForm.controls['newPhoneNumber'].errors?.['required'] && registerForm.controls['newPhoneNumber'].touched">
