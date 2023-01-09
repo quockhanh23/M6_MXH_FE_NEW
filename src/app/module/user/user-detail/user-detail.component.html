@@ -252,3 +252,37 @@
     </div>
   </div>
 </div>
+
+<form [formGroup]="descriptionCreateForm" (ngSubmit)="createDescription()">
+  <input formControlName="description"
+         class="form-control" type="text"
+         name="work" placeholder="giới thiệu" style="width: 86% !important; height: 60px"/>
+  <br>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-primary">Lưu giới thiệu</button>
+    </div>
+    <div class="col">
+      <button style="margin-left: 10px" type="button"
+              class="btn btn-primary">Đóng
+      </button>
+    </div>
+  </div>
+</form>
+
+<form [formGroup]="descriptionUpdateForm" (ngSubmit)="updateDescription()">
+  <input formControlName="description"
+         class="form-control" type="text"
+         name="work" placeholder="chỉnh sửa giới thiệu" style="width: 86% !important; height: 60px"/>
+  <br>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-primary">Lưu giới thiệu</button>
+    </div>
+    <div class="col">
+      <button style="margin-left: 10px" type="button"
+              class="btn btn-primary">Đóng
+      </button>
+    </div>
+  </div>
+</form>

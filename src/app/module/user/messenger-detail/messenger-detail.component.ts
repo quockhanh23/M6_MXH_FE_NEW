@@ -17,6 +17,7 @@ import {CommonService} from "../../../services/common.service";
   styleUrls: ['./messenger-detail.component.css']
 })
 export class MessengerDetailComponent implements OnInit {
+
   idConversation?: any
   idUserLogIn = localStorage.getItem("USERID")
   url = localStorage.getItem("Url")

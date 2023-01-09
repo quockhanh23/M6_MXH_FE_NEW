@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SaveService} from "../../../services/save.service";
 import {Saved} from "../../../models/saved";
 import {ToartsService} from "../../../services/toarts.service";
-import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 import {MatDialog} from "@angular/material/dialog";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-saved-list',
@@ -19,6 +19,7 @@ export class SavedListComponent implements OnInit {
   constructor(private saveService: SaveService,
               private toartsService: ToartsService,
               public dialog: MatDialog,
+              private commonService: CommonService
   ) {
   }
 
@@ -40,9 +41,7 @@ export class SavedListComponent implements OnInit {
       this.toartsService.openToartsSavePost('remove')
       this.listSavedPost()
     }, error => {
-      this.dialog.open(DialogCommonComponent, {
-        data: {dialogTitle: error.error.message, dialogText: error.error.description}
-      })
+      this.commonService.dialogCommon(error)
     })
   }
 }

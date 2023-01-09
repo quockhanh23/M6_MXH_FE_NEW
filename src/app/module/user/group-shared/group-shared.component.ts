@@ -56,7 +56,6 @@ export class GroupSharedComponent implements OnInit, OnDestroy {
       console.log("vào đây")
       this.allGroup = rs
       this.checkEmptySearch = rs.length == 0;
-      console.log(JSON.stringify(rs))
     })
   }
 

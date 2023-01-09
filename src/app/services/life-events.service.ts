@@ -19,7 +19,7 @@ export class LifeEventsService {
   }
 
   editLifeEvents(idUser: any, idEvent: any, lifeEvents: LifeEvents): Observable<LifeEvents> {
-    return this.httpClient.put<LifeEvents>(API_URL + '/update' + `/?idUser=${idUser}&idEvent=${idEvent}`, lifeEvents);
+    return this.httpClient.put<LifeEvents>(API_URL + `/update/?idUser=${idUser}&idEvent=${idEvent}`, lifeEvents);
   }
 
   findListByIdUser(idUser: string): Observable<LifeEvents[]> {

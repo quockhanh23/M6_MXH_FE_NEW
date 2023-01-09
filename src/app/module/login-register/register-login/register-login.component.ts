@@ -11,8 +11,8 @@ import {
   DialogRegisterSuccessComponent
 } from "../../notifications/dialog-register-success/dialog-register-success.component";
 import {NotificationService} from "../../../services/notification.service";
-import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 import {DialogCheckLoginComponent} from "../../notifications/dialog-check-login/dialog-check-login.component";
+import {CommonService} from "../../../services/common.service";
 
 declare var $: any;
 
@@ -55,6 +55,7 @@ export class RegisterLoginComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               public dialog: MatDialog,
+              private commonService: CommonService,
               private authenticationService: AuthenticationService,
               private notificationService: NotificationService,
               private userService: UserService,
@@ -106,9 +107,7 @@ export class RegisterLoginComponent implements OnInit {
     }, error => {
       this.dialog.closeAll()
       setTimeout(() => {
-        this.dialog.open(DialogCommonComponent, {
-          data: {dialogTitle: error.error.message, dialogText: error.error.description}
-        })
+        this.commonService.dialogCommon(error)
       }, 100)
     })
   }
@@ -141,9 +140,7 @@ export class RegisterLoginComponent implements OnInit {
         });
         this.registerForm.reset()
       }, error => {
-        this.dialog.open(DialogCommonComponent, {
-          data: {dialogTitle: error.error.message, dialogText: error.error.description}
-        })
+        this.commonService.dialogCommon(error)
       }
     )
   }

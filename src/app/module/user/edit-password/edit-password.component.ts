@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogSuccessComponent} from "../../notifications/dialog-success/dialog-success.component";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-edit-password',
@@ -26,6 +26,7 @@ export class EditPasswordComponent implements OnInit {
   constructor(private router: Router,
               private userService: UserService,
               public dialog: MatDialog,
+              private commonService: CommonService,
   ) {
     if (localStorage.getItem('currentUser') == null) {
       this.router.navigate(['']).then()
@@ -41,12 +42,10 @@ export class EditPasswordComponent implements OnInit {
       passwordNew: this.updateForm.value.passwordNew,
       confirmPasswordNew: this.updateForm.value.confirmPasswordNew,
     }
-    this.userService.matchPassword(change, this.idUserLogIn).subscribe(rs => {
+    this.userService.matchPassword(change, this.idUserLogIn).subscribe(() => {
       this.dialog.open(DialogSuccessComponent)
     }, error => {
-      this.dialog.open(DialogCommonComponent, {
-        data: {dialogTitle: error.error.message, dialogText: error.error.description}
-      })
+      this.commonService.dialogCommon(error)
     })
   }
 }

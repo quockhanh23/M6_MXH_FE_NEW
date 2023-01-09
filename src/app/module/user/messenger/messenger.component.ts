@@ -166,7 +166,7 @@ export class MessengerComponent implements OnInit {
     }
     console.log(newMessenger)
     // @ts-ignore
-    this.messengerService.createMessenger(idConversation, this.idUserLogIn, newMessenger).subscribe(rs => {
+    this.messengerService.createMessenger(idConversation, this.idUserLogIn, newMessenger).subscribe(() => {
       console.log("vào đây")
       this.listMessage(idConversation)
       // @ts-ignore

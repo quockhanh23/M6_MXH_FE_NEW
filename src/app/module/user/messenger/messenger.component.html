@@ -102,7 +102,7 @@
             <img *ngIf="idUserLogIn == conversation?.idReceiver?.id && conversation != null"
                  class="imgFix imc" style="margin-left: 10px"
                  src="{{conversation?.idSender?.avatar}}">
-            <sub><span *ngIf="count > 0" matTooltip="Đến lượt bạn"
+            <sub><span *ngIf="lastIdSend != idUserLogIn && count > 0" matTooltip="Đến lượt bạn"
                        style="color: red;" class="material-icons">announcement</span></sub>
             <sub><span *ngIf="conversation != null && !checkSearch" (click)="openSearch()"
                        style="margin-left: 10px; font-size: 25px"

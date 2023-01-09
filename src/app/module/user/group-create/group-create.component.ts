@@ -4,9 +4,9 @@ import {GroupService} from "../../../services/group.service";
 import {finalize, Observable} from "rxjs";
 import {TheGroup} from "../../../models/the-group";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-group-create',
@@ -32,6 +32,7 @@ export class GroupCreateComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               public dialog: MatDialog,
+              private commonService: CommonService,
               private storage: AngularFireStorage,
               private router: Router,) {
   }
@@ -54,9 +55,7 @@ export class GroupCreateComponent implements OnInit {
     this.groupService.createGroup(newGroup, this.idUserLogIn).subscribe(result => {
       this.theGroup = result
     }, error => {
-      this.dialog.open(DialogCommonComponent, {
-        data: {dialogTitle: error.error.message, dialogText: error.error.description}
-      })
+      this.commonService.dialogCommon(error)
     })
   }
 

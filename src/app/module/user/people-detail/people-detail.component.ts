@@ -20,7 +20,6 @@ import {LikePostService} from "../../../services/like-post.service";
 import {ToartsService} from "../../../services/toarts.service";
 import {FollowWatchingService} from "../../../services/follow-watching.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogCommonComponent} from "../../notifications/dialog-common/dialog-common.component";
 import {CommonService} from "../../../services/common.service";
 
 @Component({
@@ -97,9 +96,7 @@ export class PeopleDetailComponent implements OnInit {
         this.userDetail = result
       }, error => {
         this.router.navigate(['user/newsfeed']).then()
-        this.dialog.open(DialogCommonComponent, {
-          data: {dialogTitle: error.error.message, dialogText: error.error.description}
-        })
+        this.commonService.dialogCommon(error)
       })
       this.userService.userDetail(this.idUserLogIn).subscribe(result => {
         this.avatarUserLogin = result.avatar

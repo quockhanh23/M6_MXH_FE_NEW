@@ -54,9 +54,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
   fb: any;
   downloadURL!: Observable<string>;
   detailUser = 'Xem trang cá nhân'
-  liked = ' đã thích'
-  disLiked = ' không thích'
-  hearted = ' đã thả tim'
+  liked = ' đã thích bài viết'
+  disLiked = ' không thích bài viết'
+  hearted = ' đã thả tim bài viết'
   checkLike = false
   checkHeart = false
   checkDisLike = false
@@ -157,6 +157,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.likePostService.createLike(likePost, idPost, this.idUser).subscribe(() => {
       this.updateLikePost(idPost)
     }, error => {
+      if (error.status == 200) {
+        this.updateLikePost(idPost)
+      }
       console.log("Lỗi: " + error)
     })
   }
@@ -177,6 +180,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.likePostService.createDisLike(disLikePost, idPost, this.idUser).subscribe(() => {
       this.updateDisLikePost(idPost)
     }, error => {
+      if (error.status == 200) {
+        this.updateDisLikePost(idPost)
+      }
       console.log("Lỗi: " + error)
     })
   }
@@ -197,6 +203,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.likePostService.createHeart(heart, idPost, this.idUser).subscribe(() => {
       this.updateHeartPost(idPost)
     }, error => {
+      if (error.status == 200) {
+        this.updateHeartPost(idPost)
+      }
       console.log("Lỗi: " + error)
     })
   }
@@ -326,6 +335,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.likeCommentService.createLikeComment(commentLike, idComment, this.idUser).subscribe(() => {
       this.allCommentUpdated()
     }, error => {
+      if (error.status == 200) {
+        this.allCommentUpdated()
+      }
       console.log("Lỗi: " + error)
     })
     this.allCommentUpdated()
@@ -346,6 +358,9 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     this.likeCommentService.createDisLikeComment(dislikeComment, idComment, this.idUser).subscribe(() => {
       this.allCommentUpdated()
     }, error => {
+      if (error.status == 200) {
+        this.allCommentUpdated()
+      }
       console.log("Lỗi: " + error)
     })
     this.allCommentUpdated()

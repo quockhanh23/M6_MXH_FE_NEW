@@ -35,8 +35,24 @@
                    onfocus="this.value=''" type="text"
                    class="form-control c1 i1" formControlName="b">
             <mat-hint style="margin-left: 10px" align="end">{{text3.value.length}} / 200</mat-hint>
-            <p>Tải ảnh nền</p>
-            <p>Tải ảnh đại diện</p>
+
+            <ul class="publishing-tools list-inline" (change)="onFileSelected($event)">
+              <sub>
+                <div matTooltip="Tải ảnh lên"
+                      class="a1 a2 material-icons btn-file">add_a_photo
+                  <input type="file" name="image" autocomplete="off" class="a1 form-control">
+                </div>
+              </sub>&nbsp;Thêm ảnh đại diện
+            </ul>
+
+            <ul class="publishing-tools list-inline" (change)="onFileSelected1($event)">
+              <sub>
+                <span matTooltip="Tải ảnh lên"
+                      class="a1 a2 material-icons btn-file">add_a_photo
+                  <input type="file" name="image" autocomplete="off" class="a1 form-control">
+                </span>
+              </sub>&nbsp;Thêm ảnh nền
+            </ul>
           </div>
         </div>
       </div>

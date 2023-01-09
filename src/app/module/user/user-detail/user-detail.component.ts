@@ -9,6 +9,8 @@ import {UserDTO} from "../../../models/user-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {DescriptionService} from "../../../services/description.service";
 import {UserDescription} from "../../../models/user-description";
+import {MatDialog} from "@angular/material/dialog";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-user-detail',
@@ -36,6 +38,8 @@ export class UserDetailComponent implements OnInit {
   idLifeEvent?: any
   descriptions?: UserDescription
   switchChangePassword = false
+  switchCreateDescription = false
+  switchUpdateDescription = false
 
   lifeEventsCreateForm: FormGroup = new FormGroup({
     work: new FormControl("",),
@@ -47,7 +51,17 @@ export class UserDetailComponent implements OnInit {
     timeline: new FormControl("",)
   });
 
+  descriptionCreateForm: FormGroup = new FormGroup({
+    description: new FormControl("",),
+  })
+
+  descriptionUpdateForm: FormGroup = new FormGroup({
+    description: new FormControl("",),
+  })
+
   constructor(private router: Router,
+              public dialog: MatDialog,
+              private commonService: CommonService,
               private userService: UserService,
               private shortNewService: ShortNewService,
               private lifeEventsService: LifeEventsService,
@@ -71,7 +85,7 @@ export class UserDetailComponent implements OnInit {
       this.avatar = this.currentUser.avatar;
       this.cover = this.currentUser.cover;
     }, error => {
-      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 
@@ -91,18 +105,69 @@ export class UserDetailComponent implements OnInit {
     })
   }
 
-  openLifeEvents() {
-    this.showLifeEvents = true
-  }
-
-  closeLifeEvents() {
-    this.showLifeEvents = false
-  }
-
   friends() {
     this.friendRelationService.listFriendShowAvatarLimit(this.idUserLogIn).subscribe(rs => {
       this.listFriend = rs
       this.count = rs.length
+    })
+  }
+
+  getDescriptionByIdUser() {
+    this.descriptionService.getDescriptionByIdUser(this.idUserLogIn).subscribe(rs => {
+      this.descriptions = rs
+      this.descriptionUpdateForm = new FormGroup({
+        description: new FormControl(this.descriptions?.description),
+      });
+    })
+  }
+
+  createDescription() {
+    console.log("vào hàm createDescription")
+    let des = {
+      description: this.descriptionCreateForm.value.description,
+    }
+    console.log(des)
+    this.descriptionService.createDescription(this.idUserLogIn, des).subscribe(() => {
+      this.getDescriptionByIdUser()
+    }, error => {
+      console.log("Lỗi: " + error)
+      if (error.status == 200) {
+        this.getDescriptionByIdUser()
+      }
+      this.commonService.dialogCommon(error)
+    })
+  }
+
+  updateDescription() {
+    console.log("vào hàm updateDescription")
+    let des = {
+      description: this.descriptionUpdateForm.value.description,
+    }
+    console.log(des)
+    this.descriptionService.getDescriptionByIdUser(this.idUserLogIn).subscribe(rs => {
+      this.descriptionService.editDescription(rs?.id, des).subscribe(() => {
+        this.getDescriptionByIdUser()
+      })
+    }, error => {
+      console.log("Lỗi: " + error)
+      if (error.status == 200) {
+        this.getDescriptionByIdUser()
+      }
+      this.commonService.dialogCommon(error)
+    })
+  }
+
+  getOne(idLifeEvent: any) {
+    // @ts-ignore
+    this.lifeEventsService.getOne(this.idUserLogIn, idLifeEvent).subscribe(result => {
+      this.lifeEvent = result
+      localStorage.setItem('idLifeEvent', <string>this.lifeEvent.id);
+      this.idLifeEvent = localStorage.getItem("idLifeEvent")
+      console.log("vào hàm getOne" + this.idLifeEvent)
+      this.updateForm = new FormGroup({
+        work: new FormControl(this.lifeEvent.work),
+        timeline: new FormControl(this.lifeEvent.timeline),
+      });
     })
   }
 
@@ -117,11 +182,15 @@ export class UserDetailComponent implements OnInit {
     }
     console.log(life)
     // @ts-ignore
-    this.lifeEventsService.createLifeEvents(life, this.idUserLogIn).subscribe(result => {
-      this.lifeEvent = result
-      this.ngOnInit()
+    this.lifeEventsService.createLifeEvents(life, this.idUserLogIn).subscribe(rs => {
+      this.lifeEvent = rs
+      this.findListByIdUser()
     }, error => {
       console.log("Lỗi: " + error)
+      if (error.status == 200) {
+        this.findListByIdUser()
+      }
+      this.commonService.dialogCommon(error)
     })
   }
 
@@ -134,11 +203,23 @@ export class UserDetailComponent implements OnInit {
     // @ts-ignore
     this.lifeEventsService.editLifeEvents(this.idUserLogIn, this.idLifeEvent, lifeEvent).subscribe(result => {
       this.lifeEvent = result
-      this.ngOnInit()
+      this.findListByIdUser()
     }, error => {
       console.log("Lỗi: " + error)
+      if (error.status == 200) {
+        this.findListByIdUser()
+      }
+      this.commonService.dialogCommon(error)
     })
     this.updateForm.reset();
+  }
+
+  openLifeEvents() {
+    this.showLifeEvents = true
+  }
+
+  closeLifeEvents() {
+    this.showLifeEvents = false
   }
 
   openFromCreateLifeEvent() {
@@ -163,26 +244,6 @@ export class UserDetailComponent implements OnInit {
 
   closeDescription() {
     this.checkShowDescription = false
-  }
-
-  getOne(idLifeEvent: any) {
-    // @ts-ignore
-    this.lifeEventsService.getOne(this.idUserLogIn, idLifeEvent).subscribe(result => {
-      this.lifeEvent = result
-      localStorage.setItem('idLifeEvent', <string>this.lifeEvent.id);
-      this.idLifeEvent = localStorage.getItem("idLifeEvent")
-      console.log("vào hàm getOne" + this.idLifeEvent)
-      this.updateForm = new FormGroup({
-        work: new FormControl(this.lifeEvent.work),
-        timeline: new FormControl(this.lifeEvent.timeline),
-      });
-    })
-  }
-
-  getDescriptionByIdUser() {
-    this.descriptionService.getDescriptionByIdUser(this.idUserLogIn).subscribe(rs => {
-      this.descriptions = rs
-    })
   }
 
   openChangePassword() {

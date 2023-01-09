@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {DialogCommonComponent} from "../module/notifications/dialog-common/dialog-common.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
 
-  constructor() {
+  constructor(public dialog: MatDialog,) {
   }
 
   changeBackgroundColor1() {
@@ -46,5 +48,11 @@ export class CommonService {
 
   consoleStringify(result: any) {
     console.log("data: " + JSON.stringify(result))
+  }
+
+  dialogCommon(error: any) {
+    this.dialog.open(DialogCommonComponent, {
+      data: {dialogTitle: error.error.message, dialogText: error.error.description}
+    })
   }
 }

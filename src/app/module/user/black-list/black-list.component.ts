@@ -49,6 +49,10 @@ export class BlackListComponent implements OnInit {
       this.ngOnInit()
       this.searchByFullNameOrEmail()
     }, error => {
+      if (error.status == 200) {
+        this.ngOnInit()
+        this.searchByFullNameOrEmail()
+      }
       this.ngOnInit()
       console.log(JSON.stringify(error))
     })
@@ -59,6 +63,10 @@ export class BlackListComponent implements OnInit {
       this.ngOnInit()
       this.searchByFullNameOrEmail()
     }, error => {
+      if (error.status == 200) {
+        this.ngOnInit()
+        this.searchByFullNameOrEmail()
+      }
       this.ngOnInit()
       console.log(JSON.stringify(error))
     })
