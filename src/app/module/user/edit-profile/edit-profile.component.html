@@ -35,9 +35,11 @@
     </div>
     <div style="float: left; width: 1%"></div>
     <div class="col" style="background-color: whitesmoke; border-radius: 5px">
-      <h2 *ngIf="!checkList" style="width: 100%" class="a1 a2" (click)="openListImage()">
+      <sub><span *ngIf="!checkList" class="material-icons">image</span></sub>
+      <span *ngIf="!checkList" style="width: 100%; font-size: 22px; color: #0a70b9" class="a1 a2"
+            (click)="openListImage()" matTooltip="Ấn để chọn" matTooltipPosition="above">
         Chọn ảnh đại diện mặc định
-      </h2>
+      </span>
       <span style="color: #0a70b9; margin-top: 5px" matTooltip="Đóng"
             *ngIf="checkList && imageDefault == null" (click)="closeListImage()"
             class="a1 a2 material-icons">highlight_off</span>
@@ -45,9 +47,10 @@
         <div>
           <div class="row" style=" margin-left: 1%">
             <div style="float: left; width: 110px" *ngFor="let list of listImage">
-              <img class="zoomImage imageChange" style="width: 100px; height: 100px; border-radius: 5px"
+              <img class="zoomImage imageChange" style="width: 100px; height: 100px;
+              border-radius: 5px;  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3)"
                    src="{{list?.name}}"><br>
-              <button mat-raised-button color="accent" style="width: 90%"
+              <button mat-raised-button color="accent" style="width: 90%" class="a2"
                       *ngIf="imageDefault == null" (click)="getNameImage(list?.name)">Chọn
               </button>
             </div>
@@ -66,21 +69,32 @@
       </div>
       <div id="page-contents">
         <div class="row">
-          <div class="edit-block">
-            <div class="form-group col-12" *ngIf="imageDefault == null">
+          <div class="edit-block" style="margin-left: 5px">
+            <div class="form-group col-12" *ngIf="imageDefault == null && !checkList">
               <label for="avatar">{{changeImage}} đại diện</label>
-              <input type="file"
-                     id="avatar"
-                     #userPhoto
-                     (change)="onFileSelected($event)"
-                     name="image"
-                     autocomplete="off"/>
+              <ul class="publishing-tools list-inline">
+                <sub>
+                  <div matTooltip="Tải ảnh lên"
+                       class="a1 a2 material-icons btn-file">add_a_photo
+                    <input type="file" id="avatar"
+                           (change)="onFileSelected($event)"
+                           name="image" autocomplete="off"/>
+                  </div>
+                </sub>
+              </ul>
             </div>
             <div class="form-group col-12">
               <label for="cover">{{changeImage}} nền</label>
-              <input type="file" name="image"
-                     id="cover" autocomplete="off"
-                     #userPhoto (change)="onFileSelected1($event)"/>
+              <ul class="publishing-tools list-inline">
+                <sub>
+                  <div matTooltip="Tải ảnh lên"
+                       class="a1 a2 material-icons btn-file">add_a_photo
+                    <input type="file" name="image"
+                           id="cover" autocomplete="off"
+                           (change)="onFileSelected1($event)"/>
+                  </div>
+                </sub>
+              </ul>
             </div>
             <form [formGroup]="updateForm" (ngSubmit)="update()" name="basic-info" id="basic-info"
                   class="form-inline">

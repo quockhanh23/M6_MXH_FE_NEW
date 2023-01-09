@@ -500,7 +500,7 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   checkUrl() {
-    return this.url == 'http://localhost:4200/user/listFriend/' + this.idUserLogIn;
+    return this.url == this.commonService.urlModuleUser + '/listFriend/' + this.idUserLogIn;
   }
 
   createFollow(idUserFollow: any) {
@@ -541,16 +541,16 @@ export class PeopleDetailComponent implements OnInit {
 
   checkLine() {
     let count = 0
-    if (this.urlMessage == 'http://localhost:4200/user/messenger') {
+    if (this.urlMessage == this.commonService.urlModuleUser + '/messenger') {
       count = count + 1;
     }
-    if (this.url == 'http://localhost:4200/user/requests') {
+    if (this.url == this.commonService.urlModuleUser + '/requests') {
       count = count + 1;
     }
-    if (this.url == 'http://localhost:4200/user/listFriend/' + this.idUserLogIn) {
+    if (this.url == this.commonService.urlModuleUser + '/listFriend/' + this.idUserLogIn) {
       count = count + 1;
     }
-    if (this.urlBlackList == 'http://localhost:4200/user/blackList') {
+    if (this.urlBlackList == this.commonService.urlModuleUser + '/blackList') {
       count = count + 1;
     }
     console.log("count" + count)

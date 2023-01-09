@@ -1,7 +1,8 @@
 <div class="backArrowDiv">
        <span matTooltip="Quay lại"
              [routerLink]="['/user/newsfeed']"
-             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace</span>
+             class="backButton title material-icons a1 a2 backArrowSpan">keyboard_backspace
+       </span>
 </div>
 
 <div class="row"
@@ -125,9 +126,8 @@
                   matTooltip="Thông tin hội thoại">last_page</span>
           </div>
           <div>
-            <div style="border-left: #b2dba1 1px solid; border-right: #b2dba1 1px solid;{{background}}" #scrollMe
-                 [scrollTop]="scrollMe.scrollHeight"
-                 id="scroll" class="col">
+            <div style="border-left: #b2dba1 1px solid; border-right: #b2dba1 1px solid;{{background}}"
+                 #scrollMe [scrollTop]="scrollMe.scrollHeight" id="scroll" class="col">
               <p style="text-align: center"
                  *ngIf="checkFirstDayMessage">{{firstDayMessage | date:"HH:MM | dd/MM/yyyy"}}</p>
               <div style="margin-top: 215px" align="center" *ngIf="count == 0">
@@ -190,13 +190,13 @@
                   </div>
                   <div class="col-1">
                     <sup *ngIf="conversation != null">
-                  <span matTooltip="Tải ảnh lên" style="font-size: 73px; color: #196d86" #userPhoto
+                  <span matTooltip="Tải ảnh lên" style="font-size: 73px; color: #196d86"
                         (change)="onFileSelected($event)"
                         class="a1 material-icons btn-file">image
                    <input type="file" name="image" autocomplete="off" class="a1 form-control"></span>
                     </sup>
                     <sup *ngIf="conversation == null">
-                  <span matTooltip="Tải ảnh lên" style="font-size: 73px; color: #d9e3e7" #userPhoto
+                  <span matTooltip="Tải ảnh lên" style="font-size: 73px; color: #d9e3e7"
                         class="a1 material-icons btn-file">image
                    </span>
                     </sup>

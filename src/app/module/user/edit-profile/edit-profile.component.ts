@@ -86,7 +86,7 @@ export class EditProfileComponent implements OnInit {
     if (this.fb1 != null) {
       this.currentUser.cover = this.fb1
     }
-    this.userService.updateUserProfile(this.currentUser.id, this.currentUser).subscribe(result => {
+    this.userService.updateUserProfile(this.currentUser.id, this.currentUser).subscribe(() => {
       this.dialog.open(DialogSuccessComponent)
     }, error => {
       this.commonService.dialogCommon(error)

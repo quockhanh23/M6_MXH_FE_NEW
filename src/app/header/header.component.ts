@@ -6,6 +6,7 @@ import {DialogLogoutComponent} from "../module/notifications/dialog-logout/dialo
 import {NotificationService} from "../services/notification.service";
 import {Notification} from "../models/notification";
 import {ToartsService} from "../services/toarts.service";
+import {CommonService} from "../services/common.service";
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
               private router: Router,
               private notificationService: NotificationService,
               private toartsService: ToartsService,
+              private commonService: CommonService,
               public dialog: MatDialog,
   ) {
   }
@@ -67,7 +69,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkHRF2(): boolean {
-    return window.location.href == 'http://localhost:4200/';
+    return window.location.href == this.commonService.urlHost
   }
 
   getAllNotificationByIdSenTo() {

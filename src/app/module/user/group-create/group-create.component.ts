@@ -7,6 +7,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {CommonService} from "../../../services/common.service";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-group-create',
@@ -25,7 +26,6 @@ export class GroupCreateComponent implements OnInit {
 
   groupCreateForm: FormGroup = new FormGroup({
     groupName: new FormControl("", [Validators.required]),
-    createBy: new FormControl("", [Validators.required]),
     type: new FormControl("", [Validators.required]),
     subtype: new FormControl("", [Validators.required]),
   })
@@ -34,6 +34,7 @@ export class GroupCreateComponent implements OnInit {
               public dialog: MatDialog,
               private commonService: CommonService,
               private storage: AngularFireStorage,
+              private userService: UserService,
               private router: Router,) {
   }
 
@@ -44,7 +45,6 @@ export class GroupCreateComponent implements OnInit {
     console.log("vào hàm createGroup")
     let newGroup = {
       groupName: this.groupCreateForm.value.groupName,
-      createBy: this.groupCreateForm.value.createBy,
       type: this.groupCreateForm.value.type,
       avatarGroup: this.avatarGroup,
       coverGroup: this.coverGroup,
@@ -116,7 +116,7 @@ export class GroupCreateComponent implements OnInit {
   }
 
   back() {
-    if (this.urlGroupByUser == 'http://localhost:4200/user/group') {
+    if (this.urlGroupByUser == this.commonService.urlModuleUser + '/group') {
       this.router.navigate(['user/group']).then()
     } else {
       this.router.navigate(['user/groupShare']).then()

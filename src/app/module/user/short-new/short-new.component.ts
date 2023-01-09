@@ -30,7 +30,6 @@ export class ShortNewComponent implements OnInit {
     this.shortNewService.allShortNews().subscribe(rs => {
       this.count = rs.length
       this.shortNew2 = rs
-      // console.log("Kiểu dữ liệu: " + JSON.stringify(rs))
     })
   }
 

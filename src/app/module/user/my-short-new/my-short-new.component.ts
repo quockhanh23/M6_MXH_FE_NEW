@@ -3,6 +3,7 @@ import {UserService} from "../../../services/user.service";
 import {ShortNewService} from "../../../services/short-new.service";
 import {ShortNews} from "../../../models/short-news";
 import {Router} from "@angular/router";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-my-short-new',
@@ -20,7 +21,8 @@ export class MyShortNewComponent implements OnInit {
 
   constructor(private userService: UserService,
               private shortNewService: ShortNewService,
-              private router: Router
+              private router: Router,
+              private commonService: CommonService
   ) {
   }
 
@@ -59,10 +61,11 @@ export class MyShortNewComponent implements OnInit {
   }
 
   back() {
-    if (localStorage.getItem('UrlShortNew') == 'http://localhost:4200/user/listShortNew') {
+    let urlShortNew = localStorage.getItem('UrlShortNew')
+    if (urlShortNew == this.commonService.urlModuleUser + '/listShortNew') {
       this.router.navigate(['user/listShortNew']).then()
     }
-    if (localStorage.getItem('UrlShortNew') == 'http://localhost:4200/user/user-detail') {
+    if (urlShortNew == this.commonService.urlModuleUser + '/user-detail') {
       this.router.navigate(['user/user-detail']).then()
     }
   }

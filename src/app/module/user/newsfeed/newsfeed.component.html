@@ -54,20 +54,26 @@
         <form [formGroup]="newPostForm"
               (ngSubmit)="createPost(userDetail?.id)">
           <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <img src="{{userDetail?.avatar}}" alt="" class="profile-photo-md a1"/>
-                <input #text maxlength="500" id="value"
-                       style="background: whitesmoke ;width: 400px !important; height: 50px;"
-                       onfocus="this.value=''" type="text"
-                       (mouseover)="connectInput()" (mouseleave)="leaveInput()"
-                       class="font-size-18 form-control c1 i1" formControlName="content"
-                       placeholder="Bạn đang nghĩ gì thế?">
+            <div class="col-9">
+              <div class="row">
+                <div class="col-1">
+                  <img src="{{userDetail?.avatar}}" alt="" class="profile-photo-md a1"/>
+                </div>
+                <div class="col-10" style="margin-left: 15px">
+                  <input #text maxlength="500" id="value"
+                         style="background: whitesmoke ;width: 100% !important; height: 50px;"
+                         onfocus="this.value=''" type="text"
+                         (mouseover)="connectInput()" (mouseleave)="leaveInput()"
+                         class="font-size-18 form-control c1 i1" formControlName="content"
+                         placeholder="Bạn đang nghĩ gì thế?">
+                </div>
               </div>
-              <span *ngIf="checkConnectInput || text.value.length > 0" class="font-size-15"
-                    style="margin-left: 60px">{{text.value.length}}/ 500.</span>
-              <span *ngIf="!checkConnectInput && text.value.length == 0" class="font-size-15"
-                    style="margin-left: 60px">Tối đa 500 kí tự.</span>
+              <div>
+                <span *ngIf="checkConnectInput || text.value.length > 0" class="font-size-15"
+                      style="margin-left: 60px">{{text.value.length}}/ 500.</span>
+                <span *ngIf="!checkConnectInput && text.value.length == 0" class="font-size-15"
+                      style="margin-left: 60px">Tối đa 500 kí tự.</span>
+              </div>
               <br>
               <div style="margin-left: 60px" *ngIf="checkDone">
                 <mat-spinner [diameter]="30"></mat-spinner>
@@ -79,21 +85,28 @@
                      src="{{fb}}" alt="">
               </div>
             </div>
-            <div class="col-6">
-              <div class="a1 tools">
-                <ul matTooltip="Tải ảnh lên" style="margin-left: 125px" class="publishing-tools list-inline">
-                  <span style="font-size: 40px; color: deeppink" #userPhoto (change)="onFileSelected($event)"
-                        class="a1 material-icons btn-file">add_photo_alternate
-                    <input type="file" name="image" autocomplete="off" class="a1 form-control"></span>
-                </ul>
-                <button *ngIf="!checkButton" disabled mat-raised-button style="width: 130px;
-                 margin-top: 7px"
-                        class="border-radius-10 btn btn-primary pull-right">Đăng
-                </button>
-                <button *ngIf="checkButton" mat-raised-button style="width: 130px;
-                 margin-top: 7px"
-                        class="border-radius-10 btn btn-primary pull-right">Đăng
-                </button>
+            <div class="col-3">
+              <div class="row">
+                <div class="col-1">
+                  <ul class="publishing-tools list-inline">
+                    <sub>
+                      <div matTooltip="Tải ảnh lên" style="color: deeppink; font-size: 40px"
+                           class="a1 a2 material-icons btn-file">add_photo_alternate
+                        <input type="file" name="image"
+                               id="cover" autocomplete="off"
+                               (change)="onFileSelected($event)"/>
+                      </div>
+                    </sub>
+                  </ul>
+                </div>
+                <div class="col" style="margin-left: 15px">
+                  <button *ngIf="!checkButton" disabled mat-raised-button style="width: 100%; margin-top: 7px"
+                          class="border-radius-10 btn btn-primary pull-right">Đăng
+                  </button>
+                  <button *ngIf="checkButton" mat-raised-button style="width: 100%; margin-top: 7px"
+                          class="border-radius-10 btn btn-primary pull-right">Đăng
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -7,7 +7,10 @@ import {DialogCommonComponent} from "../module/notifications/dialog-common/dialo
 })
 export class CommonService {
 
-  constructor(public dialog: MatDialog,) {
+  urlModuleUser = 'http://localhost:4200/user'
+  urlHost = 'http://localhost:4200/'
+
+  constructor(public dialog: MatDialog) {
   }
 
   changeBackgroundColor1() {
