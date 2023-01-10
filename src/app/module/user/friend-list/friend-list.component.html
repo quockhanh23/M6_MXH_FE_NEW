@@ -81,21 +81,24 @@
         style="border-radius: 5px;margin-top: 10px;
          margin-right: 10px; margin-bottom: 10px; border: #afd9ee 1px solid">
         <div class="left1">
-          <img *ngIf="idUser == idUserLogIn"
+          <img *ngIf="friend?.id == idUserLogIn"
                style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px"
                data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
-               src="{{friend?.avatar}}" routerLink="/user/people-detail/{{friend?.id}}"
+               src="{{friend?.avatar}}" routerLink="/user/user-detail"
                alt="" class=" a1"/>
-          <img *ngIf="idUser != idUserLogIn"
+          <img *ngIf="friend?.id != idUserLogIn"
                style="font-size: 40px; width: 70px; height: 70px; border-radius: 5px; margin-top: 5px; margin-bottom: 5px"
                data-toggle="tooltip" data-placement="top" matTooltip="Xem trang cá nhân"
                src="{{friend?.avatar}}" routerLink="/user/people-detail/{{friend?.id}}"
                alt="" class=" a1"/>
         </div>
         <div class="left2">
-          <h2 matTooltip="Xem trang cá nhân"><a routerLink="/user/people-detail/{{friend?.id}}">{{friend?.fullName}}</a>
+          <h2 matTooltip="Xem trang cá nhân">
+            <a *ngIf="friend?.id == idUserLogIn" routerLink="/user/user-detail">{{friend?.fullName}}</a>
+            <a *ngIf="friend?.id != idUserLogIn" routerLink="/user/people-detail/{{friend?.id}}">{{friend?.fullName}}</a>
           </h2>
-          <p *ngIf="idUser == idUserLogIn">Bạn chung: {{friend?.mutualFriends}}</p>
+          <p *ngIf="friend?.id == idUserLogIn">Là tôi</p>
+          <p *ngIf="friend?.id != idUserLogIn">Bạn chung: {{friend?.mutualFriends}}</p>
         </div>
         <div class="left3" *ngIf="idUser == idUserLogIn">
           <span matTooltip="Tuỳ chọn" [matMenuTriggerFor]="menu" style="margin-top: 10px"

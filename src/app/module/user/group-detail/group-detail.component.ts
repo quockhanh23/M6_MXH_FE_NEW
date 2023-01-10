@@ -20,6 +20,7 @@ export class GroupDetailComponent implements OnInit {
   checkUserOnGroup = false
   countMember = 0
   checkManager = false
+  step = 0;
 
   constructor(private groupService: GroupService,
               private router: Router,
@@ -57,6 +58,10 @@ export class GroupDetailComponent implements OnInit {
     if (this.idCreateGroup == this.idUserLogIn) {
       this.checkManager = true
     }
+  }
+
+  setStep(index: number) {
+    this.step = index;
   }
 
   joinGroupParticipant() {

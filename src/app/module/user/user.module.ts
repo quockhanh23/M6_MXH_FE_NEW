@@ -29,6 +29,7 @@ import {MaterialModule} from "../material/material.module";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ShortNewsAllComponent} from './short-news-all/short-news-all.component';
 import {BlackListComponent} from './black-list/black-list.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -58,18 +59,19 @@ import {BlackListComponent} from './black-list/black-list.component';
   exports: [
     EditProfileComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MaterialModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatDatepickerModule,
-    MatTooltipModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MaterialModule,
+        MatMenuModule,
+        MatProgressSpinnerModule,
+        MatDatepickerModule,
+        MatTooltipModule,
+        MatExpansionModule
+    ]
 })
 export class UserModule {
 }

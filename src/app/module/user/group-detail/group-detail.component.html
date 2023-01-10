@@ -6,7 +6,7 @@
 
 <div class="divFix">
   <div class="row">
-    <div class="col-4" style="background-color: #fcf8f8;">
+    <div class="col-3" style="background-color: #fcf8f8;">
       <div style="border: #e7e7e7 1px solid; border-radius: 5px">
         <img class="width-100-percent" style="height: 200px;" src="{{theGroup?.coverGroup}}">
         <h2 style="margin-left: 5px">{{theGroup?.groupName}}</h2>
@@ -20,24 +20,49 @@
           Tham gia nhóm
         </button>
       </div>
-    </div>
-    <div class="col-8" style="background-color: #e7e7e7;  border: #e7e7e7 1px solid">
-      <div class="row" style="border: #e7e7e7 1px solid">
-        <div class="col-9" style="background-color: white">
-          <h2>Thảo luận</h2>
-        </div>
-        <div class="col" align="right" style="background-color: white">
-          <button *ngIf="!checkUserOnGroup" mat-raised-button color="primary">Tạo bài viết</button>
-        </div>
-      </div>
       <div class="row">
-        <div class="col-7" style="background-color: white; margin-right: 10px; margin-top: 10px; margin-left: 10px">
-        </div>
-        <div class="col-4" style="border: #0a70b9 1px solid">
+        <div style="border: #0a70b9 1px solid">
           <h2>Giới thiệu</h2>
           <h2>{{theGroup?.type}}</h2>
           <h2 *ngIf="theGroup?.status == 'Public'">Nhóm công khai</h2>
         </div>
+      </div>
+    </div>
+    <div class="col-9" style="background-color: #e7e7e7; border: #e7e7e7 1px solid; border-radius: 5px">
+      <mat-accordion class="example-headers-align" *ngIf="!checkUserOnGroup">
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p>Tạo bài viết</p>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <textarea></textarea>
+            <ul class="publishing-tools list-inline">
+              <sub>
+                <div matTooltip="Tải ảnh lên"
+                     class="a1 a2 material-icons btn-file">add_a_photo
+                  <input type="file" id="avatar"
+                         name="image" autocomplete="off"/>
+                </div>
+              </sub>
+            </ul>
+          </div>
+          <button mat-raised-button color="primary">Đăng bài</button>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div class="row" style="margin-top: 5px">
+        <button disabled
+                mat-raised-button color="primary"
+                style="width: 90%;color: #0a70b9; margin-left: 15px; margin-right: 15px">Thảo luận
+        </button>
+        <span matTooltip="Tất cả ảnh" style="color: deeppink; margin-left: 10px; margin-top: 5px"
+              class="a1 a2 material-icons btn-file">image
+        </span>
+        <span matTooltip="Tìm kiếm" style="margin-top: 5px" class="material-icons a1 a2">search</span>
+      </div>
+      <div class="row">
+        <div style="background-color: white"></div>
       </div>
     </div>
   </div>
@@ -52,8 +77,9 @@
     <button (click)="rejectUserJoinGroup(mem?.user?.id)" mat-raised-button color="warn">Từ chối</button>
   </div>
   <div class="row border-green-b2dba1" *ngFor="let mem of groupParticipant2"
-       style="border-radius: 5px; margin-top: 5px">
+       style="border-radius: 5px; margin-top: 5px;">
     <img class="imageListAvatarMessage" style="margin-bottom: 5px"
          src="{{mem?.user?.avatar}}">
   </div>
 </div>
+

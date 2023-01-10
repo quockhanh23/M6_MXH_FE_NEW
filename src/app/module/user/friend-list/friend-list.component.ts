@@ -39,7 +39,7 @@ export class FriendListComponent implements OnInit {
   checkWatchingList = false
   countFollowList = 0
   countWatchingList = 0
-  colorCheckFriend = 'color: #27aae1'
+  colorCheckFriend = 'color: #ffc107'
   colorCheckFollow = 'color: #27aae1'
   colorCheckWatching = 'color: #27aae1'
   checkEmptySearch = false
