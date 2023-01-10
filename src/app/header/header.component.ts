@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkHRF2() {
-    return localStorage.getItem('USERNAME') != null
+    return localStorage.getItem('USERNAME') == null
   }
 
   getAllNotificationByIdSenTo() {
