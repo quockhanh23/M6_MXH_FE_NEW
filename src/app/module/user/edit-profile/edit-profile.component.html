@@ -47,8 +47,8 @@
         <div>
           <div class="row" style=" margin-left: 1%">
             <div style="float: left; width: 110px" *ngFor="let list of listImage">
-              <img class="zoomImage imageChange" style="width: 100px; height: 100px;
-              border-radius: 5px;  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3)"
+              <img class="zoomImage imageChange box-shadow-image"
+                   style="width: 100px; height: 100px; border-radius: 5px;"
                    src="{{list?.name}}"><br>
               <button mat-raised-button color="accent" style="width: 90%" class="a2"
                       *ngIf="imageDefault == null" (click)="getNameImage(list?.name)">Chọn

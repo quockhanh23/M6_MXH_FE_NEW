@@ -8,7 +8,7 @@
     <div class="col-4">
       <h2 align="center" style="margin-top: 15px">Danh sách đã chặn</h2>
       <div *ngIf="count > 0" style="margin-top: 20px">
-        <div class="hc shadow-box" *ngFor="let user of listUserInBlackList"
+        <div class="hc box-shadow-div" *ngFor="let user of listUserInBlackList"
              style="border-radius: 5px; border: #afd9ee 1px solid; margin-bottom: 8px">
           <div class="row">
             <div class="col-3">
@@ -57,7 +57,7 @@
         <img style="width: 100%;" align="center" src="assets/images/565665.png">
       </div>
       <div style="height: 500px" *ngIf="!checkEmptySearch">
-        <div class="row hc shadow-box" *ngFor="let user of listUser"
+        <div class="row hc box-shadow-div" *ngFor="let user of listUser"
              style="border: #ead6e7 1px solid; border-radius: 5px; margin-bottom: 5px">
           <div class="col">
             <img style="height: 60px; width: 60px; border-radius: 10px;margin-left: 10px; margin-top: 10px"

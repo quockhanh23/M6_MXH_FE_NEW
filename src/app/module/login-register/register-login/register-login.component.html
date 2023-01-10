@@ -8,7 +8,8 @@
       <div style="margin-right: 10px; float: left; width: 30%" *ngFor="let user of lastUserLogin">
         <div class="row">
           <div class="col-3">
-            <img style="border-radius: 15px; width: 80px; height: 80px" src="{{user.avatar}}" alt="">
+            <img style="border-radius: 15px; width: 80px; height: 80px"
+                 src="{{user.avatar}}" alt="">
           </div>
           <div class="col">
             <h2>{{user.fullName}}</h2>
@@ -34,9 +35,13 @@
         <!-- Register/Login Tabs-->
         <div class="reg-options">
           <ul class="nav nav-tabs">
-            <li class="active a1"><a style="font-size: 20px; color: #1c75bc" href="#register" data-toggle="tab">Đăng ký</a>
+            <li class="active a1">
+              <a style="font-size: 20px; color: #1c75bc;"
+                 href="#register" data-toggle="tab">Đăng ký</a>
             </li>
-            <li><a style="font-size: 20px; color: #1c75bc" id="showLogin" href="#login" data-toggle="tab">Đăng nhập</a>
+            <li>
+              <a style="font-size: 20px; color: #1c75bc;"
+                 id="showLogin" href="#login" data-toggle="tab">Đăng nhập</a>
             </li>
           </ul><!--Tabs End-->
         </div>
@@ -63,7 +68,8 @@
               <div class="row">
                 <div class="form-group col-xs-12">
                   <label for="password" class="sr-only">Mật khẩu</label>
-                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;" matTooltip="Mật khẩu từ 6-32 kí tự"
+                  <input style="border-radius: 5px;font-size: 20px; width: 380px !important;"
+                         matTooltip="Mật khẩu từ 6-32 kí tự"
                          formControlName="newPassWord" id="password"
                          class="form-control input-group-lg"
                          type="password" name="password" title="Enter password"
@@ -168,7 +174,8 @@
                 ngay
               </button>
             </form><!--Register Now Form Ends-->
-            <p class="a1 a2" style="margin-top: 10px; margin-left: 5px"><a (click)="showLogin()">Bạn đã có tài khoản?</a>
+            <p class="a1 a2" style="margin-top: 10px; margin-left: 5px; text-shadow: #FC0 1px 0 10px;">
+              <a (click)="showLogin()">Bạn đã có tài khoản?</a>
             </p>
           </div><!--Registration Form Contents Ends-->
 

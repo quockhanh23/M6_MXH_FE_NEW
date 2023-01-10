@@ -112,8 +112,12 @@ body {
   overflow: hidden;
 }
 
-.shadow-box {
+.box-shadow-div {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.box-shadow-image {
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-file input[type=file] {
@@ -225,6 +229,39 @@ body {
 .break-word {
   word-wrap: break-word;
 }
+
+/*Bell animation*/
+
+#subscribeButton {
+  -webkit-animation-name: shake;
+  animation-name: shake;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  40% {
+    transform: rotate(6deg);
+  }
+  40%,
+  60% {
+    transform: rotate(0deg);
+  }
+  60%,
+  90% {
+    transform: rotate(-6deg);
+  }
+}
+
+/*Bell animation*/
 
 input {
   font-size: 16px !important;

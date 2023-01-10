@@ -74,6 +74,10 @@ export class RegisterLoginComponent implements OnInit {
     console.log("vào login")
     this.submitted = true;
     this.loading = true;
+    this.authentication()
+  }
+
+  authentication() {
     this.authenticationService.login(this.loginForm.value).subscribe((data: JWTResponse) => {
       localStorage.setItem('currentUser', JSON.stringify(data));
       localStorage.setItem('ACCESS_TOKEN', data.token);
@@ -139,6 +143,9 @@ export class RegisterLoginComponent implements OnInit {
           password: new FormControl(this.registerForm.value.newPassWord, [Validators.required, Validators.minLength(6), Validators.maxLength(32)])
         });
         this.registerForm.reset()
+        setTimeout(() => {
+          this.authentication()
+        }, 1000)
       }, error => {
         this.commonService.dialogCommon(error)
       }
