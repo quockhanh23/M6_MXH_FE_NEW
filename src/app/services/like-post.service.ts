@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {DisLikePost} from "../models/dis-like-post";
 import {IconHeart} from "../models/icon-heart";
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 import {LikePost} from "../models/like-post";
 
 const API_URL = environment.apiUrl + "/refs";

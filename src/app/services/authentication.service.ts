@@ -4,7 +4,7 @@ import {UserToken} from "../models/user-token";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 import {JWTResponse} from "../models/jwtresponse";
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 const API_URL = environment.apiUrl + "/login";
 

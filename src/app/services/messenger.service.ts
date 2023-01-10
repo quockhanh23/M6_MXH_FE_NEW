@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Messenger} from "../models/messenger";
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 import {Conversation} from "../models/conversation";
 
 const API_URL = environment.apiUrl + "/conversations";

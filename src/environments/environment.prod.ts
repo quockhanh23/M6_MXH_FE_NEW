@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
   apiServer: 'https://mxh-web.herokuapp.com/api',
+  localUrl:'http://localhost:4200',
+  apiUrl: 'http://localhost:8080/api',
   firebaseConfig: {
     apiKey: "AIzaSyC_qHVWtwYAuaUxQ79wysN21DjjwzLy2VE",
     authDomain: "test2-d8f2d.firebaseapp.com",

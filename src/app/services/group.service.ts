@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TheGroup} from "../models/the-group";
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 import {GroupPost} from "../models/group-post";
 import {GroupParticipant} from "../models/group-participant";
 

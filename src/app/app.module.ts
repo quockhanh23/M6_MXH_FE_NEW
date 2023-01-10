@@ -13,10 +13,8 @@ import {HeaderComponent} from './header/header.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MaterialModule} from "./module/material/material.module";
 import {NotificationsModule} from "./module/notifications/notifications.module";
-import {TestComponent} from "./test/test.component";
 import {ToastrModule} from "ngx-toastr";
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -24,7 +22,6 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    TestComponent,
 
   ],
   imports: [
@@ -41,7 +38,6 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatMenuModule,
     ToastrModule.forRoot(),
     MatNativeDateModule,
-    MatTooltipModule,
 
   ],
   providers: [],

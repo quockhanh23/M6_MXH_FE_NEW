@@ -23,5 +23,4 @@ export class DialogCommonComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

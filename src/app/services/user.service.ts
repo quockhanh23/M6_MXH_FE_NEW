@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
 import {User} from "../models/user";
 import {ListAvatarDTO} from "../models/list-avatar-dto";
 import {UserBlackListDTO} from "../models/user-black-list-dto";
 import {UserDTO} from "../models/user-dto";
 import {UserChangePassword} from "../models/user-change-password";
+import {environment} from "../../environments/environment.prod";
 
 const API_URL = environment.apiUrl;
 
