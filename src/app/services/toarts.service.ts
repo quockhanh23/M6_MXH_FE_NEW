@@ -39,5 +39,6 @@ export class ToartsService {
   openToartsSavePost(type: any) {
     if (type == 'save') this.toarts.info('Bạn đã lưu bài viết vào danh sách chờ', this.title)
     if (type == 'remove') this.toarts.info('Bạn đã gỡ bài viết khỏi danh sách chờ', this.title)
+    if (type == 'duplicate') this.toarts.info('Bài viết đã được lưu rồi', this.title)
   }
 }

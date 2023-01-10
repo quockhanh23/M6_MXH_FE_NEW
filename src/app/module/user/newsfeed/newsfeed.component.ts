@@ -21,6 +21,7 @@ import {LikePostService} from "../../../services/like-post.service";
 import {DisLikePost} from "../../../models/dis-like-post";
 import {SaveService} from "../../../services/save.service";
 import {ToartsService} from "../../../services/toarts.service";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-newsfeed',
@@ -87,6 +88,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
               private storage: AngularFireStorage,
               private saveService: SaveService,
               private toartsService: ToartsService,
+              private commonService: CommonService
   ) {
     localStorage.removeItem('UrlMessage')
     localStorage.setItem('Url', window.location.href);
@@ -340,7 +342,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
       }
       console.log("Lỗi: " + error)
     })
-    this.allCommentUpdated()
   }
 
   createDisLikeComment(idComment: any) {
@@ -363,7 +364,6 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
       }
       console.log("Lỗi: " + error)
     })
-    this.allCommentUpdated()
   }
 
   getListFriends(idUser: any) {
@@ -506,6 +506,8 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
     console.log("vào hàm savePost")
     this.saveService.savePost(idPost, this.idUserLogIn).subscribe(() => {
       this.toartsService.openToartsSavePost('save')
+    }, error => {
+      this.toartsService.openToartsSavePost('duplicate')
     })
   }
 
