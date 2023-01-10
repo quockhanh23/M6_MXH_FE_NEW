@@ -68,8 +68,8 @@ export class HeaderComponent implements OnInit {
     }, 1000)
   }
 
-  checkHRF2(): boolean {
-    return window.location.href == this.commonService.urlHost
+  checkHRF2() {
+    return localStorage.getItem('USERNAME') != null
   }
 
   getAllNotificationByIdSenTo() {
