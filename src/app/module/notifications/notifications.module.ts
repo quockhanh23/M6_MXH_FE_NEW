@@ -8,6 +8,7 @@ import {DialogLogoutComponent} from './dialog-logout/dialog-logout.component';
 import {DialogCommonComponent} from './dialog-common/dialog-common.component';
 import {DialogCheckLoginComponent} from "./dialog-check-login/dialog-check-login.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 
 const NotificationComponents = [
   DialogRegisterSuccessComponent,
@@ -21,6 +22,7 @@ const NotificationComponents = [
 @NgModule({
   declarations: [
     NotificationComponents,
+    DialogHeaderComponent,
   ],
   imports: [
     CommonModule,

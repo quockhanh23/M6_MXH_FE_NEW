@@ -80,10 +80,10 @@ export class MyImageComponent implements OnInit {
   delete2(idImage: any) {
     console.log("idImage là: " + idImage);
     this.imageService.deleteInDataBase(idImage, this.idUser).subscribe(() => {
-      this.ngOnInit()
+      this.getAllImageDeleted()
     }, error => {
       console.log("Lỗi: " + error)
-      this.ngOnInit()
+      this.getAllImageDeleted()
     })
   }
 

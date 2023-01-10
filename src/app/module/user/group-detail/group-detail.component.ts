@@ -3,6 +3,8 @@ import {GroupService} from "../../../services/group.service";
 import {TheGroup} from "../../../models/the-group";
 import {ActivatedRoute, Router} from "@angular/router";
 import {GroupParticipant} from "../../../models/group-participant";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CommonService} from "../../../services/common.service";
 
 @Component({
   selector: 'app-group-detail',
@@ -22,9 +24,14 @@ export class GroupDetailComponent implements OnInit {
   checkManager = false
   step = 0;
 
+  groupPostCreateForm: FormGroup = new FormGroup({
+    content: new FormControl("", [Validators.required]),
+  })
+
   constructor(private groupService: GroupService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
+              private commonService: CommonService,
   ) {
   }
 
@@ -68,6 +75,9 @@ export class GroupDetailComponent implements OnInit {
     this.groupService.createGroupParticipant(this.idUserLogIn, this.idGroup).subscribe(() => {
       console.log("joinGroupParticipant")
       this.ngOnInit()
+    }, error => {
+      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 
@@ -75,6 +85,9 @@ export class GroupDetailComponent implements OnInit {
     this.groupService.acceptUserJoinGroup(this.idUserLogIn, idUser, this.idGroup).subscribe(() => {
       console.log("acceptUserJoinGroup")
       this.ngOnInit()
+    }, error => {
+      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 
@@ -82,24 +95,36 @@ export class GroupDetailComponent implements OnInit {
     this.groupService.rejectUserJoinGroup(this.idUserLogIn, idUser, this.idGroup).subscribe(() => {
       console.log("rejectUserJoinGroup")
       this.ngOnInit()
+    }, error => {
+      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 
   lockGroup() {
     this.groupService.lockGroup(this.idGroup, this.idUserLogIn).subscribe(() => {
       console.log("lockGroup")
+    }, error => {
+      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 
   acceptUserUpPost() {
     this.groupService.acceptUserUpPost(this.idGroup, this.idUserLogIn).subscribe(() => {
       console.log("acceptUserUpPost")
+    }, error => {
+      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 
   rejectUserUpPost() {
     this.groupService.rejectUserUpPost(this.idGroup, this.idUserLogIn).subscribe(() => {
       console.log("rejectUserUpPost")
+    }, error => {
+      console.log(error);
+      this.commonService.dialogCommon(error)
     })
   }
 }

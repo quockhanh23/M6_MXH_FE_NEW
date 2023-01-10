@@ -7,7 +7,7 @@ import {DialogCommonComponent} from "../module/notifications/dialog-common/dialo
 })
 export class CommonService {
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,) {
   }
 
   changeBackgroundColor1() {

@@ -34,10 +34,6 @@ export class UserService {
     return this.http.get<UserDTO[]>(API_URL + `/searchAll?search=${search}&idUserLogin=${idUserLogin}`);
   }
 
-  allUser(): Observable<User[]> {
-    return this.http.get<User[]>(API_URL + '/allUser')
-  }
-
   register(user: User): Observable<User> {
     return this.http.post<User>(API_URL + '/register', user);
   }
