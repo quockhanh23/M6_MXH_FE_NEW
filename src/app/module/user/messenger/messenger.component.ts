@@ -76,7 +76,7 @@ export class MessengerComponent implements OnInit {
               private storage: AngularFireStorage,
               private commonService: CommonService,
   ) {
-    localStorage.setItem('UrlMessage', window.location.href);
+    localStorage.setItem('UrlMessage', window.location.pathname);
   }
 
   ngOnInit(): void {

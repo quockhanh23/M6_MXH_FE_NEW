@@ -6,7 +6,6 @@ import {Messenger} from "../../../models/messenger";
 import {User} from "../../../models/user";
 import {Conversation} from "../../../models/conversation";
 import {FormControl, FormGroup} from "@angular/forms";
-import {environment} from "../../../../environments/environment";
 import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {CommonService} from "../../../services/common.service";
@@ -162,12 +161,12 @@ export class MessengerDetailComponent implements OnInit {
 
   back() {
     console.log(this.url)
-    if (this.url == environment.localUrl + '/user/people-detail/' + this.idUser) {
+    if (this.url == '/user/people-detail/' + this.idUser) {
       this.router.navigate(['user/people-detail', this.idUser]).then(rs => {
         console.log(rs)
       })
     }
-    if (this.url == environment.localUrl + '/user/requests') {
+    if (this.url == '/user/requests') {
       this.router.navigate(['user/requests']).then(rs => {
         console.log(rs)
       })

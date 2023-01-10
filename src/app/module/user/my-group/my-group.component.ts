@@ -14,7 +14,7 @@ export class MyGroupComponent implements OnInit {
   count = 0
 
   constructor(private groupService: GroupService) {
-    localStorage.setItem('UrlGroupByUser', window.location.href);
+    localStorage.setItem('UrlGroupByUser', window.location.pathname);
   }
 
   ngOnInit(): void {

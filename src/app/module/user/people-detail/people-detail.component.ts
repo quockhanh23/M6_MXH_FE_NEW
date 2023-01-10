@@ -87,7 +87,7 @@ export class PeopleDetailComponent implements OnInit {
               private commonService: CommonService,
               public dialog: MatDialog,
   ) {
-    localStorage.setItem('Url', window.location.href);
+    localStorage.setItem('Url', window.location.pathname);
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const id: any = paramMap.get('id');
       console.log("id user: " + id)
@@ -500,7 +500,7 @@ export class PeopleDetailComponent implements OnInit {
   }
 
   checkUrl() {
-    return this.url == this.commonService.urlModuleUser + '/listFriend/' + this.idUserLogIn;
+    return this.url == '/user/listFriend/' + this.idUserLogIn;
   }
 
   createFollow(idUserFollow: any) {
@@ -541,16 +541,16 @@ export class PeopleDetailComponent implements OnInit {
 
   checkLine() {
     let count = 0
-    if (this.urlMessage == this.commonService.urlModuleUser + '/messenger') {
+    if (this.urlMessage == '/user/messenger') {
       count = count + 1;
     }
-    if (this.url == this.commonService.urlModuleUser + '/requests') {
+    if (this.url == '/user/requests') {
       count = count + 1;
     }
-    if (this.url == this.commonService.urlModuleUser + '/listFriend/' + this.idUserLogIn) {
+    if (this.url == '/user/listFriend/' + this.idUserLogIn) {
       count = count + 1;
     }
-    if (this.urlBlackList == this.commonService.urlModuleUser + '/blackList') {
+    if (this.urlBlackList == '/user/blackList') {
       count = count + 1;
     }
     console.log("count" + count)

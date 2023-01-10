@@ -36,7 +36,7 @@ export class ShortNewsAllComponent implements OnInit {
               private toarts: ToartsService,
               private storage: AngularFireStorage,
   ) {
-    localStorage.setItem('UrlShortNew', window.location.href);
+    localStorage.setItem('UrlShortNew', window.location.pathname);
   }
 
   ngOnInit(): void {

@@ -157,6 +157,6 @@ export class RegisterLoginComponent implements OnInit {
   }
 
   checkHRF() {
-    return window.location.href == this.commonService.urlHost
+    return window.location.pathname == '/'
   }
 }

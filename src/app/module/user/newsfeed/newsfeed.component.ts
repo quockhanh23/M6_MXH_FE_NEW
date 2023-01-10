@@ -91,7 +91,7 @@ export class NewsfeedComponent implements OnInit, OnDestroy {
               private commonService: CommonService
   ) {
     localStorage.removeItem('UrlMessage')
-    localStorage.setItem('Url', window.location.href);
+    localStorage.setItem('Url', window.location.pathname);
     // @ts-ignore
     this.currentUser = localStorage.getItem("currentUser")
     this.idUser = JSON.parse(this.currentUser).id;

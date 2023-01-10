@@ -62,10 +62,10 @@ export class MyShortNewComponent implements OnInit {
 
   back() {
     let urlShortNew = localStorage.getItem('UrlShortNew')
-    if (urlShortNew == this.commonService.urlModuleUser + '/listShortNew') {
+    if (urlShortNew == '/user/listShortNew') {
       this.router.navigate(['user/listShortNew']).then()
     }
-    if (urlShortNew == this.commonService.urlModuleUser + '/user-detail') {
+    if (urlShortNew == '/user/user-detail') {
       this.router.navigate(['user/user-detail']).then()
     }
   }

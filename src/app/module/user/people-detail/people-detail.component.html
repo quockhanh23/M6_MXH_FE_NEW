@@ -19,15 +19,15 @@
                 <sub><span class="material-icons">grade</span></sub>
                 <span [routerLink]="['/user/newsfeed']">&ensp;Trang chủ</span>
               </div>
-              <div class="col color-whitesmoke a5" *ngIf="urlMessage == 'http://localhost:4200/user/messenger'">
+              <div class="col color-whitesmoke a5" *ngIf="urlMessage == '/user/messenger'">
                 <sub><span class="material-icons">grade</span></sub>
                 <span (click)="backToMessage()">&ensp;Trang tin nhắn</span>
               </div>
-              <div class="col color-whitesmoke a5" *ngIf="url == 'http://localhost:4200/user/requests'">
+              <div class="col color-whitesmoke a5" *ngIf="url == '/user/requests'">
                 <sub><span class="material-icons">grade</span></sub>
                 <span (click)="backToRequest()">&ensp;Trang tìm bạn</span>
               </div>
-              <div class="col color-whitesmoke a5" *ngIf="urlBlackList == 'http://localhost:4200/user/blackList'">
+              <div class="col color-whitesmoke a5" *ngIf="urlBlackList == '/user/blackList'">
                 <sub><span class="material-icons">grade</span></sub>
                 <span (click)="backToBlackList()">&ensp;Dánh sách chặn</span>
               </div>

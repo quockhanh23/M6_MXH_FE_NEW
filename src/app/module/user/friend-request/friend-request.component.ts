@@ -40,7 +40,7 @@ export class FriendRequestComponent implements OnInit {
               private userService: UserService,
               private commonService: CommonService
   ) {
-    localStorage.setItem('Url', window.location.href);
+    localStorage.setItem('Url', window.location.pathname);
   }
 
   ngOnInit(): void {

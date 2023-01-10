@@ -116,7 +116,7 @@ export class GroupCreateComponent implements OnInit {
   }
 
   back() {
-    if (this.urlGroupByUser == this.commonService.urlModuleUser + '/group') {
+    if (this.urlGroupByUser == '/user/group') {
       this.router.navigate(['user/group']).then()
     } else {
       this.router.navigate(['user/groupShare']).then()

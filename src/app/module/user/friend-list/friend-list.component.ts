@@ -54,7 +54,7 @@ export class FriendListComponent implements OnInit {
               private commonService: CommonService
   ) {
     localStorage.removeItem('UrlBlackList')
-    localStorage.setItem('Url', window.location.href);
+    localStorage.setItem('Url', window.location.pathname);
   }
 
   ngOnInit(): void {

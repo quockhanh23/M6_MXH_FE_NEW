@@ -19,7 +19,7 @@ export class BlackListComponent implements OnInit {
 
   constructor(private blackListService: BlackListService,
               private userService: UserService) {
-    localStorage.setItem('UrlBlackList', window.location.href);
+    localStorage.setItem('UrlBlackList', window.location.pathname);
   }
 
   ngOnInit(): void {
