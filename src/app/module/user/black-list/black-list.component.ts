@@ -20,6 +20,11 @@ export class BlackListComponent implements OnInit {
   constructor(private blackListService: BlackListService,
               private userService: UserService) {
     localStorage.setItem('UrlBlackList', window.location.pathname);
+    this.userService.searchByFullNameOrEmail("", this.idUserLogIn).subscribe(rs => {
+      console.log("vào đây")
+      this.listUser = rs
+      this.checkEmptySearch = rs.length == 0;
+    })
   }
 
   ngOnInit(): void {
@@ -45,7 +50,7 @@ export class BlackListComponent implements OnInit {
   }
 
   block(idBlock: any) {
-    this.blackListService.block(this.idUserLogIn, idBlock).subscribe(rs => {
+    this.blackListService.block(this.idUserLogIn, idBlock).subscribe(() => {
       this.ngOnInit()
       this.searchByFullNameOrEmail()
     }, error => {
@@ -59,7 +64,7 @@ export class BlackListComponent implements OnInit {
   }
 
   unBlock(idBlock: any) {
-    this.blackListService.unBlock(this.idUserLogIn, idBlock).subscribe(rs => {
+    this.blackListService.unBlock(this.idUserLogIn, idBlock).subscribe(() => {
       this.ngOnInit()
       this.searchByFullNameOrEmail()
     }, error => {
