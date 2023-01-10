@@ -27,20 +27,24 @@
           class="text-white">{{userDetail?.fullName}}</a></h2>
         <a class="text-white"> {{countFriend}} Bạn bè </a>
       </div>
+
       <ul class="nav-news-feed">
-        <li><i style="color: slateblue" class='fas fa-bell'></i>
-          <div><a class="a1 a2" routerLink="/user/user-detail">Trang cá nhân</a></div>
+        <li>
+          <sub><mat-icon style="color: #0ac70a" matBadgeColor="warn"
+                         class="noti material-icons">notifications
+        </mat-icon></sub>
+          <span class="a1 a2" routerLink="/user/user-detail">&nbsp;Trang cá nhân</span>
         </li>
-        <li><i class="icon ion-ios-people"></i>
+        <li style="margin-left: 5px"><i class="icon ion-ios-people"></i>
           <div><a class="a1 a2" [routerLink]="['/user/requests']">Bạn bè</a></div>
         </li>
-        <li><i class="icon ion-ios-people"></i>
+        <li style="margin-left: 5px"><i class="icon ion-ios-people"></i>
           <div><a class="a1 a2" [routerLink]="['/user/groupShare']">Nhóm</a></div>
         </li>
-        <li><i class="icon ion-chatboxes"></i>
+        <li style="margin-left: 5px"><i class="icon ion-chatboxes"></i>
           <div><a class="a1 a2" [routerLink]="['/user/messenger']">Tin nhắn</a></div>
         </li>
-        <li>
+        <li style="margin-left: 4px">
           <sub><span style="font-size: 18px; color: purple" class="material-icons">turned_in</span></sub>
           <a [routerLink]="['/user/saveList']" style="margin-left: 12px" class="a1 a2">Đã lưu</a>
         </li>
