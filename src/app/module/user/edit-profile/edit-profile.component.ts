@@ -96,7 +96,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    var n = Date.now();
+    let n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
     const fileRef = this.storage.ref(filePath);
@@ -121,7 +121,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onFileSelected1(event: any) {
-    var n1 = Date.now();
+    let n1 = Date.now();
     const file1 = event.target.files[0];
     const filePath1 = `RoomsImages/${n1}`;
     const fileRef1 = this.storage.ref(filePath1);
